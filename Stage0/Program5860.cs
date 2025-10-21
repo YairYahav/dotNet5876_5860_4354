@@ -25,7 +25,7 @@ namespace Targil0
             Console.WriteLine("Hi {0}! Welcome to my first application", name);
         }
 
-        private static string Welcome4354() { }
+        static partial void Welcome4354();
     }
 }
 
