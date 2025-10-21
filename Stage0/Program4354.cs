@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stage0
+namespace Targil0
 {
     partial class Program
     {

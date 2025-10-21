@@ -13,6 +13,7 @@ namespace Targil0
             Console.ReadKey();
         }
 
+
         // I'm using Google Translate to translate some of the comments, I hope there are no mistakes.
         // The file asks why the method is static, and I'll briefly explain that because main is static,
         // the methods that call it must also be static, otherwise we'll have to create an instance of the class.
