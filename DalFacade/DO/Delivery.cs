@@ -3,7 +3,7 @@ namespace DO;
 /// <summary>
 /// Delivery information.
 /// </summary>
-/// <param name="id">The unique identifier for the delivery.</param>
+/// <param name="Id">The unique identifier for the delivery.</param>
 /// <param name="OrderId">The unique identifier for the associated order.</param>
 /// <param name="CourierId">The unique identifier for the courier assigned to the delivery.</param>
 /// <param name="DeliveryType">The type of delivery.</param>
@@ -13,7 +13,7 @@ namespace DO;
 /// <param name="TypeOfDeliveryCompletionTime">The type of delivery completion time (optional).</param>
 public record Delivery
 (
-    int id,
+    int Id,
     int OrderId,
     int CourierId,
     DateTime DeliveryStartTime,

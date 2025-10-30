@@ -6,7 +6,7 @@
 /// <param name="FullName">The Full name of the delivery guy</param>
 /// <param name="PhoneNumber">Phone number of the delivery guy</param>
 /// <param name="Gmail">Gmail of the delivery guy</param>
-/// <param name="password">Password for the delivery guy's account</param>
+/// <param name="Password">Password for the delivery guy's account</param>
 /// <param name="IsActive">Indicates whether the delivery guy is currently active</param>
 /// <param name="DeliveryType">The type of deliveries the courier handles</param>
 /// <param name="EmploymentStartDate">The date when the courier started employment</param>
@@ -18,7 +18,7 @@ public record Courier
     string FullName,
     string PhoneNumber,
     string Gmail,
-    string password,
+    string Password,
     bool IsActive,
     DeliveryType DeliveryType,
     DateTime EmploymentStartDate,
