@@ -25,7 +25,9 @@ public record Order
     bool IsFrag,
     double? Volume = null,
     double ? Weight = null,
-    string? DescriptionOfOrder = null
+    string? DescriptionOfOrder = null,
+    DateTime? OrderPlacementTime = null
+
 )
 {
     /// <summary>
