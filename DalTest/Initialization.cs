@@ -36,7 +36,8 @@ public static class Initialization
             int id;
             do id = s_rand.Next(200000000, 400000000);// Generate a random ID
             while (s_dalCourier!.Read(id) != null);// Ensure ID is unique
-            string fullName = firstName + " " + lastName[s_rand.Next(lastName.Length)];// Generate full name
+            string fullName = firstName[s_rand.Next(firstName.Length)] + " " +
+                  lastName[s_rand.Next(lastName.Length)];// Generate full name
             string email = firstName[i].ToLower() + domain;//Generate email
             int password = s_rand.Next(1000, 9999);// Generate a simple numeric password
             string passwordStr = password.ToString();// Convert password to string
@@ -119,7 +120,7 @@ public static class Initialization
             int minutes = s_rand.Next(0, 60);// Randomly select hours and minutes
             DateTime orderTime = now.AddDays(-days).AddHours(-hours).AddMinutes(-minutes);// Calculate order placement time
             OrderType orderType = types[s_rand.Next(types.Length)];// Randomly select an order type
-            bool isFragile = orderType == OrderType.Fragile:// Set fragile flag based on order type
+            bool isFragile = orderType == OrderType.Fragile;// Set fragile flag based on order type
             double? volume = s_rand.Next(1, 100);// Randomly assign a volume
             double? weight = s_rand.Next(1, 50);// Randomly assign a weight
             s_dalOrder!.Create(new Order(0, orderType, pick.Address, pick.Lat, pick.Lon, cusName, cusPhone, isFragile, volume, weight, desc, orderTime));// Create and insert the order record
@@ -134,7 +135,7 @@ public static class Initialization
     /// Creates and inserts delivery records linking couriers and orders.
     /// Ensures logical and valid relations between entities.
     /// </summary>
-    private static void createDeliverys()
+    private static void createDeliveries()
     {
         var orders = s_dalOrder.ReadAll();// Get all orders
         var couriers = s_dalCourier.ReadAll().Where(c => c.IsActive).ToList();// Get all active couriers
@@ -154,7 +155,7 @@ public static class Initialization
         {
             var order = TakeRandomOrder(orders);// Take a random order
             var courier = PickEligibleCourier(order, couriers, companyLat.Value, companyLon.Value, companyMaxRange.Value); // Pick an eligible courier for the order
-            if (courier != null) continue;
+            if (courier == null) continue;
             DateTime start = RandomStartAfter((DateTime)order.OrderPlacementTime, 12);
 
             s_dalDelivery!.Create(new Delivery(0, order.Id, courier.Id, start, courier.DeliveryType, HaversineKm(companyLat.Value, companyLon.Value, order.Latitude, order.Longitude), null, null));// Create and insert the delivery record
@@ -167,7 +168,7 @@ public static class Initialization
         {
             var order = TakeRandomOrder(orders);
             var courier = PickEligibleCourier(order, couriers, companyLat.Value, companyLon.Value, companyMaxRange.Value);
-            if (courier != null) continue;
+            if (courier == null) continue;
             DateTime start = RandomStartAfter((DateTime)order.OrderPlacementTime, 24);
             DateTime end = start.AddMinutes(s_rand.Next(25, 180));
             var endType = endKind[s_rand.Next(endKind.Length)];
@@ -288,8 +289,8 @@ public static class Initialization
         Console.WriteLine("Initializing Students list ...");
         createConfig();// Set configuration parameters
         createCouriers();// Populate couriers
-        createDeliverys();// Populate deliveries
         createOrders();// Populate orders
+        createDeliveries();// Populate deliveries
         Console.WriteLine("Initialization completed");
     }
 }
