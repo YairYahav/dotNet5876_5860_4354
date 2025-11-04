@@ -5,7 +5,7 @@ namespace Dal;
 /// Implementation of the IConfig interface for managing configuration settings in the Data Access Layer (DAL).
 /// </summary>
 
-public class ConfigImplementation : IConfig
+internal class ConfigImplementation : IConfig
 {
     public DateTime Clock { get => Config.Clock; set => Config.Clock = value; }// Current application clock time.
     public int ManagerId { get => Config.ManagerId; set => Config.ManagerId = value; }// Unique identifier for the manager

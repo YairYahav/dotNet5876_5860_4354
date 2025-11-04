@@ -137,14 +137,22 @@ public static class Initialization
     /// </summary>
     private static void createDeliveries()
     {
-        var orders = s_dalOrder.ReadAll();// Get all orders
+        var orders = s_dalOrder.ReadAll().ToList();// Get all orders
         var couriers = s_dalCourier.ReadAll().Where(c => c.IsActive).ToList();// Get all active couriers
         if (orders.Count == 0 || couriers.Count == 0)// No orders or couriers available
             return;
-        int openOrders = 20;// Number of open orders to create
-        int closeOrders = 20;// Number of closed orders to create
-        int inProgressOrders = 10;// Number of in-progress orders to create
-        var endKind = new[] { TypeOfDeliveryCompletionTime.Supplied, TypeOfDeliveryCompletionTime.Failed, TypeOfDeliveryCompletionTime.Canceled, TypeOfDeliveryCompletionTime.RefusedByCustomer, TypeOfDeliveryCompletionTime.CustomerNotFound };// Possible delivery completion types
+
+        int openOrders = 20; // Number of open orders to create
+        int closeOrders = 20; // Number of closed orders to create
+        int inProgressOrders = 10; // Number of in-progress orders to create
+        var endKind = new[] { 
+            TypeOfDeliveryCompletionTime.Supplied, 
+            TypeOfDeliveryCompletionTime.Failed, 
+            TypeOfDeliveryCompletionTime.Canceled, 
+            TypeOfDeliveryCompletionTime.RefusedByCustomer, 
+            TypeOfDeliveryCompletionTime.CustomerNotFound 
+        }; // Possible delivery completion types
+
         double? companyLat = s_dalConfig!.Latitude, companyLon = s_dalConfig!.Longitude;
         double? companyMaxRange = s_dalConfig!.MaxDeliveryRange;
 

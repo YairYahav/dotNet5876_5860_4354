@@ -6,7 +6,7 @@ using DO;
 /// <summary>
 /// Implementation of the ICourier interface for managing Courier entities in the Data Access Layer (DAL).  
 /// </summary>
-public class CourierImplementation : ICourier
+internal class CourierImplementation : ICourier
 {
     /// <summary>
     /// Creates new entity object in DAL if it does not already exist but if it does, throws an InvalidOperationException.
@@ -54,9 +54,9 @@ public class CourierImplementation : ICourier
     /// Reads all entity objects.
     /// </summary>
     /// <returns> The list of all Courier objects. </returns>
-    public List<Courier> ReadAll()
+    public IEnumerable<Courier> ReadAll()
     {
-        return new List<Courier>(DataSource.Couriers.Where(c => c is not null)!);
+        return DataSource.Couriers.Where(c => c is not null)!;
     }
 
     /// <summary>

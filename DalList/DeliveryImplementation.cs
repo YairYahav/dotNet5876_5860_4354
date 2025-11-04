@@ -6,7 +6,7 @@ using DO;
 /// Implementation of the IDelivery interface for managing Delivery entities in the Data Access Layer (DAL).`
 /// </summary>
 
-public class DeliveryImplementation : IDelivery
+internal class DeliveryImplementation : IDelivery
 {
 
     /// <summary>
@@ -57,9 +57,9 @@ public class DeliveryImplementation : IDelivery
     /// Reads all entity objects.
     /// </summary>
     /// <returns> The list of all Delivery objects. </returns>
-    public List<Delivery> ReadAll()
+    public IEnumerable<Delivery> ReadAll()
     {
-        return new List<Delivery>(DataSource.Deliveries.Where(d => d is not null)!);
+        return DataSource.Deliveries.Where(d => d is not null)!;
     }
 
     /// <summary>

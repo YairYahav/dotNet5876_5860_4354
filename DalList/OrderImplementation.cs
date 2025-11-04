@@ -7,7 +7,7 @@ using DO;
 /// Implementation of the IOrder interface for managing Order entities in the Data Access Layer (DAL).
 /// </summary>
 
-public class OrderImplementation : IOrder
+internal class OrderImplementation : IOrder
 {
 
 
@@ -58,9 +58,9 @@ public class OrderImplementation : IOrder
     /// Reads all entity objects.
     /// </summary>
     /// <returns> The list of all Order objects. </returns>
-    public List<Order> ReadAll()
+    public IEnumerable<Order> ReadAll()
     {
-        return new List<Order>(DataSource.Orders.Where(o => o is not null)!);
+        return DataSource.Orders.Where(o => o is not null)!;
     }
 
 
