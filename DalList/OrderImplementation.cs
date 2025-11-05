@@ -2,6 +2,7 @@
 namespace Dal;
 using DalApi;
 using DO;
+using System.Linq;
 
 /// <summary>
 /// Implementation of the IOrder interface for managing Order entities in the Data Access Layer (DAL).
@@ -17,9 +18,10 @@ internal class OrderImplementation : IOrder
     /// <param name="item"></param>
     public void Create(Order item)
     {
-        int newID = Config.NextOrderId;
-        Order newOrder = item with { Id = newID };
-        DataSource.Orders.Add(newOrder);
+        if (Read(item.Id) == null)
+            throw new DalAlreadyExistsException($"Order with id {item.Id} already exist");
+
+        DataSource.Orders.Add(item);
     }
 
 
@@ -31,7 +33,8 @@ internal class OrderImplementation : IOrder
     public void Delete(int id)
     {
         if (Read(id) == null)
-            throw new InvalidOperationException($"Order with Id {id} does not exist");
+            throw new DalDoesNotExistException($"Order with Id {id} does not exist");
+
         DataSource.Orders.RemoveAll(o => o?.Id == id);
     }
 
@@ -51,16 +54,35 @@ internal class OrderImplementation : IOrder
     /// <returns> The Order object with the specified ID, or null if not found. </returns>
     public Order? Read(int id)
     {
-        return DataSource.Orders.FirstOrDefault(c => c?.Id == id);
+        var order = DataSource.Orders.FirstOrDefault(o => o?.Id == id);
+        if (order == null)
+            throw new DalDoesNotExistException($"Order with Id {id} does not exist");
+
+        return order;
+    }
+
+
+    public Order? Read(Func<Order, bool> filter)
+    {
+        if (filter == null)
+            throw new DalNullReferenceException("Filter function cannot be null");
+
+        var order = DataSource.Orders.FirstOrDefault(filter);
+        if (order == null)
+            throw new DalDoesNotExistException("No Order matches the filter");
+
+        return order;
     }
 
     /// <summary>
     /// Reads all entity objects.
     /// </summary>
     /// <returns> The list of all Order objects. </returns>
-    public IEnumerable<Order> ReadAll()
+    public IEnumerable<Order> ReadAll(Func<Order, bool>? filter = null) // Stage 2
     {
-        return DataSource.Orders.Where(o => o is not null)!;
+        return filter == null
+            ? DataSource.Orders.Select(item => item)
+            : DataSource.Orders.Where(filter);
     }
 
 
@@ -71,8 +93,10 @@ internal class OrderImplementation : IOrder
     /// <exception cref="InvalidOperationException"></exception>
     public void Update(Order item)
     {
-        if (Read(item.Id) == null)
-            throw new InvalidOperationException($"Order with Id {item.Id} does not exist");
+        var existing = DataSource.Orders.FirstOrDefault(o => o?.Id == item.Id);
+        if (existing == null)
+            throw new DalDoesNotExistException($"Order with Id {item.Id} does not exist");
+
         DataSource.Orders.RemoveAll(o => o?.Id == item.Id);
         DataSource.Orders.Add(item);
     }

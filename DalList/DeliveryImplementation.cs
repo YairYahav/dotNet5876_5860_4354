@@ -2,6 +2,7 @@
 namespace Dal;
 using DalApi;
 using DO;
+using System.Linq;
 /// <summary>
 /// Implementation of the IDelivery interface for managing Delivery entities in the Data Access Layer (DAL).`
 /// </summary>
@@ -15,9 +16,10 @@ internal class DeliveryImplementation : IDelivery
     /// <param name="item"></param>
     public void Create(Delivery item)
     {
-        int newID = Config.NextDeliveryId;
-        Delivery newDelivery = item with { Id =  newID };
-        DataSource.Deliveries.Add(newDelivery);
+        if (Read(item.Id) != null)
+            throw new DalAlreadyExistsException($"Delivery with Id {item.Id} already exists");
+
+        DataSource.Deliveries.Add(item);
     }
 
 
@@ -29,7 +31,8 @@ internal class DeliveryImplementation : IDelivery
     public void Delete(int id)
     {
         if (Read(id) == null)
-            throw new InvalidOperationException($"Delivery with Id {id} does not exist");
+            throw new DalDoesNotExistException($"Delivery with Id {id} does not exist");
+
         DataSource.Deliveries.RemoveAll(d => d?.Id == id);
     }
 
@@ -50,16 +53,35 @@ internal class DeliveryImplementation : IDelivery
     /// <returns> The Delivery object with the specified ID, or null if not found. </returns>
     public Delivery? Read(int id)
     {
-        return DataSource.Deliveries.FirstOrDefault(c => c?.Id == id);
+        var delivery = DataSource.Deliveries.FirstOrDefault(d => d?.Id == id);
+        if (delivery == null)
+            throw new DalDoesNotExistException($"Delivery with Id {id} does not exist");
+
+        return delivery;
+    }
+
+
+    public Delivery? Read(Func<Delivery, bool> filter)
+    {
+        if (filter == null)
+            throw new DalNullReferenceException("Filter function cannot be null");
+
+        var delivery = DataSource.Deliveries.FirstOrDefault(filter);
+        if (delivery == null)
+            throw new DalDoesNotExistException("No Delivery matches the filter");
+
+        return delivery;
     }
 
     /// <summary>
     /// Reads all entity objects.
     /// </summary>
     /// <returns> The list of all Delivery objects. </returns>
-    public IEnumerable<Delivery> ReadAll()
+    public IEnumerable<Delivery> ReadAll(Func<Delivery, bool>? filter = null) // Stage 2
     {
-        return DataSource.Deliveries.Where(d => d is not null)!;
+        return filter == null
+            ? DataSource.Deliveries.Select(item => item)
+            : DataSource.Deliveries.Where(filter);
     }
 
     /// <summary>
@@ -69,8 +91,10 @@ internal class DeliveryImplementation : IDelivery
     /// <exception cref="InvalidOperationException"></exception>
     public void Update(Delivery item)
     {
-        if(Read(item.Id) == null)
-            throw new InvalidOperationException($"Delivery with Id {item.Id} does not exist");
+        var existing = DataSource.Deliveries.FirstOrDefault(d => d?.Id == item.Id);
+        if (existing == null)
+            throw new DalDoesNotExistException($"Delivery with Id {item.Id} does not exist");
+
         DataSource.Deliveries.RemoveAll(d => d?.Id == item.Id);
         DataSource.Deliveries.Add(item);
     }

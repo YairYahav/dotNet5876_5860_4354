@@ -18,8 +18,14 @@ namespace DalApi
         T? Read(int id);
 
 
+        // Read entity object by predicate
+        T? Read(Func<T, bool> filter); // Stage 2
+
+
         // Read all the entities
-        IEnumerable<T> ReadAll();
+        // Stage 1: IEnumerable<T> ReadAll();
+        IEnumerable<T> ReadAll(Func<T, bool>? filter = null); // stage 2
+
 
 
         // Update an existing entity by ID

@@ -6,10 +6,13 @@ namespace DalTest
 {
     internal class Program
     {
-        private static ICourier? s_dalCourier = new CourierImplementation();
-        private static IDelivery? s_dalDelivery = new DeliveryImplementation();
-        private static IOrder? s_dalOrder = new OrderImplementation();
-        private static IConfig? s_dalConfig = new ConfigImplementation();
+        // Again, the old stge (stage 1):
+        //private static ICourier? s_dalCourier = new CourierImplementation();
+        //private static IDelivery? s_dalDelivery = new DeliveryImplementation();
+        //private static IOrder? s_dalOrder = new OrderImplementation();
+        //private static IConfig? s_dalConfig = new ConfigImplementation();
+
+        static readonly IDal s_dal = new DalList();// Stage 2
 
         /// <summary>
         /// Main menu options enumeration.
@@ -120,7 +123,7 @@ namespace DalTest
                         try
                         {
                             var c = ReadCourierFromConsoleForCreate();
-                            s_dalCourier!.Create(c);
+                            s_dal.Courier!.Create(c);
                             Console.WriteLine("Created.");
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -130,7 +133,7 @@ namespace DalTest
                         try
                         {
                             int id = AskInt("Courier Id: ");
-                            var c = s_dalCourier!.Read(id);
+                            var c = s_dal.Courier!.Read(id);
                             Console.WriteLine(c is null ? "Not found." : c);
                         }
                         catch (Exception ex) 
@@ -140,7 +143,7 @@ namespace DalTest
                     case subMenuOptions.ReadAll:
                         try
                         {
-                            foreach (var c in s_dalCourier!.ReadAll())
+                            foreach (var c in s_dal.Courier!.ReadAll())
                                 Console.WriteLine(c);
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -150,12 +153,12 @@ namespace DalTest
                         try
                         {
                             int id = AskInt("Courier Id to update: ");
-                            var existing = s_dalCourier!.Read(id);
+                            var existing = s_dal.Courier!.Read(id);
                             Console.WriteLine(existing is null ? "Not found." : existing);
                             if (existing is not null)
                             {
                                 var updated = ReadCourierFromConsoleForUpdate(existing);
-                                s_dalCourier!.Update(updated);
+                                s_dal.Courier!.Update(updated);
                                 Console.WriteLine("Updated.");
                             }
                         }
@@ -166,14 +169,14 @@ namespace DalTest
                         try
                         {
                             int id = AskInt("Courier Id to delete: ");
-                            s_dalCourier!.Delete(id);
+                            s_dal.Courier!.Delete(id);
                             Console.WriteLine("Deleted.");
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
                         break;
 
                     case subMenuOptions.DeleteAll:
-                        try { s_dalCourier!.DeleteAll(); Console.WriteLine("All couriers deleted."); }
+                        try { s_dal.Courier!.DeleteAll(); Console.WriteLine("All couriers deleted."); }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
                         break;
                 }
@@ -198,7 +201,7 @@ namespace DalTest
                         try
                         {
                             var o = ReadOrderFromConsoleForCreate();
-                            s_dalOrder!.Create(o);
+                            s_dal.Order!.Create(o);
                             Console.WriteLine("Created.");
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -208,7 +211,7 @@ namespace DalTest
                         try
                         {
                             int id = AskInt("Order Id: ");
-                            var o = s_dalOrder!.Read(id);
+                            var o = s_dal.Order!.Read(id);
                             Console.WriteLine(o is null ? "Not found." : o);
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -217,7 +220,7 @@ namespace DalTest
                     case subMenuOptions.ReadAll:
                         try
                         {
-                            foreach (var o in s_dalOrder!.ReadAll())
+                            foreach (var o in s_dal.Order!.ReadAll())
                                 Console.WriteLine(o);
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -227,12 +230,12 @@ namespace DalTest
                         try
                         {
                             int id = AskInt("Order Id to update: ");
-                            var existing = s_dalOrder!.Read(id);
+                            var existing = s_dal.Order!.Read(id);
                             Console.WriteLine(existing is null ? "Not found." : existing);
                             if (existing is not null)
                             {
                                 var updated = ReadOrderFromConsoleForUpdate(existing);
-                                s_dalOrder!.Update(updated);
+                                s_dal.Order!.Update(updated);
                                 Console.WriteLine("Updated.");
                             }
                         }
@@ -243,14 +246,14 @@ namespace DalTest
                         try
                         {
                             int id = AskInt("Order Id to delete: ");
-                            s_dalOrder!.Delete(id);
+                            s_dal.Order!.Delete(id);
                             Console.WriteLine("Deleted.");
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
                         break;
 
                     case subMenuOptions.DeleteAll:
-                        try { s_dalOrder!.DeleteAll(); Console.WriteLine("All orders deleted."); }
+                        try { s_dal.Order!.DeleteAll(); Console.WriteLine("All orders deleted."); }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
                         break;
                 }
@@ -276,7 +279,7 @@ namespace DalTest
                         try
                         {
                             var d = ReadDeliveryFromConsoleForCreate();
-                            s_dalDelivery!.Create(d);
+                            s_dal.Delivery!.Create(d);
                             Console.WriteLine("Created.");
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -286,7 +289,7 @@ namespace DalTest
                         try
                         {
                             int id = AskInt("Delivery Id: ");
-                            var d = s_dalDelivery!.Read(id);
+                            var d = s_dal.Delivery!.Read(id);
                             Console.WriteLine(d is null ? "Not found." : d);
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -295,7 +298,7 @@ namespace DalTest
                     case subMenuOptions.ReadAll:
                         try
                         {
-                            foreach (var d in s_dalDelivery!.ReadAll())
+                            foreach (var d in s_dal.Delivery!.ReadAll())
                                 Console.WriteLine(d);
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -305,12 +308,12 @@ namespace DalTest
                         try
                         {
                             int id = AskInt("Delivery Id to update: ");
-                            var existing = s_dalDelivery!.Read(id);
+                            var existing = s_dal.Delivery!.Read(id);
                             Console.WriteLine(existing is null ? "Not found." : existing);
                             if (existing is not null)
                             {
                                 var updated = ReadDeliveryFromConsoleForUpdate(existing);
-                                s_dalDelivery!.Update(updated);
+                                s_dal.Delivery!.Update(updated);
                                 Console.WriteLine("Updated.");
                             }
                         }
@@ -321,14 +324,14 @@ namespace DalTest
                         try
                         {
                             int id = AskInt("Delivery Id to delete: ");
-                            s_dalDelivery!.Delete(id);
+                            s_dal.Delivery!.Delete(id);
                             Console.WriteLine("Deleted.");
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
                         break;
 
                     case subMenuOptions.DeleteAll:
-                        try { s_dalDelivery!.DeleteAll(); Console.WriteLine("All deliveries deleted."); }
+                        try { s_dal.Delivery!.DeleteAll(); Console.WriteLine("All deliveries deleted."); }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
                         break;
                 }
@@ -667,25 +670,25 @@ namespace DalTest
                     {
                         case ConfigSubMenu.Back: return;
                         case ConfigSubMenu.TickMinute:
-                            s_dalConfig!.Clock = s_dalConfig.Clock.AddMinutes(1);
-                            Console.WriteLine($"Clock: {s_dalConfig.Clock}");
+                            s_dal.Config!.Clock = s_dal.Config.Clock.AddMinutes(1);
+                            Console.WriteLine($"Clock: {s_dal.Config.Clock}");
                             break;
                         case ConfigSubMenu.TickHour:
-                            s_dalConfig!.Clock = s_dalConfig.Clock.AddHours(1);
-                            Console.WriteLine($"Clock: {s_dalConfig.Clock}");
+                            s_dal.Config!.Clock = s_dal.Config.Clock.AddHours(1);
+                            Console.WriteLine($"Clock: {s_dal.Config.Clock}");
                             break;
                         case ConfigSubMenu.ShowClock:
-                            Console.WriteLine(s_dalConfig!.Clock);
+                            Console.WriteLine(s_dal.Config!.Clock);
                             break;
                         case ConfigSubMenu.SetMaxRange:
-                            s_dalConfig!.MaxDeliveryRange = AskNullableDouble("Max delivery range (km, empty = null): ");
+                            s_dal.Config!.MaxDeliveryRange = AskNullableDouble("Max delivery range (km, empty = null): ");
                             Console.WriteLine("Set.");
                             break;
                         case ConfigSubMenu.ShowMaxRange:
-                            Console.WriteLine($"MaxDeliveryRange: {s_dalConfig!.MaxDeliveryRange?.ToString() ?? "null"} km");
+                            Console.WriteLine($"MaxDeliveryRange: {s_dal.Config!.MaxDeliveryRange?.ToString() ?? "null"} km");
                             break;
                         case ConfigSubMenu.ResetConfig:
-                            s_dalConfig!.Reset();
+                            s_dal.Config!.Reset();
                             Console.WriteLine("Configuration reset.");
                             break;
                     }
@@ -704,13 +707,13 @@ namespace DalTest
             try
             {
                 Console.WriteLine("\n-- Couriers --");
-                foreach (var c in s_dalCourier!.ReadAll()) Console.WriteLine(c);
+                foreach (var c in s_dal.Courier!.ReadAll()) Console.WriteLine(c);
 
                 Console.WriteLine("\n-- Orders --");
-                foreach (var o in s_dalOrder!.ReadAll()) Console.WriteLine(o);
+                foreach (var o in s_dal.Order!.ReadAll()) Console.WriteLine(o);
 
                 Console.WriteLine("\n-- Deliveries --");
-                foreach (var d in s_dalDelivery!.ReadAll()) Console.WriteLine(d);
+                foreach (var d in s_dal.Delivery!.ReadAll()) Console.WriteLine(d);
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
         }
@@ -748,7 +751,11 @@ namespace DalTest
                             break;
 
                         case MainMenuOptions.InitDatabase:
-                            Initialization.Do(s_dalCourier, s_dalDelivery, s_dalOrder, s_dalConfig);
+                            // Again, Stage 1:
+                            //Initialization.Do(s_dalCourier, s_dalDelivery, s_dalOrder, s_dalConfig); 
+
+                            // Stage 2:
+                            Initialization.Do(s_dal);
                             Console.WriteLine("Database initialized.");
                             break;
 
@@ -761,10 +768,10 @@ namespace DalTest
                             break;
 
                         case MainMenuOptions.ResetAll:
-                            s_dalCourier!.DeleteAll();
-                            s_dalOrder!.DeleteAll();
-                            s_dalDelivery!.DeleteAll();
-                            s_dalConfig!.Reset();
+                            s_dal.Courier!.DeleteAll();
+                            s_dal.Order!.DeleteAll();
+                            s_dal.Delivery!.DeleteAll();
+                            s_dal.Config!.Reset();
                             Console.WriteLine("All data cleared and configuration reset.");
                             break;
                     }
