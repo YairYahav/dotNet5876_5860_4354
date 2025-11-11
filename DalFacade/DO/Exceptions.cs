@@ -41,3 +41,10 @@ public class DalNullReferenceException : Exception
 {
     public DalNullReferenceException(string? message) : base(message) { }
 }
+
+
+[Serializable]
+public class DalXMLFileLoadCreateException : Exception
+{
+    public DalXMLFileLoadCreateException(string? message) : base(message) { }
+}

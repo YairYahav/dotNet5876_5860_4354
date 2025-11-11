@@ -10,11 +10,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalFacade", "DalFacade\DalFacade.csproj", "{61DE43A7-106B-4983-B60E-952BBA5D99A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalFacade\DalFacade.csproj", "{61DE43A7-106B-4983-B60E-952BBA5D99A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalList", "DalList\DalList.csproj", "{AD0348D2-8E5B-4F81-9727-C88738DCD446}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.csproj", "{AD0348D2-8E5B-4F81-9727-C88738DCD446}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalTest", "DalTest\DalTest.csproj", "{A037A3A4-DBB9-4072-A261-F2A89B77F30F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{A037A3A4-DBB9-4072-A261-F2A89B77F30F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{BFF0CD31-3ED9-4F7A-98B2-3D16E2CFD765}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{C2F0E946-DFA8-4307-8838-3EAA66584571}"
+	ProjectSection(SolutionItems) = preProject
+		xml\couriers.xml = xml\couriers.xml
+		xml\data-config.xml = xml\data-config.xml
+		xml\deliveries.xml = xml\deliveries.xml
+		xml\orders.xml = xml\orders.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +48,10 @@ Global
 		{A037A3A4-DBB9-4072-A261-F2A89B77F30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A037A3A4-DBB9-4072-A261-F2A89B77F30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A037A3A4-DBB9-4072-A261-F2A89B77F30F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFF0CD31-3ED9-4F7A-98B2-3D16E2CFD765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF0CD31-3ED9-4F7A-98B2-3D16E2CFD765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF0CD31-3ED9-4F7A-98B2-3D16E2CFD765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF0CD31-3ED9-4F7A-98B2-3D16E2CFD765}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
