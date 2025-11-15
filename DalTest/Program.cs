@@ -12,7 +12,8 @@ namespace DalTest
         //private static IOrder? s_dalOrder = new OrderImplementation();
         //private static IConfig? s_dalConfig = new ConfigImplementation();
 
-        static readonly IDal s_dal = new DalList();// Stage 2
+        //static readonly IDal s_dal = new DalList(); // Stage 2
+        static readonly IDal s_dal = new DalXml();
 
         /// <summary>
         /// Main menu options enumeration.

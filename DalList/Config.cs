@@ -52,7 +52,7 @@ internal static class Config
     /// <summary>
     /// constructor to reset all configuration settings to their default values.
     /// </summary>
-    internal static void Reset()
+    public static void Reset()
     {
         nextOrderId = startOrderId;
         nextDeliveryId = startDeliveryId;

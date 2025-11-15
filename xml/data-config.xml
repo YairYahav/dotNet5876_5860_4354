@@ -1,31 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-
   <NextCourierId>200000001</NextCourierId>
   <NextOrderId>300000001</NextOrderId>
   <NextDeliveryId>400000001</NextDeliveryId>
-
-
   <ManagerId>329164354</ManagerId>
   <ManagerPassword>Admin1234</ManagerPassword>
-  <CompanyAddress>Yehuda Hanasi St, 95, Elad</CompanyAddress>
-
-
+  <CompanyAddress>Yehuda Hanasi St, 95 , Elad </CompanyAddress>
   <Latitude>32.0512</Latitude>
-  <Longitude>34.8780</Longitude>
-
-
+  <Longitude>34.878</Longitude>
   <MaxDeliveryRange>100</MaxDeliveryRange>
   <AvgSpeedKmhForCar>90</AvgSpeedKmhForCar>
   <AvgSpeedKmhForMotorcycle>60</AvgSpeedKmhForMotorcycle>
   <AvgSpeedKmhForBicycle>25</AvgSpeedKmhForBicycle>
   <AvgSpeedKmhForFoot>5</AvgSpeedKmhForFoot>
-
-
   <MaxTimeRangeForDelivery>02:00:00</MaxTimeRangeForDelivery>
   <RiskRange>00:30:00</RiskRange>
   <InactivityRange>00:15:00</InactivityRange>
-
-
-  <Clock>2025-11-11T12:00:00</Clock>
+  <Clock>11/13/2025 5:50:59 PM</Clock>
 </config>

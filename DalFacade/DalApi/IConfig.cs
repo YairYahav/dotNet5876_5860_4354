@@ -21,6 +21,5 @@ public interface IConfig
     TimeSpan RiskRange { get; set; }// Risk range for deliveries
     TimeSpan InactivityRange { get; set; }// Inactivity range for couriers
 
-
     void Reset();// Method to reset configuration settings to default values
 }
