@@ -4,7 +4,7 @@ using DO;
 
 
 
-sealed public class DalList : IDal
+sealed internal class DalList : IDal
 {
     public static IDal Instance { get; } = new DalList();
 

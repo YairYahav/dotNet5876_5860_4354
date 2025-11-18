@@ -2,7 +2,7 @@
 using BO;
 using System;
 using DalTest;
-using DO = DalFacade.DO;
+using DO = DO; // It was "DO = DalFaced.DO" but it is not rellevent anymore couse of the reference
 
 namespace Helpers;
 internal static class AdminManager

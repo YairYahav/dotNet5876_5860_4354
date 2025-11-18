@@ -1,4 +1,5 @@
-﻿using System;
+﻿namespace BO;
+using System;
 using DO;
 using Helpers;
 
