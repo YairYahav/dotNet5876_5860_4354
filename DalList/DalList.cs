@@ -6,6 +6,10 @@ using DO;
 
 sealed public class DalList : IDal
 {
+    public static IDal Instance { get; } = new DalList();
+
+    private DalList() { }
+
     // Initialize the concrete implementations for each DAL interface.
     public IConfig Config { get; } = new ConfigImplementation();
     public ICourier Courier { get; } = new CourierImplementation();

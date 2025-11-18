@@ -13,7 +13,8 @@ namespace DalTest
         //private static IConfig? s_dalConfig = new ConfigImplementation();
 
         //static readonly IDal s_dal = new DalList(); // Stage 2
-        static readonly IDal s_dal = new DalXml();
+        //static readonly IDal s_dal = new DalXml();  // Stage 3
+        static readonly IDal s_dal = Factory.Get;
 
         /// <summary>
         /// Main menu options enumeration.
@@ -756,7 +757,7 @@ namespace DalTest
                             //Initialization.Do(s_dalCourier, s_dalDelivery, s_dalOrder, s_dalConfig); 
 
                             // Stage 2:
-                            Initialization.Do(s_dal);
+                            Initialization.Do(); // removing the parameter "s_dal" in Stage 4.
                             Console.WriteLine("Database initialized.");
                             break;
 

@@ -321,10 +321,10 @@ public static class Initialization
     
     
     /// <param name="dal">Unified DAL implementation (e.g., new DalList())</param>
-    public static void Do(IDal dal)
+    public static void Do()
     {
         // assign the provided dal to the static field (and validate not null)
-        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!");
+        s_dal = DalApi.Factory.Get;
 
         Console.WriteLine("Reset configuration and lists...");
         // now we can reset everything through one method

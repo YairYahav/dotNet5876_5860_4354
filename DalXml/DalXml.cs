@@ -4,6 +4,11 @@ namespace Dal;
 
 sealed public class DalXml : IDal
 {
+    private DalXml() { }
+
+    public static IDal Instance { get; } = new DalXml();
+
+
     public IConfig Config { get; } = new ConfigImplementation();// Initialize the concrete implementation for configuration management.
 
     public ICourier Courier { get; } = new CourierImplementation();// Initialize the concrete implementation for courier management.
