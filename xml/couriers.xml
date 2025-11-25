@@ -1,278 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfCourier xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Courier>
-    <Id>349868736</Id>
-    <FullName>Robert Harris</FullName>
-    <PhoneNumber>05933154846</PhoneNumber>
+    <Id>382180662</Id>
+    <FullName>Michael Martin</FullName>
+    <PhoneNumber>05162198933</PhoneNumber>
     <Gmail>john@gmail.com</Gmail>
-    <Password>4333</Password>
+    <Password>3571</Password>
     <IsActive>true</IsActive>
-    <DeliveryType>Car</DeliveryType>
-    <EmploymentStartDate>2024-05-05T20:58:44</EmploymentStartDate>
+    <DeliveryType>OnFoot</DeliveryType>
+    <EmploymentStartDate>2024-10-12T13:38:12</EmploymentStartDate>
     <MaxPersonalDeliveryDistance xsi:nil="true" />
   </Courier>
   <Courier>
-    <Id>221360735</Id>
-    <FullName>Charlotte King</FullName>
-    <PhoneNumber>05573513251</PhoneNumber>
+    <Id>276308631</Id>
+    <FullName>Evelyn Harris</FullName>
+    <PhoneNumber>05854199117</PhoneNumber>
     <Gmail>jane@gmail.com</Gmail>
-    <Password>5549</Password>
+    <Password>1941</Password>
     <IsActive>true</IsActive>
-    <DeliveryType>OnFoot</DeliveryType>
-    <EmploymentStartDate>2025-09-10T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance>3.1440998138547447</MaxPersonalDeliveryDistance>
+    <DeliveryType>Motorcycle</DeliveryType>
+    <EmploymentStartDate>2025-04-09T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance>1.9169155779245626</MaxPersonalDeliveryDistance>
   </Courier>
   <Courier>
-    <Id>376193933</Id>
-    <FullName>Jane Scott</FullName>
-    <PhoneNumber>05655774374</PhoneNumber>
+    <Id>369421048</Id>
+    <FullName>Abigail Thompson</FullName>
+    <PhoneNumber>05758990309</PhoneNumber>
     <Gmail>michael@gmail.com</Gmail>
-    <Password>4886</Password>
+    <Password>5884</Password>
     <IsActive>true</IsActive>
-    <DeliveryType>Bicycle</DeliveryType>
-    <EmploymentStartDate>2025-08-28T20:58:44</EmploymentStartDate>
+    <DeliveryType>Car</DeliveryType>
+    <EmploymentStartDate>2024-10-07T13:38:12</EmploymentStartDate>
     <MaxPersonalDeliveryDistance xsi:nil="true" />
   </Courier>
   <Courier>
-    <Id>395599681</Id>
-    <FullName>Christopher Martinez</FullName>
-    <PhoneNumber>05600699083</PhoneNumber>
+    <Id>274243222</Id>
+    <FullName>Charlotte Smith</FullName>
+    <PhoneNumber>05929692521</PhoneNumber>
     <Gmail>emily@gmail.com</Gmail>
-    <Password>7262</Password>
-    <IsActive>false</IsActive>
-    <DeliveryType>OnFoot</DeliveryType>
-    <EmploymentStartDate>2024-11-22T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance>1.0778822707630966</MaxPersonalDeliveryDistance>
+    <Password>7527</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Motorcycle</DeliveryType>
+    <EmploymentStartDate>2025-03-19T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance>9.126601555405484</MaxPersonalDeliveryDistance>
   </Courier>
   <Courier>
-    <Id>314078005</Id>
-    <FullName>Sarah Lee</FullName>
-    <PhoneNumber>05249274423</PhoneNumber>
+    <Id>375291629</Id>
+    <FullName>Jane Jackson</FullName>
+    <PhoneNumber>05418157356</PhoneNumber>
     <Gmail>david@gmail.com</Gmail>
-    <Password>8568</Password>
+    <Password>6790</Password>
     <IsActive>true</IsActive>
     <DeliveryType>OnFoot</DeliveryType>
-    <EmploymentStartDate>2025-11-04T20:58:44</EmploymentStartDate>
+    <EmploymentStartDate>2024-09-19T13:38:12</EmploymentStartDate>
     <MaxPersonalDeliveryDistance xsi:nil="true" />
   </Courier>
   <Courier>
-    <Id>345179207</Id>
-    <FullName>Amelia Johnson</FullName>
-    <PhoneNumber>05582102814</PhoneNumber>
-    <Gmail>sarah@gmail.com</Gmail>
-    <Password>1291</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Bicycle</DeliveryType>
-    <EmploymentStartDate>2024-05-07T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>298397449</Id>
-    <FullName>Jane Martinez</FullName>
-    <PhoneNumber>05242911328</PhoneNumber>
-    <Gmail>daniel@gmail.com</Gmail>
-    <Password>5392</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Car</DeliveryType>
-    <EmploymentStartDate>2024-06-12T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>227432688</Id>
-    <FullName>Mia Rodriguez</FullName>
-    <PhoneNumber>05665928694</PhoneNumber>
-    <Gmail>olivia@gmail.com</Gmail>
-    <Password>2248</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Bicycle</DeliveryType>
-    <EmploymentStartDate>2025-06-24T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance>9.559938744101943</MaxPersonalDeliveryDistance>
-  </Courier>
-  <Courier>
-    <Id>246092061</Id>
-    <FullName>Isabella Lee</FullName>
-    <PhoneNumber>05788486142</PhoneNumber>
-    <Gmail>james@gmail.com</Gmail>
-    <Password>7121</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Car</DeliveryType>
-    <EmploymentStartDate>2025-09-15T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>286508823</Id>
-    <FullName>Matthew King</FullName>
-    <PhoneNumber>05140995942</PhoneNumber>
-    <Gmail>sophia@gmail.com</Gmail>
-    <Password>5161</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Motorcycle</DeliveryType>
-    <EmploymentStartDate>2025-04-20T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance>15.85669464145544</MaxPersonalDeliveryDistance>
-  </Courier>
-  <Courier>
-    <Id>215771410</Id>
-    <FullName>Joseph Wright</FullName>
-    <PhoneNumber>05333135959</PhoneNumber>
-    <Gmail>robert@gmail.com</Gmail>
-    <Password>6189</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>OnFoot</DeliveryType>
-    <EmploymentStartDate>2025-03-04T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>243315425</Id>
-    <FullName>John White</FullName>
-    <PhoneNumber>05147013844</PhoneNumber>
-    <Gmail>isabella@gmail.com</Gmail>
-    <Password>3877</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>OnFoot</DeliveryType>
-    <EmploymentStartDate>2024-07-27T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>380499060</Id>
-    <FullName>Michael Johnson</FullName>
-    <PhoneNumber>05945493690</PhoneNumber>
-    <Gmail>william@gmail.com</Gmail>
-    <Password>3312</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Car</DeliveryType>
-    <EmploymentStartDate>2025-08-27T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>336600082</Id>
-    <FullName>Emily Martin</FullName>
-    <PhoneNumber>05476191729</PhoneNumber>
-    <Gmail>mia@gmail.com</Gmail>
-    <Password>2810</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>OnFoot</DeliveryType>
-    <EmploymentStartDate>2024-04-11T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>207526960</Id>
-    <FullName>Harper Garcia</FullName>
-    <PhoneNumber>05772220373</PhoneNumber>
-    <Gmail>joseph@gmail.com</Gmail>
-    <Password>2747</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Motorcycle</DeliveryType>
-    <EmploymentStartDate>2025-05-10T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>340537141</Id>
-    <FullName>Sophia Walker</FullName>
-    <PhoneNumber>05400519927</PhoneNumber>
-    <Gmail>charlotte@gmail.com</Gmail>
-    <Password>8065</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Motorcycle</DeliveryType>
-    <EmploymentStartDate>2024-02-06T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>351821633</Id>
+    <Id>344390205</Id>
     <FullName>Thomas Martinez</FullName>
-    <PhoneNumber>05232911094</PhoneNumber>
-    <Gmail>charles@gmail.com</Gmail>
-    <Password>8507</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Car</DeliveryType>
-    <EmploymentStartDate>2025-11-12T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance>15.308922646668076</MaxPersonalDeliveryDistance>
-  </Courier>
-  <Courier>
-    <Id>323527410</Id>
-    <FullName>Michael Clark</FullName>
-    <PhoneNumber>05421729298</PhoneNumber>
-    <Gmail>amelia@gmail.com</Gmail>
-    <Password>7984</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>OnFoot</DeliveryType>
-    <EmploymentStartDate>2023-12-10T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>280605796</Id>
-    <FullName>Charles Taylor</FullName>
-    <PhoneNumber>05505083784</PhoneNumber>
-    <Gmail>thomas@gmail.com</Gmail>
-    <Password>8417</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Motorcycle</DeliveryType>
-    <EmploymentStartDate>2024-05-03T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>225249630</Id>
-    <FullName>Evelyn King</FullName>
-    <PhoneNumber>05627933709</PhoneNumber>
-    <Gmail>harper@gmail.com</Gmail>
-    <Password>1181</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Motorcycle</DeliveryType>
-    <EmploymentStartDate>2024-07-10T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>327409036</Id>
-    <FullName>James Thompson</FullName>
-    <PhoneNumber>05916616831</PhoneNumber>
-    <Gmail>christopher@gmail.com</Gmail>
-    <Password>1346</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Car</DeliveryType>
-    <EmploymentStartDate>2024-06-12T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>240403647</Id>
-    <FullName>Christopher Smith</FullName>
-    <PhoneNumber>05591535669</PhoneNumber>
-    <Gmail>evelyn@gmail.com</Gmail>
-    <Password>1015</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Car</DeliveryType>
-    <EmploymentStartDate>2025-05-30T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance>15.663741212207508</MaxPersonalDeliveryDistance>
-  </Courier>
-  <Courier>
-    <Id>299995026</Id>
-    <FullName>Daniel Robinson</FullName>
-    <PhoneNumber>05450962866</PhoneNumber>
-    <Gmail>matthew@gmail.com</Gmail>
-    <Password>2119</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>Car</DeliveryType>
-    <EmploymentStartDate>2025-06-21T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance>16.08079279599268</MaxPersonalDeliveryDistance>
-  </Courier>
-  <Courier>
-    <Id>341207037</Id>
-    <FullName>Charles Thompson</FullName>
-    <PhoneNumber>05478250406</PhoneNumber>
-    <Gmail>abigail@gmail.com</Gmail>
-    <Password>9198</Password>
-    <IsActive>true</IsActive>
-    <DeliveryType>OnFoot</DeliveryType>
-    <EmploymentStartDate>2024-12-06T20:58:44</EmploymentStartDate>
-    <MaxPersonalDeliveryDistance xsi:nil="true" />
-  </Courier>
-  <Courier>
-    <Id>341928617</Id>
-    <FullName>James Lee</FullName>
-    <PhoneNumber>05676377655</PhoneNumber>
-    <Gmail>anthony@gmail.com</Gmail>
-    <Password>7164</Password>
+    <PhoneNumber>05124931320</PhoneNumber>
+    <Gmail>sarah@gmail.com</Gmail>
+    <Password>1713</Password>
     <IsActive>true</IsActive>
     <DeliveryType>Bicycle</DeliveryType>
-    <EmploymentStartDate>2025-04-09T20:58:44</EmploymentStartDate>
+    <EmploymentStartDate>2025-07-18T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>222805765</Id>
+    <FullName>Harper Thompson</FullName>
+    <PhoneNumber>05809581787</PhoneNumber>
+    <Gmail>daniel@gmail.com</Gmail>
+    <Password>1458</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Motorcycle</DeliveryType>
+    <EmploymentStartDate>2024-10-09T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>321464142</Id>
+    <FullName>Matthew White</FullName>
+    <PhoneNumber>05420141597</PhoneNumber>
+    <Gmail>olivia@gmail.com</Gmail>
+    <Password>3188</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Bicycle</DeliveryType>
+    <EmploymentStartDate>2025-02-15T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>388741618</Id>
+    <FullName>David Brown</FullName>
+    <PhoneNumber>05537773734</PhoneNumber>
+    <Gmail>james@gmail.com</Gmail>
+    <Password>2951</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>OnFoot</DeliveryType>
+    <EmploymentStartDate>2024-10-31T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance>2.6321361911024312</MaxPersonalDeliveryDistance>
+  </Courier>
+  <Courier>
+    <Id>362916898</Id>
+    <FullName>Olivia Martinez</FullName>
+    <PhoneNumber>05710638984</PhoneNumber>
+    <Gmail>sophia@gmail.com</Gmail>
+    <Password>1560</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Bicycle</DeliveryType>
+    <EmploymentStartDate>2025-05-22T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>203615766</Id>
+    <FullName>William Lewis</FullName>
+    <PhoneNumber>05464368407</PhoneNumber>
+    <Gmail>robert@gmail.com</Gmail>
+    <Password>6906</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Bicycle</DeliveryType>
+    <EmploymentStartDate>2025-06-21T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>245473287</Id>
+    <FullName>Charles Lewis</FullName>
+    <PhoneNumber>05205960441</PhoneNumber>
+    <Gmail>isabella@gmail.com</Gmail>
+    <Password>1249</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Car</DeliveryType>
+    <EmploymentStartDate>2024-09-03T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>398820003</Id>
+    <FullName>Anthony Johnson</FullName>
+    <PhoneNumber>05364279943</PhoneNumber>
+    <Gmail>william@gmail.com</Gmail>
+    <Password>7786</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Bicycle</DeliveryType>
+    <EmploymentStartDate>2024-12-17T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance>6.024653920774801</MaxPersonalDeliveryDistance>
+  </Courier>
+  <Courier>
+    <Id>236777064</Id>
+    <FullName>Isabella Wright</FullName>
+    <PhoneNumber>05587241713</PhoneNumber>
+    <Gmail>mia@gmail.com</Gmail>
+    <Password>5121</Password>
+    <IsActive>false</IsActive>
+    <DeliveryType>Car</DeliveryType>
+    <EmploymentStartDate>2023-12-10T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>280178941</Id>
+    <FullName>Sophia Robinson</FullName>
+    <PhoneNumber>05858446625</PhoneNumber>
+    <Gmail>joseph@gmail.com</Gmail>
+    <Password>7630</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Motorcycle</DeliveryType>
+    <EmploymentStartDate>2025-07-04T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>388022254</Id>
+    <FullName>John Hall</FullName>
+    <PhoneNumber>05855973775</PhoneNumber>
+    <Gmail>charlotte@gmail.com</Gmail>
+    <Password>6693</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Bicycle</DeliveryType>
+    <EmploymentStartDate>2024-09-29T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance>1.301769496572429</MaxPersonalDeliveryDistance>
+  </Courier>
+  <Courier>
+    <Id>244418274</Id>
+    <FullName>Matthew Lewis</FullName>
+    <PhoneNumber>05636380091</PhoneNumber>
+    <Gmail>charles@gmail.com</Gmail>
+    <Password>1235</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Car</DeliveryType>
+    <EmploymentStartDate>2024-01-28T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>348559378</Id>
+    <FullName>Isabella Anderson</FullName>
+    <PhoneNumber>05664776126</PhoneNumber>
+    <Gmail>amelia@gmail.com</Gmail>
+    <Password>4010</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>OnFoot</DeliveryType>
+    <EmploymentStartDate>2024-04-07T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>320464346</Id>
+    <FullName>Jane Brown</FullName>
+    <PhoneNumber>05713545498</PhoneNumber>
+    <Gmail>thomas@gmail.com</Gmail>
+    <Password>3481</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>OnFoot</DeliveryType>
+    <EmploymentStartDate>2024-03-08T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>325145844</Id>
+    <FullName>Evelyn Robinson</FullName>
+    <PhoneNumber>05432765122</PhoneNumber>
+    <Gmail>harper@gmail.com</Gmail>
+    <Password>9977</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Car</DeliveryType>
+    <EmploymentStartDate>2025-05-12T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance>2.5145797550505726</MaxPersonalDeliveryDistance>
+  </Courier>
+  <Courier>
+    <Id>289253769</Id>
+    <FullName>Evelyn Rodriguez</FullName>
+    <PhoneNumber>05467551020</PhoneNumber>
+    <Gmail>christopher@gmail.com</Gmail>
+    <Password>1809</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Car</DeliveryType>
+    <EmploymentStartDate>2024-04-20T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>234482827</Id>
+    <FullName>Isabella Wright</FullName>
+    <PhoneNumber>05876160464</PhoneNumber>
+    <Gmail>evelyn@gmail.com</Gmail>
+    <Password>3019</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Bicycle</DeliveryType>
+    <EmploymentStartDate>2023-12-12T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>291215653</Id>
+    <FullName>Jane King</FullName>
+    <PhoneNumber>05152114347</PhoneNumber>
+    <Gmail>matthew@gmail.com</Gmail>
+    <Password>9054</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Car</DeliveryType>
+    <EmploymentStartDate>2025-06-03T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance xsi:nil="true" />
+  </Courier>
+  <Courier>
+    <Id>347849884</Id>
+    <FullName>Olivia King</FullName>
+    <PhoneNumber>05282914220</PhoneNumber>
+    <Gmail>abigail@gmail.com</Gmail>
+    <Password>6683</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Car</DeliveryType>
+    <EmploymentStartDate>2025-03-13T13:38:12</EmploymentStartDate>
+    <MaxPersonalDeliveryDistance>2.1188317737612925</MaxPersonalDeliveryDistance>
+  </Courier>
+  <Courier>
+    <Id>399961503</Id>
+    <FullName>Charlotte Allen</FullName>
+    <PhoneNumber>05556431545</PhoneNumber>
+    <Gmail>anthony@gmail.com</Gmail>
+    <Password>2812</Password>
+    <IsActive>true</IsActive>
+    <DeliveryType>Bicycle</DeliveryType>
+    <EmploymentStartDate>2025-01-21T13:38:12</EmploymentStartDate>
     <MaxPersonalDeliveryDistance xsi:nil="true" />
   </Courier>
 </ArrayOfCourier>

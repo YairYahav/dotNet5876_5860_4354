@@ -66,12 +66,12 @@ internal class DeliveryImplementation : IDelivery
     /// <param name="id">The unique identifier of the delivery to retrieve.</param>
     /// <returns>The <see cref="Delivery"/> object with the specified identifier.</returns>
     /// <exception cref="DalDoesNotExistException">Thrown if no delivery with the specified <paramref name="id"/> exists.</exception>
-    public Delivery Read(int id)
+    public Delivery? Read(int id)
     {
         var list = XMLTools.LoadListFromXMLSerializer<Delivery>(Config.s_deliveries_xml);
         var delivery = list.FirstOrDefault(it => it.Id == id);
-        if (delivery == null)
-            throw new DalDoesNotExistException($"Courier with Id {id} does not exist");
+        //if (delivery == null)
+        //    throw new DalDoesNotExistException($"Courier with Id {id} does not exist");
         return delivery;
     }
 

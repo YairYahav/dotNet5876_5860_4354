@@ -66,12 +66,12 @@ internal class OrderImplementation : IOrder
     /// <param name="id">The unique identifier of the order to retrieve.</param>
     /// <returns>The <see cref="Order"/> object with the specified identifier.</returns>
     /// <exception cref="DalDoesNotExistException">Thrown if no order with the specified <paramref name="id"/> exists.</exception>
-    public Order Read(int id)
+    public Order? Read(int id)
     {
         var list = XMLTools.LoadListFromXMLSerializer<Order>(Config.s_orders_xml);
         var order = list.FirstOrDefault(it => it.Id == id);
-        if (order == null)
-            throw new DalDoesNotExistException($"Courier with Id {id} does not exist");
+        //if (order == null)
+        //    throw new DalDoesNotExistException($"Courier with Id {id} does not exist");
         return order;
     }
 

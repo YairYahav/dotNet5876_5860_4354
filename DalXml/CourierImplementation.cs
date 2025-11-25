@@ -72,12 +72,12 @@ internal class CourierImplementation : ICourier
     /// <param name="id">The unique identifier of the courier to retrieve.</param>
     /// <returns>The <see cref="Courier"/> object with the specified identifier.</returns>
     /// <exception cref="DalDoesNotExistException">Thrown if no courier with the specified <paramref name="id"/> exists.</exception>
-    public Courier Read(int id)
+    public Courier? Read(int id)
     {
         var list = XMLTools.LoadListFromXMLSerializer<Courier>(Config.s_couriers_xml);
         var courier = list.FirstOrDefault(it => it.Id == id);
-        if (courier == null)
-            throw new DalDoesNotExistException($"Courier with Id {id} does not exist");
+        //if (courier == null)
+        //    throw new DalDoesNotExistException($"Courier with Id {id} does not exist");
         return courier;
     }
 

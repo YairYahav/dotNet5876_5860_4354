@@ -16,10 +16,15 @@ internal class DeliveryImplementation : IDelivery
     /// <param name="item"></param>
     public void Create(Delivery item)
     {
-        if (Read(item.Id) != null)
-            throw new DalAlreadyExistsException($"Delivery with Id {item.Id} already exists");
-
-        DataSource.Deliveries.Add(item);
+        int id; 
+        if (item.Id != 0) 
+            id = item.Id; 
+        else 
+            id = Config.NextDeliveryId; 
+        if (Read(item.Id) != null) 
+            throw new DalAlreadyExistsException($"Delivery with Id {item.Id} already exists"); 
+        Delivery newDelivery = item with { Id = id }; 
+        DataSource.Deliveries.Add(newDelivery);
     }
 
 
@@ -54,8 +59,8 @@ internal class DeliveryImplementation : IDelivery
     public Delivery? Read(int id)
     {
         var delivery = DataSource.Deliveries.FirstOrDefault(d => d?.Id == id);
-        if (delivery == null)
-            throw new DalDoesNotExistException($"Delivery with Id {id} does not exist");
+        //if (delivery == null)
+        //    throw new DalDoesNotExistException($"Delivery with Id {id} does not exist");
 
         return delivery;
     }

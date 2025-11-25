@@ -49,8 +49,8 @@ internal class CourierImplementation : ICourier
     public Courier? Read(int id)
     {
         var courier = DataSource.Couriers.FirstOrDefault(c => c?.Id == id);
-        if (courier == null)
-            throw new DalDoesNotExistException($"Courier with ID {id} does not exist");
+        //if (courier == null)
+        //    throw new DalDoesNotExistException($"Courier with ID {id} does not exist");
         return courier;
     }
 

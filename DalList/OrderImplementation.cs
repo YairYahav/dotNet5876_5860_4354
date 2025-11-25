@@ -18,10 +18,15 @@ internal class OrderImplementation : IOrder
     /// <param name="item"></param>
     public void Create(Order item)
     {
-        if (Read(item.Id) == null)
-            throw new DalAlreadyExistsException($"Order with id {item.Id} already exist");
-
-        DataSource.Orders.Add(item);
+        int id;
+        if (item.Id != 0)
+            id = item.Id;
+        else
+            id = Config.NextOrderId;
+        if (Read(item.Id) != null)
+            throw new DalAlreadyExistsException($"Order with Id {item.Id} already exists");
+        Order newOrder = item with { Id = id };
+        DataSource.Orders.Add(newOrder);
     }
 
 
@@ -55,8 +60,8 @@ internal class OrderImplementation : IOrder
     public Order? Read(int id)
     {
         var order = DataSource.Orders.FirstOrDefault(o => o?.Id == id);
-        if (order == null)
-            throw new DalDoesNotExistException($"Order with Id {id} does not exist");
+        //if (order == null)
+        //    throw new DalDoesNotExistException($"Order with Id {id} does not exist");
 
         return order;
     }
