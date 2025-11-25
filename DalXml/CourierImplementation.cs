@@ -27,15 +27,9 @@ internal class CourierImplementation : ICourier
     public void Create(Courier item)
     {
         var list = XMLTools.LoadListFromXMLSerializer<Courier>(Config.s_couriers_xml);
-
-        Courier newCourier = item;
-        if (item.Id == 0)
-            newCourier = item with { Id = Config.NextCourierId };
-
-        if (list.Any(c => c.Id == newCourier.Id))
-            throw new DalAlreadyExistsException($"Courier with Id {newCourier.Id} already exists");
-
-        list.Add(newCourier);
+        if(Read(item.Id) != null)
+            throw new DalAlreadyExistsException($"Courier with Id {item.Id} already exists");
+        list.Add(item);
         XMLTools.SaveListToXMLSerializer(list, Config.s_couriers_xml);
     }
 

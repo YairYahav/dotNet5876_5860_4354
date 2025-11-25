@@ -17,13 +17,6 @@ internal static class Config
     internal const string s_deliveries_xml = "deliveries.xml";
 
 
-    internal static int NextCourierId
-    {
-        get => XMLTools.GetAndIncreaseConfigIntVal(s_data_config_xml, nameof(NextCourierId));
-        private set => XMLTools.SetConfigIntVal(s_data_config_xml, nameof(NextCourierId), value);
-    }
-
-
     internal static int NextOrderId
     {
         get => XMLTools.GetAndIncreaseConfigIntVal(s_data_config_xml, nameof(NextOrderId));
@@ -239,10 +232,8 @@ internal static class Config
 
     internal static void Reset()
     {
-        // set some reasonable starting values
-        NextCourierId = 200000001;
-        NextOrderId = 300000001;
-        NextDeliveryId = 400000001;
+        NextOrderId = 30001;
+        NextDeliveryId = 40001;
 
         ManagerId = 329164354;
         ManagerPassword = "Admin1234";

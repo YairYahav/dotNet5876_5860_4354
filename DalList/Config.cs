@@ -8,7 +8,7 @@ internal static class Config
     /// Starting ID for orders.
     /// Next unique order ID.
     /// </summary>
-    internal const int startOrderId = 1000;
+    internal const int startOrderId = 30001;
     private static int nextOrderId = startOrderId;
     internal static int NextOrderId { get => nextOrderId++; }
 
@@ -16,7 +16,7 @@ internal static class Config
     /// Starting ID for deliveries.
     /// Next unique delivery ID.
     /// </summary>
-    internal const int startDeliveryId = 1000;
+    internal const int startDeliveryId = 40001;
     private static int nextDeliveryId = startDeliveryId;
     internal static int NextDeliveryId { get => nextDeliveryId++; }
 
