@@ -1,13 +1,17 @@
-﻿namespace BlApi;
-using BO;
-using System.Collections.Generic;
-using System;
+﻿//using BO;
+
+namespace BlApi;
 
 public interface ICourier
 {
-    void Create(BO.Courier boCourier);
-    BO.Courier Read(int id);
-    IEnumerable<BO.Courier> ReadAll(Func<BO.Courier, bool>? filter = null);
-    void Update(BO.Courier boCourier);
-    void Delete(int id);
+    BO.UserRole Login(int id, string password);
+
+    IEnumerable<BO.CourierInList> GetCouriers(
+        int requesterId, bool? onlyActive = null,
+        BO.CourierListOrderBy? orderBy = null);
+
+    BO.Courier GetCourier(int requesterId, int courierId);
+    void UpdateCourier(int requesterId, BO.Courier courier);
+    void CreateCourier(int requesterId, BO.Courier courier);
+    void DeleteCourier(int requesterId, int courierId);
 }

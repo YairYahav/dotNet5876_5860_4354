@@ -1,34 +1,39 @@
-﻿namespace BlImplementation;
-using BlApi;
+﻿using BlApi;
 using BO;
-using System;
-using System.Collections.Generic;
-using Helpers;
+
+//using BO; // מעדיף לכתוב לפני טיפוסים הלוגים BO כדי לא להתבלבל עם DO
+
+namespace BlImplementation;
 
 internal class CourierImplementation : ICourier
 {
-    public void Create(Courier boCourier)
+    public void CreateCourier(int requesterId, Courier courier)
     {
-        throw new NotImplementedException("Creation logic not yet implemented in BL.");
+        throw new NotImplementedException();
     }
 
-    public Courier Read(int id)
+    public void DeleteCourier(int requesterId, int courierId)
     {
-        throw new NotImplementedException("Read logic not yet implemented in BL.");
+        throw new NotImplementedException();
     }
 
-    public IEnumerable<Courier> ReadAll(Func<Courier, bool>? filter = null)
+    public Courier GetCourier(int requesterId, int courierId)
     {
-        return new List<Courier>();
+        throw new NotImplementedException();
     }
 
-    public void Update(Courier boCourier)
+    public IEnumerable<CourierInList> GetCouriers(int requesterId, bool? onlyActive = null, CourierListOrderBy? orderBy = null)
     {
-        throw new NotImplementedException("Update logic not yet implemented in BL.");
+        throw new NotImplementedException();
     }
 
-    public void Delete(int id)
+    public void Login(string id, string password)
     {
-        throw new NotImplementedException("Delete logic not yet implemented in BL.");
+        throw new NotImplementedException();
+    }
+
+    public void UpdateCourier(int requesterId, Courier courier)
+    {
+        throw new NotImplementedException();
     }
 }

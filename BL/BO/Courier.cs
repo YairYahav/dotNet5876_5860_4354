@@ -7,9 +7,6 @@ using Helpers;
 public class Courier
 {
     public int Id { get; init; }
-    public DateTime EmploymentStartDate { get; init; }
-
-
     public string FullName { get; set; }
     public string PhoneNumber { get; set; }
     public string Gmail { get; set; }
@@ -17,6 +14,17 @@ public class Courier
     public bool IsActive { get; set; }
     public DeliveryType DeliveryType { get; set; }
     public double? MaxPersonalDeliveryDistance { get; set; }
+    public DateTime EmploymentStartDate { get; init; }
+    public int NumberOfDeliveriesCompletedOnTime { get; set; }
+    public int NumberOfDeliveriesCompletedLate { get; set; }
+    OrderInProgress ordersInProgress { get; set; }
+
+
+
+
+
+
+
 
     public override string ToString() => this.ToStringProperty();
 }

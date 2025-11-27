@@ -1,34 +1,64 @@
-﻿namespace BlImplementation;
-using BlApi;
+﻿using BlApi;
 using BO;
-using System;
-using System.Collections.Generic;
-using Helpers;
+
+//using BO; // מעדיף לכתוב לפני טיפוסים הלוגים BO כדי לא להתבלבל עם DO
+
+namespace BlImplementation;
 
 internal class OrderImplementation : IOrder
 {
-    public void Create(Order boOrder)
+    public void CancelOrder(int requesterId, int orderId)
     {
-        throw new NotImplementedException("Creation logic not yet implemented in BL.");
+        throw new NotImplementedException();
     }
 
-    public Order Read(int id)
+    public void ChooseOrderForDelivery(int requesterId, int courierId, int orderId)
     {
-        throw new NotImplementedException("Read logic not yet implemented in BL.");
+        throw new NotImplementedException();
     }
 
-    public IEnumerable<Order> ReadAll(Func<Order, bool>? filter = null)
+    public void CompleteOrderForCourier(int requesterId, int courierId, int deliveryId)
     {
-        return new List<Order>();
+        throw new NotImplementedException();
     }
 
-    public void Update(Order boOrder)
+    public void CreateOrder(int requesterId, Order order)
     {
-        throw new NotImplementedException("Update logic not yet implemented in BL.");
+        throw new NotImplementedException();
     }
 
-    public void Delete(int id)
+    public void DeleteOrder(int requesterId, int orderId)
     {
-        throw new NotImplementedException("Delete logic not yet implemented in BL.");
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<ClosedDeliveryInList> GerClosedDeliveries(int requesterId, int courierId, ClosedDeliveryListFilterBy? filterBy = null, ClosedDeliveryListOrderBy? orderBy = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<OpenOrderInList> GetOpenDeliveries(int requesterId, int courierId, OpenDeliveryListFilterBy? filterBy = null, OpenDeliveryListOrderBy? orderBy = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Order GetOrder(int requesterId, int orderId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<OpenOrderInList> GetOrders(int requesterId, OrderListFilterBy? filterBy = null, object? filterValue = null, OrderListOrderBy? orderBy = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int[] GetOrdersSummary(int requesterId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void UpdateOrder(int requesterId, Order order)
+    {
+        throw new NotImplementedException();
     }
 }
