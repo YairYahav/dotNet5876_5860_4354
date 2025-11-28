@@ -8,4 +8,5 @@ internal static class DeliveryManager
 {
     private static readonly IDal s_dal = Factory.Get;
 
+
 }
