@@ -23,15 +23,16 @@ public record Order
     string CustomerName,
     string CustomerPhone,
     bool IsFrag,
+    DateTime OrderPlacementTime,
     double? Volume = null,
     double ? Weight = null,
-    string? DescriptionOfOrder = null,
-    DateTime? OrderPlacementTime = null
+    string? DescriptionOfOrder = null
+   
 
 )
 {
     /// <summary>
     /// Default constructor 
     /// </summary>
-    public Order() : this(0, default, "", 0.0, 0.0, "", "", false) { }
+    public Order() : this(0, default, "", 0.0, 0.0, "", "", false,default) { }
 }

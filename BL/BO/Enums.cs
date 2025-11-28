@@ -56,7 +56,11 @@ public enum ScheduleStatus
 
 public enum CourierListOrderBy
 {
-    
+    ById,
+    ByName,
+    ByActive,
+    EmploymentStartDate,
+    DeliveryType
 }
 
 public enum OrderListFilterBy

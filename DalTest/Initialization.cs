@@ -154,10 +154,10 @@ public static class Initialization
                 cusName,
                 cusPhone,
                 isFragile,
+                orderTime,
                 volume,
                 weight,
-                desc,
-                orderTime));
+                desc));
         }
     }
 
@@ -282,6 +282,7 @@ public static class Initialization
     /// <param name="lat2"></param>
     /// <param name="lon2"></param>
     /// <returns></returns>
+    /// 
     private static double HaversineKm(double lat1, double lon1, double lat2, double lon2)
     {
         const double R = 6371.0;

@@ -53,3 +53,9 @@ public class BlNullReferenceException : Exception
 {
     public BlNullReferenceException(string? message) : base(message) { }
 }
+
+[Serializable]
+public class BlUnauthorizedAccessException : Exception
+{
+    public BlUnauthorizedAccessException(string? message) : base(message) { }
+}

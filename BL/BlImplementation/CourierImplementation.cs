@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using Helpers;
 
 //using BO; // מעדיף לכתוב לפני טיפוסים הלוגים BO כדי לא להתבלבל עם DO
 
@@ -9,31 +10,31 @@ internal class CourierImplementation : ICourier
 {
     public void CreateCourier(int requesterId, Courier courier)
     {
-        throw new NotImplementedException();
+        CourierManager.CreateCourier(requesterId, courier);
     }
 
     public void DeleteCourier(int requesterId, int courierId)
     {
-        throw new NotImplementedException();
+        CourierManager.DeleteCourier(requesterId, courierId);   
     }
 
     public Courier GetCourier(int requesterId, int courierId)
     {
-        throw new NotImplementedException();
+        return CourierManager.GetCourier(requesterId, courierId);
     }
 
     public IEnumerable<CourierInList> GetCouriers(int requesterId, bool? onlyActive = null, CourierListOrderBy? orderBy = null)
     {
-        throw new NotImplementedException();
+        return CourierManager.GetCouriers(requesterId, onlyActive, orderBy);
     }
 
-    public void Login(string id, string password)
+    public UserRole Login(int id, string password)
     {
-        throw new NotImplementedException();
+        return CourierManager.Login(id, password);
     }
 
     public void UpdateCourier(int requesterId, Courier courier)
     {
-        throw new NotImplementedException();
+        CourierManager.UpdateCourier(requesterId, courier);
     }
 }

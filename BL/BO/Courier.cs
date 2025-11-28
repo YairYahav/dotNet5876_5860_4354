@@ -14,16 +14,10 @@ public class Courier
     public bool IsActive { get; set; }
     public DeliveryType DeliveryType { get; set; }
     public double? MaxPersonalDeliveryDistance { get; set; }
-    public DateTime EmploymentStartDate { get; init; }
+    public DateTime EmploymentStartDate { get; set; }
     public int NumberOfDeliveriesCompletedOnTime { get; set; }
     public int NumberOfDeliveriesCompletedLate { get; set; }
-    OrderInProgress ordersInProgress { get; set; }
-
-
-
-
-
-
+    public OrderInProgress? ordersInProgress { get; set; }
 
 
     public override string ToString() => this.ToStringProperty();
