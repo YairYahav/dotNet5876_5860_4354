@@ -117,6 +117,12 @@ internal static class CourierManager
         s_dal.Courier.Delete(courierId);
     }
 
+
+
+
+    // Help functions
+
+
     private static BO.Courier FromDoToBo(DO.Courier d) 
     {
         var deliverys = s_dal.Delivery.ReadAll().Where(del => del.CourierId == d.Id);
@@ -222,7 +228,7 @@ internal static class CourierManager
             BO.CourierListOrderBy.DeliveryType => couriers.OrderBy(c => c.DeliveryType),
             _ => couriers
         };
-    }//הסבר
+    }
 
     internal static TimeSpan ExpectedDeliveryTime(DO.Delivery delivery)
     {
@@ -237,7 +243,8 @@ internal static class CourierManager
         return s_dal.Config.MaxTimeRangeForDelivery;
     }
 
-    internal static BO.OrderStatus GetOrderStatus(DO.Delivery delivery)
+    //לבדוק בסוף שאין סתם מתודה מקבליה בOrderManager
+    private static BO.OrderStatus GetOrderStatus(DO.Delivery delivery)
     {
 
         if (delivery.DeliveryCompletionTime is not null)
@@ -253,8 +260,8 @@ internal static class CourierManager
             return BO.OrderStatus.Open;
         return BO.OrderStatus.InProgress;
     }
-
-    internal static BO.ScheduleStatus GetScheduleStatus(DO.Delivery delivery)
+    //לבדוק בסוף שאין סתם מתודה מקבליה בOrderManager
+    private static BO.ScheduleStatus GetScheduleStatus(DO.Delivery delivery)
     {
         if (delivery.DeliveryCompletionTime != null)
         {

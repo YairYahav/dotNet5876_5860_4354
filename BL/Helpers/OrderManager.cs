@@ -7,23 +7,7 @@ namespace Helpers;
 internal static class OrderManager
 {
     private static readonly IDal s_dal = Factory.Get;
-    internal static int[] GetOrdersSummery(int requesterId)
-    {
-        AuthorizeAdmin(requesterId);
-        var orders = s_dal.Order.ReadAll().ToList();
-        var projected = orders.Select(o => (Status: GetOrderStatus(o), Timing: GetTimingStatus(o)));
-        var grouped = projected
-            .GroupBy(x => x)
-            .ToDictionary(g => g.Key, g => g.Count());
-        var statuses = Enum.GetValues(typeof(BO.OrderStatus))
-                     .Cast<BO.OrderStatus>()
-                     .ToArray();
-        var timings = Enum.GetValues(typeof(BO.ScheduleStatus))
-                           .Cast<BO.ScheduleStatus>()
-                           .ToArray();
 
-
-    }
 
     private static void AuthorizeAdmin(int requesterId)
     {
@@ -32,10 +16,38 @@ internal static class OrderManager
             throw new BO.BlUnauthorizedAccessException("Only admin users are authorized to perform this action.");
     }
 
+    internal static BO.Order GetOrder(int requesterId, int orderId)
+    {
+        AuthorizeAdmin(requesterId);
+
+        var d = s_dal.Order.Read(orderId);
+            if(d == null)
+                throw new BO.BlDoesNotExistException($"Order {orderId} not found");
+
+        return FromDoToBo(d);
+    }
+
+    internal static void UpdateOrder(int requesterId, BO.Order order)
+    {
+        AuthorizeAdmin(requesterId);
+        var existingDoOrder = s_dal.Order.Read(order.Id);
+            if(existingDoOrder == null)
+                throw new BO.BlDoesNotExistException($"Order {order.Id} not found");
+
+
+
+    }
+    // Help functions
+
+
+
+    public static BO.Order FromDoToBo(DO.Order d)
+    {
+    }
     private static BO.OrderStatus GetOrderStatus(DO.Order o)
     {
     }
-    private static BO.ScheduleStatus GetTimingStatus(DO.Order o)
+    private static BO.ScheduleStatus GetScheduleStatus(DO.Order o)
     {
     }
 

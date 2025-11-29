@@ -2,8 +2,6 @@
 using BO;
 using Helpers;
 
-//using BO; // מעדיף לכתוב לפני טיפוסים הלוגים BO כדי לא להתבלבל עם DO 
-
 namespace BlImplementation;
 
 internal class CourierImplementation : ICourier
