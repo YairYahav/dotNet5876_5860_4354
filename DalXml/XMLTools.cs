@@ -1,5 +1,4 @@
-﻿
-namespace Dal;
+﻿namespace Dal;
 
 using DO;
 using System.Xml;
@@ -22,7 +21,7 @@ static class XMLTools
 
         try
         {
-            using FileStream file = new(xmlFilePath, FileMode.Create, FileAccess.Write, FileShare.None);
+            using FileStream file = new(xmlFilePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             new XmlSerializer(typeof(List<T>)).Serialize(file, list);
         }
         catch (Exception ex)
@@ -37,7 +36,7 @@ static class XMLTools
         try
         {
             if (!File.Exists(xmlFilePath)) return new();
-            using FileStream file = new(xmlFilePath, FileMode.Open);
+            using FileStream file = new(xmlFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             XmlSerializer x = new(typeof(List<T>));
             return x.Deserialize(file) as List<T> ?? new();
         }

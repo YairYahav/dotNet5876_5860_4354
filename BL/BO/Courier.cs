@@ -15,8 +15,8 @@ public class Courier
     public DeliveryType DeliveryType { get; set; }
     public double? MaxPersonalDeliveryDistance { get; set; }
     public DateTime EmploymentStartDate { get; set; }
-    public int NumberOfDeliveriesCompletedOnTime { get; set; }
-    public int NumberOfDeliveriesCompletedLate { get; set; }
+    public int NumberOfDeliveriesCompletedOnTime { get; init; }
+    public int NumberOfDeliveriesCompletedLate { get; init; }
     public OrderInProgress? ordersInProgress { get; set; }
 
 

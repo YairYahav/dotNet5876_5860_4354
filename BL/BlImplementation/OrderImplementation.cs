@@ -8,8 +8,8 @@ internal class OrderImplementation : IOrder
 {
     public void CancelOrder(int requesterId, int orderId)
     {
-        Helpers.OrderManager.CanceleOrder(requesterId, orderId);
-        
+        Helpers.OrderManager.CancelOrder(requesterId, orderId);
+
     }
 
     public void ChooseOrderForDelivery(int requesterId, int courierId, int orderId)
@@ -32,29 +32,29 @@ internal class OrderImplementation : IOrder
         Helpers.OrderManager.DeleteOrder(requesterId, orderId);
     }
 
-    public IEnumerable<ClosedDeliveryInList> GerClosedDeliveries(int requesterId, int courierId, ClosedDeliveryListFilterBy? filterBy = null, ClosedDeliveryListOrderBy? orderBy = null)
+    public IEnumerable<ClosedDeliveryInList> GerClosedOrders(int requesterId, int courierId, OrderType? filterBy = null, ClosedOrdersListOrderBy? orderBy = null)
     {
-        Helpers.OrderManager.GerClosedDeliveries(requesterId, courierId);
+        return Helpers.OrderManager.GetClosedDeliveries(requesterId, courierId, filterBy, orderBy);
     }
 
-    public IEnumerable<OpenOrderInList> GetOpenDeliveries(int requesterId, int courierId, OpenDeliveryListFilterBy? filterBy = null, OpenDeliveryListOrderBy? orderBy = null)
+    public IEnumerable<OpenOrderInList> GetOpenOrders(int requesterId, int courierId, OrderType? filterBy = null, OpenDeliveryListOrderBy? orderBy = null)
     {
-        Helpers.OrderManager.GetOpenDeliveries(requesterId, courierId);
+        return Helpers.OrderManager.GetOpenDeliveries(requesterId, courierId, filterBy, orderBy);
     }
 
     public Order GetOrder(int requesterId, int orderId)
     {
-        Helpers.OrderManager.GetOrder(requesterId, orderId);
+        return Helpers.OrderManager.GetOrder(requesterId, orderId);
     }
 
-    public IEnumerable<OpenOrderInList> GetOrders(int requesterId, OrderListFilterBy? filterBy = null, object? filterValue = null, OrderListOrderBy? orderBy = null)
+    public IEnumerable<OrderInList> GetOrders(int requesterId, OrderListFilterBy? filterBy = null, object? filterValue = null, OrderListOrderBy? orderBy = null)
     {
-        Helpers.OrderManager.GetOrders(requesterId, filterBy, filterValue, orderBy);
+        return Helpers.OrderManager.GetOrders(requesterId, filterBy, filterValue, orderBy);
     }
 
     public int[] GetOrdersSummary(int requesterId)
     {
-        Helpers.OrderManager.GetOrdersSummary(requesterId);
+        return Helpers.OrderManager.GetOrdersSummary(requesterId);
     }
 
     public void UpdateOrder(int requesterId, Order order)

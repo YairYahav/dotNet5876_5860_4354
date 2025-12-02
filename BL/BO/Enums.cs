@@ -65,31 +65,45 @@ public enum CourierListOrderBy
 
 public enum OrderListFilterBy
 {
+    ByStatus,
+    ByTiming,
     
 }
 
 public enum OrderListOrderBy
 {
-    
+    ById,
+    ByStatus,
+    ByTiming,
+    ByDistance
+
 }
 
 public enum ClosedDeliveryListFilterBy
 {
-
+    ByTypeOfCompletion,
+    ByDeliveryType,
+    ByTiming,
 }
 
-public enum ClosedDeliveryListOrderBy
+public enum ClosedOrdersListOrderBy
 {
-
+    ByTypeOfCompletion,
+    ByOrderType,
+    ByTiming,
 }
 
 public enum OpenDeliveryListFilterBy
 {
+    ByOrderType,
+    ByTiming,
 }
 
 public enum OpenDeliveryListOrderBy
 {
-
+    ById,
+    ByDistance,
+    ByTiming,
 }
 public enum UserRole
 {

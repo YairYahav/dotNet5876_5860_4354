@@ -16,14 +16,14 @@ internal static class CourierManager
         if (password is null)
             throw new BO.BlDoesNotExistException("Password cannot be null or empty");
 
-        var courier = s_dal.Courier.Read(id);
-        if (courier == null)
-            throw new BO.BlDoesNotExistException($"Courier with ID {id} does not exist.");
 
         if (s_dal.Config.ManagerId == id && s_dal.Config.ManagerPassword == password)//צריך להוסיף בדיקת הצפנה
         {
             return UserRole.Admin;
         }
+        var courier = s_dal.Courier.Read(id);//או לשנות ולהוסיף try catch
+        if (courier == null)
+            throw new BO.BlDoesNotExistException($"Courier with ID {id} does not exist.");
         if (courier.Password == password)
         {
             return UserRole.Courier;
@@ -33,21 +33,22 @@ internal static class CourierManager
 
     internal static IEnumerable<BO.CourierInList> GetCouriers(int requesterId , bool? onlyActive = null, BO.CourierListOrderBy? orderBy = null)
     {
-        AuthorizeAdmin(requesterId);
+        Tools.AuthorizeAdmin(requesterId);
         var couriers = s_dal.Courier.ReadAll();
         if (onlyActive is not null)
             couriers = couriers.Where(c => c.IsActive == onlyActive.Value);
         var newListOfCouriers = couriers
-            .Select(c => new BO.CourierInList
+            .Select(c => CourierFromDoToBo(c))
+            .Select(bo => new BO.CourierInList
             {
-                Id = c.Id,
-                FullName = c.FullName,
-                IsActive = c.IsActive,
-                EmploymentStartDate = c.EmploymentStartDate,
-                DeliveryType = (BO.DeliveryType)c.DeliveryType,
-                NumberOfDeliveriesCourierCompletedOnTime = 0,//לבדוק איך עושים
-                NumberOfDeliveriesCourierCompletedLate = 0,//לבדוק איך עושים
-                CurrentOrderInProgress = null
+                Id = bo.Id,
+                FullName = bo.FullName,
+                IsActive = bo.IsActive,
+                EmploymentStartDate = bo.EmploymentStartDate,
+                DeliveryType = bo.DeliveryType,
+                NumberOfDeliveriesCourierCompletedOnTime = bo.NumberOfDeliveriesCompletedOnTime,
+                NumberOfDeliveriesCourierCompletedLate = bo.NumberOfDeliveriesCompletedLate,
+                CurrentOrderInProgress = bo.ordersInProgress
             })
             .SortCouriers(orderBy);
         return newListOfCouriers;
@@ -59,12 +60,12 @@ internal static class CourierManager
         var courier = s_dal.Courier.Read(courierId);
         if (courier == null)
             throw new BO.BlDoesNotExistException($"Courier with ID {courierId} does not exist.");
-        return FromDoToBo(courier);
+        return CourierFromDoToBo(courier);
     }
 
     internal static void UpdateCourier(int requesterId , BO.Courier courier)
     {
-        if (!IsAdmin(requesterId) && requesterId != courier.Id)
+        if (!Tools.IsAdmin(requesterId) && requesterId != courier.Id)
             throw new BO.BlUnauthorizedAccessException("Not allowed");
 
         var existingCourier = s_dal.Courier.Read(courier.Id);
@@ -89,7 +90,7 @@ internal static class CourierManager
 
     internal static void CreateCourier(int requesterId , BO.Courier courier)
     {
-        AuthorizeAdmin(requesterId);
+        Tools.AuthorizeAdmin(requesterId);
         ValidateCourierBasics(courier,forCreate: true);
         var newCourier = new DO.Courier
         {
@@ -108,7 +109,7 @@ internal static class CourierManager
 
     internal static void DeleteCourier(int requesterId, int courierId)
     {
-        AuthorizeAdmin(requesterId);
+        Tools.AuthorizeAdmin(requesterId);
         var existingCourier = s_dal.Courier.Read(courierId);
         if (existingCourier == null)
             throw new BO.BlDoesNotExistException($"Courier with ID {courierId} does not exist.");
@@ -117,13 +118,9 @@ internal static class CourierManager
         s_dal.Courier.Delete(courierId);
     }
 
-
-
-
     // Help functions
 
-
-    private static BO.Courier FromDoToBo(DO.Courier d) 
+    private static BO.Courier CourierFromDoToBo(DO.Courier d) 
     {
         var deliverys = s_dal.Delivery.ReadAll().Where(del => del.CourierId == d.Id);
 
@@ -138,30 +135,12 @@ internal static class CourierManager
             var order = s_dal.Order.Read(activeDelivery.OrderId);
             if(order is not null)
             {
-                newOrderInProgress = new BO.OrderInProgress
-                {
-                    DeliveryId = activeDelivery.Id,
-                    OrderId = order.Id,
-                    OrderType = (BO.OrderType)order.OrderType,
-                    DescriptionOfOrder = order.DescriptionOfOrder,
-                    AddressOfOrder = order.AddressOfOrder,
-                    AirDistance = AirDistance(order.Latitude, order.Longitude, s_dal.Config.Latitude.GetValueOrDefault(), s_dal.Config.Longitude.GetValueOrDefault()),
-                    ActualDistance = activeDelivery.ActualDistance,
-                    CustomerName = order.CustomerName,
-                    CustomerPhone = order.CustomerPhone,
-                    OrderPlacementTime = order.OrderPlacementTime,
-                    PickUpTime = activeDelivery.DeliveryStartTime,
-                    DeliveryTime = activeDelivery.DeliveryStartTime + ExpectedDeliveryTime(activeDelivery),
-                    MaxDelivryTime = activeDelivery.DeliveryStartTime + s_dal.Config.MaxTimeRangeForDelivery,
-                    OrderStatus = GetOrderStatus(activeDelivery),
-                    ScheduleStatus = GetScheduleStatus(activeDelivery),
-                    TimeLeftToDelivery = (activeDelivery.DeliveryStartTime + s_dal.Config.MaxTimeRangeForDelivery) - AdminManager.Now
-                };
+                newOrderInProgress = OrderManager.AddOrderInProgress(order, activeDelivery);
             }
         }
         int onTime = 0, late = 0;
-        onTime = deliverys.Count(del => GetScheduleStatus(del) == ScheduleStatus.OnTime);
-        late = deliverys.Count(del => GetScheduleStatus(del) == ScheduleStatus.Late);
+        onTime = deliverys.Count(del => GetScheduleStatusOfDelivery(del) == ScheduleStatus.OnTime);
+        late = deliverys.Count(del => GetScheduleStatusOfDelivery(del) == ScheduleStatus.Late);
         return new BO.Courier
         {
             Id = d.Id,
@@ -190,7 +169,7 @@ internal static class CourierManager
         if (!IsValidEmail(c.Gmail))
             throw new BO.BlDataValidationException("Invalid email");
         if(forCreate && c.EmploymentStartDate == default)
-            c.EmploymentStartDate = AdminManager.Now;
+            c.EmploymentStartDate = AdminManager.Now;//לטפל בהרשאה לשנות
     }
 
     private static bool IsValidPhone(string phone) =>
@@ -199,22 +178,10 @@ internal static class CourierManager
     private static bool IsValidEmail(string email) =>
         !string.IsNullOrWhiteSpace(email) && email.Contains("@") && email.Contains(".");
     
-    private static void AuthorizeAdmin(int requesterId)
-    {
-        var u = s_dal.Config.ManagerId;
-        if (requesterId != s_dal.Config.ManagerId)
-            throw new BO.BlUnauthorizedAccessException("Only admin users are authorized to perform this action.");
-    }
-
-    private static bool IsAdmin(int requesterId)
-    {
-        return requesterId == s_dal.Config.ManagerId;
-    }
-
     private static void AuthorizeAdminOrThatCourier(int requesterId, int courierId)
     {
         if (requesterId == courierId) return;
-        AuthorizeAdmin(requesterId);
+        Tools.AuthorizeAdmin(requesterId);
     }
 
     private static IEnumerable<BO.CourierInList> SortCouriers(this IEnumerable<BO.CourierInList> couriers, BO.CourierListOrderBy? orderBy)
@@ -230,65 +197,6 @@ internal static class CourierManager
         };
     }
 
-    internal static TimeSpan ExpectedDeliveryTime(DO.Delivery delivery)
-    {
-        double averageSpeed = GetAverageSpeedKmh(delivery.DeliveryType);
-        double distance = delivery.ActualDistance ?? 0;
-        double hours = averageSpeed > 0 ? distance / averageSpeed : 0;
-        return TimeSpan.FromHours(hours);
-    }
-
-    internal static TimeSpan TimeLeftToDelivery(DO.Delivery delivery , DO.Order order)
-    {
-        return s_dal.Config.MaxTimeRangeForDelivery;
-    }
-
-    //לבדוק בסוף שאין סתם מתודה מקבליה בOrderManager
-    private static BO.OrderStatus GetOrderStatus(DO.Delivery delivery)
-    {
-
-        if (delivery.DeliveryCompletionTime is not null)
-        {
-            if (delivery.TypeOfDeliveryCompletionTime == DO.TypeOfDeliveryCompletionTime.Supplied)
-                return BO.OrderStatus.Delivered;
-            if (delivery.TypeOfDeliveryCompletionTime == DO.TypeOfDeliveryCompletionTime.RefusedByCustomer)
-                return BO.OrderStatus.DeliveryDeclinedByCustomer;
-            if (delivery.TypeOfDeliveryCompletionTime == DO.TypeOfDeliveryCompletionTime.Canceled)
-                return BO.OrderStatus.Canceled;
-        }
-        else if (delivery.CourierId == 0)
-            return BO.OrderStatus.Open;
-        return BO.OrderStatus.InProgress;
-    }
-    //לבדוק בסוף שאין סתם מתודה מקבליה בOrderManager
-    private static BO.ScheduleStatus GetScheduleStatus(DO.Delivery delivery)
-    {
-        if (delivery.DeliveryCompletionTime != null)
-        {
-            if (delivery.DeliveryCompletionTime <= delivery.DeliveryStartTime + s_dal.Config.MaxTimeRangeForDelivery)
-                return BO.ScheduleStatus.OnTime;
-            else
-                return BO.ScheduleStatus.Late;
-        }
-        else
-        {
-            if (AdminManager.Now <= delivery.DeliveryStartTime + ExpectedDeliveryTime(delivery))
-            {
-                return BO.ScheduleStatus.OnTime;
-            }
-            else if (AdminManager.Now <= delivery.DeliveryStartTime + s_dal.Config.MaxTimeRangeForDelivery)
-            {
-                return BO.ScheduleStatus.InRisk;
-            }
-            else
-            {
-                return BO.ScheduleStatus.Late;
-            }
-        }
-           
-
-    }
-
     internal static double GetAverageSpeedKmh(DO.DeliveryType deliveryType)
     {
         return deliveryType switch
@@ -301,25 +209,61 @@ internal static class CourierManager
         };
     }
 
-    private const double EarthRadiusKm = 6371.0;
-    internal static double AirDistance(double lat1, double lon1, double lat2, double lon2)
+    internal static BO.ScheduleStatus GetScheduleStatusOfDelivery(DO.Delivery delivery)
     {
-        double dLat = DegreesToRadians(lat2 - lat1);
-        double dLon = DegreesToRadians(lon2 - lon1);
+        if (delivery.DeliveryCompletionTime != null)
+        {
+            var order = s_dal.Order.Read(delivery.OrderId);
+            if (order != null)
+            {
+                DateTime maxDeliveryTime = order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery;
+                
+                if (delivery.DeliveryCompletionTime <= maxDeliveryTime)
+                    return BO.ScheduleStatus.OnTime;
+                else
+                    return BO.ScheduleStatus.Late;
+            }
+        }
+        
+        DateTime expectedDeliveryTime = delivery.DeliveryStartTime + OrderManager.ExpectedDeliveryTime(delivery);
+        
+        var order2 = s_dal.Order.Read(delivery.OrderId);
+        if (order2 != null)
+        {
+            DateTime maxDeliveryTime = order2.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery;
+            DateTime riskThresholdTime = maxDeliveryTime - s_dal.Config.RiskRange;
+            if (AdminManager.Now > expectedDeliveryTime)
+            {
+                if (AdminManager.Now > maxDeliveryTime)
+                    return BO.ScheduleStatus.Late;
+                
+                if (AdminManager.Now > riskThresholdTime)
+                    return BO.ScheduleStatus.InRisk;
+            }
+        }
 
-        lat1 = DegreesToRadians(lat1);
-        lat2 = DegreesToRadians(lat2);
-
-   
-        double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-                   Math.Sin(dLon / 2) * Math.Sin(dLon / 2) * Math.Cos(lat1) * Math.Cos(lat2);
-
-        double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-        return EarthRadiusKm * c;
+        return BO.ScheduleStatus.OnTime;
     }
-    private static double DegreesToRadians(double degrees)
+
+    internal static BO.OrderStatus GetDeliveryStatus(DO.Delivery delivery)
     {
-        return degrees * (Math.PI / 180);
+        if (delivery.DeliveryCompletionTime is not null)
+        {
+            return delivery.TypeOfDeliveryCompletionTime switch
+            {
+                DO.TypeOfDeliveryCompletionTime.Supplied => BO.OrderStatus.Delivered,
+                DO.TypeOfDeliveryCompletionTime.RefusedByCustomer => BO.OrderStatus.DeliveryDeclinedByCustomer,
+                DO.TypeOfDeliveryCompletionTime.Canceled => BO.OrderStatus.Canceled,
+                DO.TypeOfDeliveryCompletionTime.Failed => BO.OrderStatus.Canceled,
+                DO.TypeOfDeliveryCompletionTime.CustomerNotFound => BO.OrderStatus.Canceled,
+                _ => BO.OrderStatus.InProgress
+            };
+        }
+        
+        if (delivery.CourierId == 0)
+            return BO.OrderStatus.Open;
+        
+        return BO.OrderStatus.InProgress;
     }
 
 }

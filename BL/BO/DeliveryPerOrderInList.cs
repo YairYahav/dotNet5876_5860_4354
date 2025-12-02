@@ -4,13 +4,13 @@ using Helpers;
 
 public class DeliveryPerOrderInList
 {
-    public int DeliveryId { get; set; }
-    public int? CourierId { get; set; }
-    public string CourierName { get; set; } 
-    public DeliveryType DeliveryType { get; set; }
-    public DateTime DeliveryStartTime { get; set; }
-    public TypeOfDeliveryCompletionTime TypeOfDeliveryCompletionTime { get; set; }
-    public DateTime DeliveryEndTime { get; set; }
+    public int DeliveryId { get; init; }
+    public int? CourierId { get; init; }
+    public string CourierName { get; init; } 
+    public DeliveryType DeliveryType { get; init; }
+    public DateTime DeliveryStartTime { get; init; }
+    public TypeOfDeliveryCompletionTime TypeOfDeliveryCompletionTime { get; init; }
+    public DateTime DeliveryEndTime { get; init; }
 
     public override string ToString() => this.ToStringProperty();
 

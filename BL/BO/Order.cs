@@ -4,7 +4,7 @@ using Helpers;
 
 public class Order
 {
-    public int Id { get; set; }
+    public int Id { get; init; }
     public OrderType orderType { get; set; }
     public string? DescriptionOfOrder { get; set; }
     public string AddressOfOrder { get; set; }
@@ -16,13 +16,13 @@ public class Order
     public bool IsFrag { get; set; }
     public double? Volume { get; set; }
     public double? Weight { get; set; }
-    public DateTime? OrderPlacementTime { get; set; }
-    public DateTime? ExpectedCompletionTime { get; set; }
-    public DateTime MaxDeliveryTime { get; set; }
-    public OrderStatus OrderStatus { get; set; }
-    public ScheduleStatus ScheduleStatus { get; set; }
-    public DateTime RemainingTimeToDelivery { get; set; }
-    public DeliveryPerOrderInList? DeliveryPerOrderInList { get; set; }
+    public DateTime? OrderPlacementTime { get; init; }
+    public DateTime? ExpectedCompletionTime { get; init; }
+    public DateTime MaxDeliveryTime { get; init; }
+    public OrderStatus OrderStatus { get; init; }
+    public ScheduleStatus ScheduleStatus { get; init; }
+    public DateTime RemainingTimeToDelivery { get; init; }
+    public DeliveryPerOrderInList? DeliveryPerOrderInList { get; init; }
 
     public override string ToString() => this.ToStringProperty();
 

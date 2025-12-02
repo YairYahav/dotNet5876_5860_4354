@@ -3,15 +3,15 @@ namespace BO;
 using Helpers;
 public class OrderInList
 {
-    public int DeliveryId { get; set; }
-    public int OrderId { get; set; }
-    public OrderType OrderType{ get; set; }
-    public double AirDistance { get; set; }
-    public OrderStatus OrderStatus { get; set; }
-    public ScheduleStatus ScheduleStatus { get; set; }
-    public TimeSpan RemainingTineToCompletion { get; set; }
-    public TimeSpan ExpectedTimeToCompletion { get; set; }
-    public int AmountOfDeliveries { get; set; }
+    public int DeliveryId { get; init; }
+    public int OrderId { get; init; }
+    public OrderType OrderType{ get; init; }
+    public double AirDistance { get; init; }
+    public OrderStatus OrderStatus { get; init; }
+    public ScheduleStatus ScheduleStatus { get; init; }
+    public TimeSpan RemainingTineToCompletion { get; init; }
+    public TimeSpan ExpectedTimeToCompletion { get; init; }
+    public int AmountOfDeliveries { get; init; }
     
 
 }
