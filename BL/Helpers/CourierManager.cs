@@ -1,6 +1,8 @@
 ﻿using BO;
 using DalApi;
 using DO;
+using System.Security.Cryptography;
+using System.Text;
 //using DO = DO;
 //using BO = BO;
 
@@ -17,14 +19,15 @@ internal static class CourierManager
             throw new BO.BlDoesNotExistException("Password cannot be null or empty");
 
 
-        if (s_dal.Config.ManagerId == id && s_dal.Config.ManagerPassword == password)//צריך להוסיף בדיקת הצפנה
+        if (AdminManager.GetConfig().ManagerId == id && AdminManager.GetConfig().ManagerPassword == password)//צריך להוסיף בדיקת הצפנה
         {
             return UserRole.Admin;
         }
         var courier = s_dal.Courier.Read(id);//או לשנות ולהוסיף try catch
         if (courier == null)
             throw new BO.BlDoesNotExistException($"Courier with ID {id} does not exist.");
-        if (courier.Password == password)
+        string hashed = HashPassword(password);
+        if (courier.Password == hashed)
         {
             return UserRole.Courier;
         }
@@ -73,32 +76,36 @@ internal static class CourierManager
             throw new BO.BlDoesNotExistException($"Courier with ID {courier.Id} does not exist.");
         ValidateCourierBasics(courier, forCreate: false);
 
+        string finalPassword = ProcessPasswordOnUpdate(courier.Password, existingCourier.Password);
+
         var updatedCourier = new DO.Courier
         {
             Id = courier.Id,
             FullName = courier.FullName,
             PhoneNumber = courier.PhoneNumber,
             Gmail = courier.Gmail,
-            Password = courier.Password,
+            Password = finalPassword,
             IsActive = courier.IsActive,
             DeliveryType = (DO.DeliveryType)courier.DeliveryType,
             MaxPersonalDeliveryDistance = courier.MaxPersonalDeliveryDistance,
             EmploymentStartDate = courier.EmploymentStartDate
         };
         s_dal.Courier.Update(updatedCourier);
+
     }
 
     internal static void CreateCourier(int requesterId , BO.Courier courier)
     {
         Tools.AuthorizeAdmin(requesterId);
         ValidateCourierBasics(courier,forCreate: true);
+        string hashedPassword = ProcessPasswordOnCreate(courier.Password);
         var newCourier = new DO.Courier
         {
             Id = courier.Id,
             FullName = courier.FullName,
             PhoneNumber = courier.PhoneNumber,
             Gmail = courier.Gmail,
-            Password = courier.Password,
+            Password = hashedPassword,
             IsActive = courier.IsActive,
             DeliveryType = (DO.DeliveryType)courier.DeliveryType,
             MaxPersonalDeliveryDistance = courier.MaxPersonalDeliveryDistance,
@@ -129,8 +136,7 @@ internal static class CourierManager
             .OrderByDescending(del => del.DeliveryStartTime)
             .FirstOrDefault();
         BO.OrderInProgress? newOrderInProgress = null;
-
-        if(activeDelivery is not null)
+        if (activeDelivery is not null)
         {
             var order = s_dal.Order.Read(activeDelivery.OrderId);
             if(order is not null)
@@ -266,5 +272,50 @@ internal static class CourierManager
         return BO.OrderStatus.InProgress;
     }
 
+    private static bool IsStrongPassword(string password)
+    {
+        if (string.IsNullOrWhiteSpace(password))
+            return false;
+
+        bool hasUpper = password.Any(char.IsUpper);
+        bool hasLower = password.Any(char.IsLower);
+        bool hasDigit = password.Any(char.IsDigit);
+        bool hasSpecial = password.Any(ch => !char.IsLetterOrDigit(ch));
+
+        return password.Length >= 8 && hasUpper && hasLower && hasDigit && hasSpecial;
+    }
+
+    private static string HashPassword(string password)
+    {
+        using var sha = SHA256.Create();
+        byte[] bytes = Encoding.UTF8.GetBytes(password);
+        byte[] hash = sha.ComputeHash(bytes);
+        return Convert.ToHexString(hash); // מחרוזת הקסדצימלית
+    }
+
+    private static string ProcessPasswordOnCreate(string password)
+    {
+        if (string.IsNullOrWhiteSpace(password))
+            throw new BO.BlDataValidationException("Password is required");
+
+        if (!IsStrongPassword(password))
+            throw new BO.BlDataValidationException("Password is not strong enough");
+
+        return HashPassword(password);
+    }
+    private static string ProcessPasswordOnUpdate(string? newPassword, string existingHashedPassword)
+    {
+        // אם המשתמש לא שינה סיסמה, משאירים את הקיימת
+        if (string.IsNullOrWhiteSpace(newPassword))
+            return existingHashedPassword;
+
+        if (!IsStrongPassword(newPassword))
+            throw new BO.BlDataValidationException("Password is not strong enough");
+
+        return HashPassword(newPassword);
+    }
 }
+
+
+
 

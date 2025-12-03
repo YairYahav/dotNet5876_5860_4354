@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BlTest": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "LOCATIONIQ_API_KEY": "pk.cc545612cdbb71f60f0611c8fc508f3a"
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BlApi;
 using BO;
 
@@ -72,7 +73,7 @@ internal class Program
                 case MainMenu.Admin:
                     if (LoggedRole != UserRole.Admin)
                     {
-                        Console.WriteLine("Access only for admin");
+                        PrintWarning("Access only for admin");
                         break;
                     }
                     AdminSubMenu();
@@ -100,7 +101,7 @@ internal class Program
             Console.Write("Enter ID: ");
             if (!int.TryParse(Console.ReadLine(), out int id))
             {
-                Console.WriteLine("Invalid ID");
+                PrintError("Invalid ID");
                 continue;
             }
 
@@ -172,12 +173,12 @@ internal class Program
 
                     case AdminMenu.ResetDB:
                         s_bl.Admin.ResetDB();
-                        Console.WriteLine("DB Reset");
+                        PrintSuccess("DB Reset");
                         break;
 
                     case AdminMenu.InitializeDB:
                         s_bl.Admin.InitializeDB();
-                        Console.WriteLine("DB Initialized");
+                        PrintSuccess("DB Initialized");
                         break;
 
                     case AdminMenu.GetClock:
@@ -218,11 +219,11 @@ internal class Program
         {
             var unit = (TimeUnit)(x - 1);
             s_bl.Admin.ForwardClock(unit);
-            Console.WriteLine("Clock forwarded");
+            PrintSuccess("Clock forwarded");
         }
         else
         {
-            Console.WriteLine("Invalid unit");
+            PrintError("Invalid unit");
         }
     }
 
@@ -237,7 +238,7 @@ internal class Program
             cfg.MaxDeliveryRange = v;
 
         s_bl.Admin.SetConfig(cfg);
-        Console.WriteLine("Config updated");
+        PrintSuccess("Config updated");
     }
 
     // ===================== COURIER =====================
@@ -315,9 +316,21 @@ internal class Program
         if (int.TryParse(o, out int ix) && Enum.IsDefined(typeof(CourierListOrderBy), ix - 1))
             orderBy = (CourierListOrderBy)(ix - 1);
 
-        var list = s_bl.Courier.GetCouriers(RequesterId, onlyActive, orderBy);
+        var list = s_bl.Courier.GetCouriers(RequesterId, onlyActive, orderBy).ToList();
+
+        if (!list.Any())
+        {
+            PrintWarning("No couriers found");
+            return;
+        }
+
+        Console.ForegroundColor = ConsoleColor.Cyan;
         foreach (var c in list)
+        {
+            Console.WriteLine("--------------------------------");
             Console.WriteLine(c);
+        }
+        Console.ResetColor();
     }
 
     private static void GetCourier()
@@ -326,67 +339,56 @@ internal class Program
         if (int.TryParse(Console.ReadLine(), out int id))
         {
             var c = s_bl.Courier.GetCourier(RequesterId, id);
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(c);
+            Console.ResetColor();
         }
         else
         {
-            Console.WriteLine("Invalid ID");
+            PrintError("Invalid ID");
         }
     }
 
     private static void CreateCourier()
     {
+        BO.Courier c = new BO.Courier();
+
         Console.Write("ID: ");
-        int courierId = 0;
-        if (!int.TryParse(Console.ReadLine(), out courierId))
-        {
-            Console.WriteLine("Invalid ID");
-            return;
-        }
+        if (int.TryParse(Console.ReadLine(), out int tmpId))
+            c = new BO.Courier
+            {
+                Id = tmpId
+            };
 
         Console.Write("Full name: ");
-        string fullName = Console.ReadLine() ?? "";
+        c.FullName = Console.ReadLine() ?? "";
 
         Console.Write("Phone: ");
-        string phone = Console.ReadLine() ?? "";
+        c.PhoneNumber = Console.ReadLine() ?? "";
 
         Console.Write("Email: ");
-        string email = Console.ReadLine() ?? "";
+        c.Gmail = Console.ReadLine() ?? "";
 
         Console.Write("Password: ");
-        string password = Console.ReadLine() ?? "";
+        c.Password = Console.ReadLine() ?? "";
 
         Console.Write("Active? (true/false): ");
-        bool isActive = false;
         if (bool.TryParse(Console.ReadLine(), out bool act))
-            isActive = act;
+            c.IsActive = act;
 
         Console.WriteLine("Delivery type: 1.Car 2.Motorcycle 3.Bicycle 4.OnFoot");
-        DeliveryType deliveryType = DeliveryType.Car;
         if (int.TryParse(Console.ReadLine(), out int dt)
             && Enum.IsDefined(typeof(DeliveryType), dt - 1))
-            deliveryType = (DeliveryType)(dt - 1);
+            c.DeliveryType = (DeliveryType)(dt - 1);
 
         Console.Write("Max personal distance: ");
-        double maxDist = 0;
         if (double.TryParse(Console.ReadLine(), out double dist))
-            maxDist = dist;
+            c.MaxPersonalDeliveryDistance = dist;
 
-        BO.Courier c = new BO.Courier
-        {
-            Id = courierId,
-            FullName = fullName,
-            PhoneNumber = phone,
-            Gmail = email,
-            Password = password,
-            IsActive = isActive,
-            DeliveryType = deliveryType,
-            MaxPersonalDeliveryDistance = maxDist,
-            EmploymentStartDate = DateTime.Now
-        };
+        c.EmploymentStartDate = DateTime.Now;
 
         s_bl.Courier.CreateCourier(RequesterId, c);
-        Console.WriteLine("Courier created");
+        PrintSuccess("Courier created");
     }
 
     private static void UpdateCourier()
@@ -394,7 +396,7 @@ internal class Program
         Console.Write("Courier ID to update: ");
         if (!int.TryParse(Console.ReadLine(), out int id))
         {
-            Console.WriteLine("Invalid ID");
+            PrintError("Invalid ID");
             return;
         }
 
@@ -421,7 +423,7 @@ internal class Program
             c.Password = s;
 
         s_bl.Courier.UpdateCourier(RequesterId, c);
-        Console.WriteLine("Courier updated");
+        PrintSuccess("Courier updated");
     }
 
     private static void DeleteCourier()
@@ -430,11 +432,11 @@ internal class Program
         if (int.TryParse(Console.ReadLine(), out int id))
         {
             s_bl.Courier.DeleteCourier(RequesterId, id);
-            Console.WriteLine("Courier deleted");
+            PrintSuccess("Courier deleted");
         }
         else
         {
-            Console.WriteLine("Invalid ID");
+            PrintError("Invalid ID");
         }
     }
 
@@ -470,47 +472,36 @@ internal class Program
                 {
                     case OrderMenu.Back:
                         return;
-
                     case OrderMenu.Summary:
                         OrdersSummary();
                         break;
-
                     case OrderMenu.ListOrders:
                         ListOrders();
                         break;
-
                     case OrderMenu.ListClosedOrders:
                         ListClosedOrders();
                         break;
-
                     case OrderMenu.ListOpenOrders:
                         ListOpenOrders();
                         break;
-
                     case OrderMenu.GetOrder:
                         GetOrder();
                         break;
-
                     case OrderMenu.CreateOrder:
                         CreateOrder();
                         break;
-
                     case OrderMenu.UpdateOrder:
                         UpdateOrder();
                         break;
-
                     case OrderMenu.CancelOrder:
                         CancelOrder();
                         break;
-
                     case OrderMenu.DeleteOrder:
                         DeleteOrder();
                         break;
-
                     case OrderMenu.CompleteOrder:
                         CompleteOrder();
                         break;
-
                     case OrderMenu.ChooseOrder:
                         ChooseOrder();
                         break;
@@ -533,30 +524,42 @@ internal class Program
 
     private static void ListOrders()
     {
-        var filterBy = AskNullableEnum<OrderListFilterBy>("FilterBy (empty = no filter)");
+        var filterBy = AskNullableEnum<OrderListFilterBy>("FilterBy");
         object? filterValue = null;
 
         if (filterBy != null)
         {
             if (filterBy == OrderListFilterBy.ByStatus)
             {
-                var st = AskNullableEnum<OrderStatus>("OrderStatus (empty = no filter value)");
+                var st = AskNullableEnum<OrderStatus>("OrderStatus");
                 if (st != null)
                     filterValue = st.Value;
             }
             else if (filterBy == OrderListFilterBy.ByTiming)
             {
-                var sch = AskNullableEnum<ScheduleStatus>("ScheduleStatus (empty = no filter value)");
+                var sch = AskNullableEnum<ScheduleStatus>("ScheduleStatus");
                 if (sch != null)
                     filterValue = sch.Value;
             }
         }
 
-        var orderBy = AskNullableEnum<OrderListOrderBy>("OrderBy (empty = default)");
+        var orderBy = AskNullableEnum<OrderListOrderBy>("OrderBy");
 
-        var list = s_bl.Order.GetOrders(RequesterId, filterBy, filterValue, orderBy);
+        var list = s_bl.Order.GetOrders(RequesterId, filterBy, filterValue, orderBy).ToList();
+
+        if (!list.Any())
+        {
+            PrintWarning("No orders found");
+            return;
+        }
+
+        Console.ForegroundColor = ConsoleColor.Cyan;
         foreach (var o in list)
+        {
+            Console.WriteLine("--------------------------------");
             Console.WriteLine(o);
+        }
+        Console.ResetColor();
     }
 
     private static void ListClosedOrders()
@@ -564,16 +567,28 @@ internal class Program
         Console.Write("Courier ID: ");
         if (!int.TryParse(Console.ReadLine(), out int cid))
         {
-            Console.WriteLine("Invalid ID");
+            PrintError("Invalid ID");
             return;
         }
 
-        var filterBy = AskNullableEnum<OrderType>("FilterBy order type (empty = no filter)");
-        var orderBy = AskNullableEnum<ClosedOrdersListOrderBy>("OrderBy (empty = default)");
+        var filterBy = AskNullableEnum<OrderType>("FilterBy order type");
+        var orderBy = AskNullableEnum<ClosedOrdersListOrderBy>("OrderBy");
 
-        var list = s_bl.Order.GerClosedOrders(RequesterId, cid, filterBy, orderBy);
+        var list = s_bl.Order.GerClosedOrders(RequesterId, cid, filterBy, orderBy).ToList();
+
+        if (!list.Any())
+        {
+            PrintWarning("No closed deliveries for this courier");
+            return;
+        }
+
+        Console.ForegroundColor = ConsoleColor.Cyan;
         foreach (var item in list)
+        {
+            Console.WriteLine("--------------------------------");
             Console.WriteLine(item);
+        }
+        Console.ResetColor();
     }
 
     private static void ListOpenOrders()
@@ -581,16 +596,28 @@ internal class Program
         Console.Write("Courier ID: ");
         if (!int.TryParse(Console.ReadLine(), out int cid))
         {
-            Console.WriteLine("Invalid ID");
+            PrintError("Invalid ID");
             return;
         }
 
-        var filterBy = AskNullableEnum<OrderType>("FilterBy order type (empty = no filter)");
-        var orderBy = AskNullableEnum<OpenDeliveryListOrderBy>("OrderBy (empty = default)");
+        var filterBy = AskNullableEnum<OrderType>("FilterBy order type");
+        var orderBy = AskNullableEnum<OpenDeliveryListOrderBy>("OrderBy");
 
-        var list = s_bl.Order.GetOpenOrders(RequesterId, cid, filterBy, orderBy);
+        var list = s_bl.Order.GetOpenOrders(RequesterId, cid, filterBy, orderBy).ToList();
+
+        if (!list.Any())
+        {
+            PrintWarning("No open orders in range for this courier");
+            return;
+        }
+
+        Console.ForegroundColor = ConsoleColor.Cyan;
         foreach (var item in list)
+        {
+            Console.WriteLine("--------------------------------");
             Console.WriteLine(item);
+        }
+        Console.ResetColor();
     }
 
     private static void GetOrder()
@@ -599,76 +626,57 @@ internal class Program
         if (int.TryParse(Console.ReadLine(), out int id))
         {
             var o = s_bl.Order.GetOrder(RequesterId, id);
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(o);
+            Console.ResetColor();
         }
         else
         {
-            Console.WriteLine("Invalid ID");
+            PrintError("Invalid ID");
         }
     }
 
     private static void CreateOrder()
     {
-        Console.WriteLine("Order type: 1.Regular 2.Express 3.Heavy 4.Fragile 5.Refrigerated (empty = Regular)");
-        OrderType orderType = OrderType.Regular;
-        string? typeInput = Console.ReadLine();
-        if (int.TryParse(typeInput, out int x) && Enum.IsDefined(typeof(OrderType), x - 1))
-            orderType = (OrderType)(x - 1);
-
-        Console.Write("Address: ");
-        string address = Console.ReadLine() ?? "";
-
-        Console.Write("Latitude: ");
-        double lat = 0;
-        if (double.TryParse(Console.ReadLine(), out double latVal))
-            lat = latVal;
-
-        Console.Write("Longitude: ");
-        double lon = 0;
-        if (double.TryParse(Console.ReadLine(), out double lonVal))
-            lon = lonVal;
-
-        Console.Write("Customer name: ");
-        string customerName = Console.ReadLine() ?? "";
-
-        Console.Write("Customer phone: ");
-        string customerPhone = Console.ReadLine() ?? "";
-
-        Console.Write("Fragile (true/false, empty = false): ");
-        bool isFrag = false;
-        if (bool.TryParse(Console.ReadLine(), out bool f))
-            isFrag = f;
-
-        Console.Write("Volume (double, empty = 0): ");
-        double vol = 0;
-        if (double.TryParse(Console.ReadLine(), out double volVal))
-            vol = volVal;
-
-        Console.Write("Weight (double, empty = 0): ");
-        double w = 0;
-        if (double.TryParse(Console.ReadLine(), out double wVal))
-            w = wVal;
-
-        Console.Write("Description: ");
-        string description = Console.ReadLine() ?? "";
-
         BO.Order o = new BO.Order
         {
-            orderType = orderType,
-            AddressOfOrder = address,
-            Latitude = lat,
-            Longitude = lon,
-            CustomerName = customerName,
-            CustomerPhone = customerPhone,
-            IsFrag = isFrag,
-            Volume = vol,
-            Weight = w,
-            DescriptionOfOrder = description,
+            // Set init-only properties in object initializer
             OrderPlacementTime = DateTime.Now
         };
 
+        Console.WriteLine("Order type: 1.Regular 2.Express 3.Heavy 4.Fragile 5.Refrigerated (empty = Regular)");
+        string? s = Console.ReadLine();
+        if (int.TryParse(s, out int x) && Enum.IsDefined(typeof(OrderType), x - 1))
+            o.orderType = (OrderType)(x - 1);
+        else
+            o.orderType = OrderType.Regular;
+
+        Console.Write("Address: ");
+        o.AddressOfOrder = Console.ReadLine() ?? "";
+
+        Console.Write("Customer name: ");
+        o.CustomerName = Console.ReadLine() ?? "";
+
+        Console.Write("Customer phone: ");
+        o.CustomerPhone = Console.ReadLine() ?? "";
+
+        Console.Write("Fragile (true/false, empty = false): ");
+        if (bool.TryParse(Console.ReadLine(), out bool f))
+            o.IsFrag = f;
+
+        Console.Write("Volume (int, empty = 0): ");
+        if (int.TryParse(Console.ReadLine(), out int vol))
+            o.Volume = vol;
+
+        Console.Write("Weight (int, empty = 0): ");
+        if (int.TryParse(Console.ReadLine(), out int w))
+            o.Weight = w;
+
+        Console.Write("Description: ");
+        o.DescriptionOfOrder = Console.ReadLine() ?? "";
+
         s_bl.Order.CreateOrder(RequesterId, o);
-        Console.WriteLine("Order created");
+        PrintSuccess("Order created");
     }
 
     private static void UpdateOrder()
@@ -676,7 +684,7 @@ internal class Program
         Console.Write("Order ID: ");
         if (!int.TryParse(Console.ReadLine(), out int id))
         {
-            Console.WriteLine("Invalid ID");
+            PrintError("Invalid ID");
             return;
         }
 
@@ -693,7 +701,7 @@ internal class Program
             o.DescriptionOfOrder = s;
 
         s_bl.Order.UpdateOrder(RequesterId, o);
-        Console.WriteLine("Order updated");
+        PrintSuccess("Order updated");
     }
 
     private static void CancelOrder()
@@ -702,11 +710,11 @@ internal class Program
         if (int.TryParse(Console.ReadLine(), out int id))
         {
             s_bl.Order.CancelOrder(RequesterId, id);
-            Console.WriteLine("Order canceled");
+            PrintSuccess("Order canceled");
         }
         else
         {
-            Console.WriteLine("Invalid ID");
+            PrintError("Invalid ID");
         }
     }
 
@@ -716,10 +724,11 @@ internal class Program
         if (int.TryParse(Console.ReadLine(), out int id))
         {
             s_bl.Order.DeleteOrder(RequesterId, id);
+            PrintSuccess("Delete request sent (should throw error from BL)");
         }
         else
         {
-            Console.WriteLine("Invalid ID");
+            PrintError("Invalid ID");
         }
     }
 
@@ -728,19 +737,19 @@ internal class Program
         Console.Write("Courier ID: ");
         if (!int.TryParse(Console.ReadLine(), out int cid))
         {
-            Console.WriteLine("Invalid courier ID");
+            PrintError("Invalid courier ID");
             return;
         }
 
         Console.Write("Delivery ID: ");
         if (!int.TryParse(Console.ReadLine(), out int did))
         {
-            Console.WriteLine("Invalid delivery ID");
+            PrintError("Invalid delivery ID");
             return;
         }
 
         s_bl.Order.CompleteOrderForCourier(RequesterId, cid, did);
-        Console.WriteLine("Order completed");
+        PrintSuccess("Order completion reported");
     }
 
     private static void ChooseOrder()
@@ -748,19 +757,19 @@ internal class Program
         Console.Write("Courier ID: ");
         if (!int.TryParse(Console.ReadLine(), out int cid))
         {
-            Console.WriteLine("Invalid courier ID");
+            PrintError("Invalid courier ID");
             return;
         }
 
         Console.Write("Order ID: ");
         if (!int.TryParse(Console.ReadLine(), out int oid))
         {
-            Console.WriteLine("Invalid order ID");
+            PrintError("Invalid order ID");
             return;
         }
 
         s_bl.Order.ChooseOrderForDelivery(RequesterId, cid, oid);
-        Console.WriteLine("Order assigned to courier");
+        PrintSuccess("Order assigned to courier");
     }
 
     // ===================== HELPERS =====================
@@ -787,8 +796,29 @@ internal class Program
             return (TEnum)values.GetValue(index - 1)!;
         }
 
-        Console.WriteLine("Invalid selection, using null");
+        PrintWarning("Invalid selection, using null");
         return null;
+    }
+
+    private static void PrintSuccess(string msg)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(msg);
+        Console.ResetColor();
+    }
+
+    private static void PrintError(string msg)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(msg);
+        Console.ResetColor();
+    }
+
+    private static void PrintWarning(string msg)
+    {
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.WriteLine(msg);
+        Console.ResetColor();
     }
 
     private static void PrintException(Exception ex)

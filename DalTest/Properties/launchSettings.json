@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DalTest": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "LOCATIONIQ_API_KEY": "pk.YOUR_API_KEY_HERE"
+      }
+    }
+  }
+}

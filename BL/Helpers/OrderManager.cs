@@ -192,15 +192,25 @@ internal static class OrderManager
 
         var status = GetOrderStatus(existingDoOrder);
         if (status != BO.OrderStatus.Open)
-            throw new BO.BlInvalidOperationException(
-                $"Cannot update order {order.Id} with status {status}"
-            );
+            throw new BO.BlInvalidOperationException($"Cannot update order {order.Id} with status {status}");
+        string newAddress = order.AddressOfOrder;
+        double newLat = existingDoOrder.Latitude;
+        double newLon = existingDoOrder.Longitude;
+
+        if (!string.Equals(existingDoOrder.AddressOfOrder, newAddress, StringComparison.Ordinal))
+        {
+            // כתובת השתנתה, מחשבים קואורדינטות חדשות
+            var coords = Tools.GetCoordinatesForAddress(newAddress);
+            newLat = coords.Latitude;
+            newLon = coords.Longitude;
+        }
+
         var updatedDoOrder = new DO.Order(
             existingDoOrder.Id,
             (DO.OrderType)order.orderType,
-            order.AddressOfOrder,
-            order.Latitude,
-            order.Longitude,
+            newAddress,
+            newLat,
+            newLon,
             order.CustomerName,
             order.CustomerPhone,
             order.IsFrag,
@@ -274,12 +284,14 @@ internal static class OrderManager
     internal static void CreateOrder(int requesterId, BO.Order order)
     {
         Tools.AuthorizeAdmin(requesterId);
+
+        var (lat, lon) = Tools.GetCoordinatesForAddress(order.AddressOfOrder);
         var doOrder = new DO.Order(
             0, 
             (DO.OrderType)order.orderType,
             order.AddressOfOrder,
-            order.Latitude,
-            order.Longitude,
+            lat,
+            lon,
             order.CustomerName,
             order.CustomerPhone,
             order.IsFrag,
@@ -505,8 +517,8 @@ internal static class OrderManager
             DescriptionOfOrder = order.DescriptionOfOrder,
             AddressOfOrder = order.AddressOfOrder,
             AirDistance = Tools.AirDistance(order.Latitude, order.Longitude,
-                s_dal.Config.Latitude.GetValueOrDefault(),
-                s_dal.Config.Longitude.GetValueOrDefault()),
+                s_dal.Config.Latitude.GetValueOrDefault(),//תיקון לפניה באינטרנט
+                s_dal.Config.Longitude.GetValueOrDefault()),//לתקן לפניה לאינטרנט
             ActualDistance = activeDelivery.ActualDistance,
             CustomerName = order.CustomerName,
             CustomerPhone = order.CustomerPhone,

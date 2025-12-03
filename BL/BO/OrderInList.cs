@@ -12,6 +12,6 @@ public class OrderInList
     public TimeSpan RemainingTineToCompletion { get; init; }
     public TimeSpan ExpectedTimeToCompletion { get; init; }
     public int AmountOfDeliveries { get; init; }
-    
 
+    public override string ToString() => this.ToStringProperty();
 }
