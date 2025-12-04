@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
   <NextCourierId>200000001</NextCourierId>
-  <NextOrderId>30052</NextOrderId>
-  <NextDeliveryId>40037</NextDeliveryId>
+  <NextOrderId>30051</NextOrderId>
+  <NextDeliveryId>40036</NextDeliveryId>
   <ManagerId>329164354</ManagerId>
   <ManagerPassword>Admin1234</ManagerPassword>
   <CompanyAddress>Yehuda Hanasi St, 95 , Elad </CompanyAddress>
@@ -16,5 +16,5 @@
   <MaxTimeRangeForDelivery>02:00:00</MaxTimeRangeForDelivery>
   <RiskRange>00:30:00</RiskRange>
   <InactivityRange>00:15:00</InactivityRange>
-  <Clock>12/3/2025 7:09:47 PM</Clock>
+  <Clock>12/4/2025 4:37:05 PM</Clock>
 </config>

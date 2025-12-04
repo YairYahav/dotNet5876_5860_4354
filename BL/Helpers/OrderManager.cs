@@ -143,8 +143,8 @@ internal static class OrderManager
                 double airDistance = Tools.AirDistance(
                     order.Latitude,
                     order.Longitude,
-                    s_dal.Config.Latitude.GetValueOrDefault(),
-                    s_dal.Config.Longitude.GetValueOrDefault());
+                    AdminManager.GetConfig().Latitude.Value,
+                    AdminManager.GetConfig().Longitude.Value);
 
                 return airDistance <= courier.MaxPersonalDeliveryDistance;
             })
@@ -371,7 +371,7 @@ internal static class OrderManager
         double airDistance = Tools.AirDistance(
             order.Latitude,
             order.Longitude,
-            s_dal.Config.Latitude.GetValueOrDefault(),
+            s_dal.Config.Latitude.GetValueOrDefault(),//ìú÷ï ìäáéà îAdminManager,GetConfig
             s_dal.Config.Longitude.GetValueOrDefault());
 
         return new BO.OrderInList
@@ -383,7 +383,7 @@ internal static class OrderManager
             OrderStatus = orderStatus,
             ScheduleStatus = scheduleStatus,
             RemainingTineToCompletion = orderStatus == BO.OrderStatus.Open
-                ? (order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery - AdminManager.Now)
+                ? (order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery - AdminManager.Now)///ìú÷ï ìäáéà îAdmin Manager
                 : TimeSpan.Zero,
             ExpectedTimeToCompletion = ExpectedDelivery != null && orderStatus == BO.OrderStatus.InProgress
                 ? ExpectedDeliveryTime(ExpectedDelivery)
@@ -396,7 +396,7 @@ internal static class OrderManager
     {
         double airDistance = Tools.AirDistance(order.Latitude, order.Longitude,
             s_dal.Config.Latitude.GetValueOrDefault(),
-            s_dal.Config.Longitude.GetValueOrDefault());
+            s_dal.Config.Longitude.GetValueOrDefault());//ìú÷ï ìäáéà îAdminManager
 
         DateTime maxDeliveryTime = order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery;
         TimeSpan remainingTime = maxDeliveryTime - AdminManager.Now;
@@ -462,7 +462,7 @@ internal static class OrderManager
         
         if (deliveries == null || !deliveries.Any())
         {
-            DateTime maxDeliveryTime = order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery;
+            DateTime maxDeliveryTime = order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery;//ìòãëï îAdmin Manager.GetConfig
             return AdminManager.Now > maxDeliveryTime ? BO.ScheduleStatus.Late : BO.ScheduleStatus.OnTime;
         }
 
@@ -470,7 +470,7 @@ internal static class OrderManager
         
         if (latestDelivery == null)
         {
-            DateTime maxDeliveryTime = order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery;
+            DateTime maxDeliveryTime = order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery;//
             return AdminManager.Now > maxDeliveryTime ? BO.ScheduleStatus.Late : BO.ScheduleStatus.OnTime;
         }
 

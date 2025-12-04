@@ -54,7 +54,8 @@ public static class Initialization
                   lastName[s_rand.Next(lastName.Length)];// Generate full name
             string email = firstName[i % firstName.Length].ToLower() + domain;//Generate email (use modulo to avoid overflow)
             int password = s_rand.Next(1000, 9999);// Generate a simple numeric password
-            string passwordStr = HashPasswordForSeed(password.ToString());// Convert password to string
+/*            string passwordStr = HashPasswordForSeed(password.ToString());*/// Convert password to string
+            string passwordStr = password.ToString();
             bool isActive = s_rand.Next(0, 10) != 0;// 90% chance of being active
             double? CompanyMaxRange = s_dal!.Config.MaxDeliveryRange;// Get company max delivery range
             double? PersonalMaxRange = null;// Personal max range for the courier
@@ -93,13 +94,13 @@ public static class Initialization
                 PersonalMaxRange));
         }
     }
-    private static string HashPasswordForSeed(string password)
-    {
-        using var sha = SHA256.Create();
-        byte[] bytes = Encoding.UTF8.GetBytes(password);
-        byte[] hash = sha.ComputeHash(bytes);
-        return Convert.ToHexString(hash);
-    }
+    //private static string HashPasswordForSeed(string password)
+    //{
+    //    using var sha = SHA256.Create();
+    //    byte[] bytes = Encoding.UTF8.GetBytes(password);
+    //    byte[] hash = sha.ComputeHash(bytes);
+    //    return Convert.ToHexString(hash);
+    //}
 
     /// <summary>
     /// Creates and inserts a set of orders with realistic data, addresses, and timestamps.
@@ -202,12 +203,9 @@ public static class Initialization
         /// </summary>
         for (int i = 0; i < openOrders && i < orders.Count; i++)
         {
-            var order = TakeRandomOrder(orders);// Take and remove a random order from local list
+            var order = TakeRandomOrder(orders);// Take a random order
             var courier = PickEligibleCourier(order, couriers, companyLat ?? 0, companyLon ?? 0, companyMaxRange);// Pick an eligible courier for the order
-            if (courier == null) 
-            {
-                continue;
-            }
+            if (courier == null) continue;
             DateTime start = RandomStartAfter((DateTime)order.OrderPlacementTime, 12);
 
             s_dal!.Delivery.Create(new Delivery(
@@ -219,9 +217,6 @@ public static class Initialization
                 HaversineKm(companyLat ?? 0, companyLon ?? 0, order.Latitude, order.Longitude),
                 null,
                 null));// Create and insert the delivery record
-            
-            // Delete order from DAL after creating delivery (order is now in-progress)
-              s_dal!.Order.Delete(order.Id);
         }
 
         /// <summary>
@@ -229,14 +224,9 @@ public static class Initialization
         /// </summary>
         for (int i = 0; i < closeOrders && i < orders.Count; i++)
         {
-            var order = TakeRandomOrder(orders);// Take and remove a random order from local list
+            var order = TakeRandomOrder(orders);
             var courier = PickEligibleCourier(order, couriers, companyLat ?? 0, companyLon ?? 0, companyMaxRange);
-            if (courier == null) 
-            {
-                // If no eligible courier, add order back to list for retry (don't delete from DAL)
-                orders.Add(order);
-                continue;
-            }
+            if (courier == null) continue;
             DateTime start = RandomStartAfter((DateTime)order.OrderPlacementTime, 24);
             DateTime end = start.AddMinutes(s_rand.Next(25, 180));
             var endType = endKind[s_rand.Next(endKind.Length)];
@@ -250,12 +240,13 @@ public static class Initialization
                 end,
                 endType));
             
-            // If delivery failed or customer not found, add order back to list for retry (don't delete from DAL)
-            // Otherwise, delete order from DAL (successfully delivered/canceled/refused)
-            if (endType != TypeOfDeliveryCompletionTime.Failed &&
+            // Remove order from list if it was successfully delivered (not Failed or CustomerNotFound)
+            if (endType != TypeOfDeliveryCompletionTime.Failed && 
                 endType != TypeOfDeliveryCompletionTime.CustomerNotFound)
-                // Delete successfully completed orders from DAL
-                s_dal!.Order.Delete(order.Id);
+            {
+                // Order is already removed by TakeRandomOrder, so no action needed
+                // This ensures we don't re-assign the same order again
+            }
         }
     }
 
@@ -297,7 +288,7 @@ public static class Initialization
     {
         int i = s_rand.Next(list.Count);
         var x = list[i];
-        list.RemoveAt(i);  // ← REMOVE from list!
+        list.RemoveAt(i);
         return x;
     }
 
