@@ -1,11 +1,14 @@
 using DalApi;
 using DO;
 using BO;
+using System;
 
 namespace Helpers;
 
 internal static class OrderManager
 {
+    internal static ObserverManager Observers = new();
+
     private static readonly IDal s_dal = Factory.Get;
 
     internal static int[] GetOrdersSummary(int requesterId)
@@ -221,6 +224,9 @@ internal static class OrderManager
         );
 
         s_dal.Order.Update(updatedDoOrder);
+
+        Observers.NotifyItemUpdated(order.Id);
+        Observers.NotifyListUpdated();
     }
 
     internal static void CancelOrder(int requesterId, int orderId)
@@ -272,6 +278,9 @@ internal static class OrderManager
                 s_dal.Delivery.Update(updatedDelivery);
             }
         }
+
+        Observers.NotifyItemUpdated(orderId);
+        Observers.NotifyListUpdated();
     }
 
     internal static void DeleteOrder(int requesterId, int orderId)
@@ -302,6 +311,8 @@ internal static class OrderManager
         );
         
         s_dal.Order.Create(doOrder);
+
+        Observers.NotifyListUpdated();
     }
 
     internal static void CompleteOrderForCourier(int requesterId, int courierId, int deliveryId)
@@ -331,6 +342,9 @@ internal static class OrderManager
         );
         
         s_dal.Delivery.Update(updatedDelivery);
+
+        Observers.NotifyItemUpdated(delivery.OrderId);
+        Observers.NotifyListUpdated();
     }
 
     internal static void ChooseOrderForDelivery(int requesterId, int courierId, int orderId)
@@ -359,6 +373,9 @@ internal static class OrderManager
         );
         
         s_dal.Delivery.Create(newDelivery);
+
+        Observers.NotifyItemUpdated(orderId);
+        Observers.NotifyListUpdated();
     }
 
     // ==================== Helper Methods ====================

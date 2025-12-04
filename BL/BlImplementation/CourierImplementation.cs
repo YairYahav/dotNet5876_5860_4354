@@ -35,4 +35,10 @@ internal class CourierImplementation : ICourier
     {
         CourierManager.UpdateCourier(requesterId, courier);
     }
+
+    // Stage 5:
+    public void AddObserver(Action listObserver) => CourierManager.Observers.AddListObserver(listObserver);
+    public void RemoveObserver(Action listObserver) => CourierManager.Observers.RemoveListObserver(listObserver);
+    public void AddObserver(int id, Action observer) => CourierManager.Observers.AddObserver(id, observer);
+    public void RemoveObserver(int id, Action observer) => CourierManager.Observers.RemoveObserver(id, observer);
 }

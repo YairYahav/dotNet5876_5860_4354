@@ -1,0 +1,21 @@
+﻿<Application x:Class="PL.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PL"
+             xmlns:converters="clr-namespace:PL.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Light.xaml" />
+
+                <ResourceDictionary Source="Themes/GeneralStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <local:DeliveryTypeCollection x:Key="DeliveryTypeCollectionKey" />
+
+            <converters:StatusToBooleanConverter x:Key="ConvertUpdateToTrueKey" />
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

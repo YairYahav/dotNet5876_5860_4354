@@ -6,7 +6,7 @@ using Helpers;
 
 public class Courier
 {
-    public int Id { get; init; }
+    public int Id { get; set; }
     public string FullName { get; set; }
     public string PhoneNumber { get; set; }
     public string Gmail { get; set; }

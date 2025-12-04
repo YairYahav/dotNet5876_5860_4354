@@ -11,6 +11,8 @@ namespace Helpers;
 
 internal static class CourierManager
 {
+    internal static ObserverManager Observers = new();
+
     private static readonly IDal s_dal = Factory.Get;
 
     internal static BO.UserRole Login(int id, string password)
@@ -46,6 +48,7 @@ internal static class CourierManager
             {
                 Id = bo.Id,
                 FullName = bo.FullName,
+                PhoneNumber = bo.PhoneNumber,
                 IsActive = bo.IsActive,
                 EmploymentStartDate = bo.EmploymentStartDate,
                 DeliveryType = bo.DeliveryType,
@@ -92,6 +95,8 @@ internal static class CourierManager
         };
         s_dal.Courier.Update(updatedCourier);
 
+        Observers.NotifyItemUpdated(courier.Id);
+        Observers.NotifyListUpdated();
     }
 
     internal static void CreateCourier(int requesterId , BO.Courier courier)
@@ -112,6 +117,8 @@ internal static class CourierManager
             EmploymentStartDate = courier.EmploymentStartDate
         };
         s_dal.Courier.Create(newCourier);
+
+        Observers.NotifyListUpdated();
     }
 
     internal static void DeleteCourier(int requesterId, int courierId)
@@ -123,6 +130,9 @@ internal static class CourierManager
         if (s_dal.Delivery.ReadAll().Any(d => d.CourierId == courierId))
             throw new BO.BlInvalidOperationException("Cannot delete courier with active deliveries.");
         s_dal.Courier.Delete(courierId);
+
+        Observers.NotifyListUpdated();
+        Observers.NotifyItemUpdated(courierId);
     }
 
     // Help functions

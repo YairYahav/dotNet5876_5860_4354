@@ -3,7 +3,7 @@ using BO;
 using System.Collections.Generic;
 using System;
 
-public interface IOrder
+public interface IOrder : IObservable
 {
     int[] GetOrdersSummary(int requesterId);
 

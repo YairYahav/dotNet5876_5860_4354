@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using Helpers;
 
 
 namespace BlImplementation;
@@ -61,4 +62,11 @@ internal class OrderImplementation : IOrder
     {
         Helpers.OrderManager.UpdateOrder(requesterId, order);
     }
+
+
+    //Stage 5:
+    public void AddObserver(Action listObserver) => OrderManager.Observers.AddListObserver(listObserver);
+    public void RemoveObserver(Action listObserver) => OrderManager.Observers.RemoveListObserver(listObserver);
+    public void AddObserver(int id, Action observer) => OrderManager.Observers.AddObserver(id, observer);
+    public void RemoveObserver(int id, Action observer) => OrderManager.Observers.RemoveObserver(id, observer);
 }

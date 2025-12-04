@@ -2,7 +2,7 @@
 
 namespace BlApi;
 
-public interface ICourier
+public interface ICourier : IObservable
 {
     BO.UserRole Login(int id, string password);
 

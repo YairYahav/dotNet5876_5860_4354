@@ -9,6 +9,9 @@ internal static class AdminManager
 {
     private static readonly IDal s_dal = DalApi.Factory.Get;
 
+    public static event Action? ConfigUpdatedObservers;
+    public static event Action? ClockUpdatedObservers;
+
 
     #region Clock Management
 
@@ -19,6 +22,7 @@ internal static class AdminManager
         var oldClock = s_dal.Config.Clock;
         s_dal.Config.Clock = newClock;
 
+        ClockUpdatedObservers?.Invoke();
     }
 
     #endregion
@@ -72,6 +76,11 @@ internal static class AdminManager
         {
             UpdateClock(configuration.Clock);
             configChanged = true;
+        }
+
+        if (configChanged)
+        {
+            ConfigUpdatedObservers?.Invoke();
         }
     }
 

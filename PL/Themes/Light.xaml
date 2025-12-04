@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="PrimaryBackground" Color="#F5F7FA"/>
+    <SolidColorBrush x:Key="SecondaryBackground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="PanelBackground" Color="#E4E7EB"/>
+    <SolidColorBrush x:Key="PrimaryText" Color="#2C3E50"/>
+    <SolidColorBrush x:Key="SecondaryText" Color="#7F8C8D"/>
+    <SolidColorBrush x:Key="AccentColor" Color="#3498DB"/>
+    <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="#BDC3C7"/>
+
+    <SolidColorBrush x:Key="DeleteButtonBg" Color="#FFECEC"/>
+    <SolidColorBrush x:Key="DeleteButtonFg" Color="#E74C3C"/>
+</ResourceDictionary>

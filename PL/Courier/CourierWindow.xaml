@@ -1,0 +1,64 @@
+﻿<Window x:Class="PL.Courier.CourierWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Courier"
+        mc:Ignorable="d"
+        Title="Courier Details" Height="500" Width="400"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="ID:" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" 
+                 Text="{Binding CurrentCourier.Id, Mode=TwoWay}"
+                 IsReadOnly="{Binding ButtonText, Converter={StaticResource ConvertUpdateToTrueKey}}"/>
+
+        <Label Grid.Row="1" Content="Name:" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding CurrentCourier.FullName, Mode=TwoWay}"/>
+
+        <Label Grid.Row="2" Content="Phone:" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding CurrentCourier.PhoneNumber, Mode=TwoWay}"/>
+
+        <Label Grid.Row="3" Content="Email:" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding CurrentCourier.Gmail, Mode=TwoWay}"/>
+
+        <Label Grid.Row="4" Content="Password:" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding CurrentCourier.Password, Mode=TwoWay}"/>
+
+        <Label Grid.Row="5" Content="Delivery Type:" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="5" Grid.Column="1" Margin="5"
+                  ItemsSource="{Binding Source={StaticResource DeliveryTypeCollectionKey}}"
+                  SelectedValue="{Binding CurrentCourier.DeliveryType, Mode=TwoWay}"/>
+
+        <Label Grid.Row="6" Content="Max Distance:" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Margin="5" Text="{Binding CurrentCourier.MaxPersonalDeliveryDistance, Mode=TwoWay, TargetNullValue=''}"/>
+
+        <Label Grid.Row="7" Content="Start Date:" VerticalAlignment="Center"/>
+        <Label Grid.Row="7" Grid.Column="1" Margin="5" Content="{Binding CurrentCourier.EmploymentStartDate}"/>
+
+        <Label Grid.Row="8" Content="Is Active:" VerticalAlignment="Center"/>
+        <CheckBox Grid.Row="8" Grid.Column="1" Margin="5" IsChecked="{Binding CurrentCourier.IsActive, Mode=TwoWay}" VerticalAlignment="Center"/>
+
+        <Button Grid.Row="10" Grid.ColumnSpan="2" Content="{Binding ButtonText}" Click="BtnAddUpdate_Click" 
+                Height="40" Width="150" HorizontalAlignment="Center" Margin="20"/>
+    </Grid>
+</Window>

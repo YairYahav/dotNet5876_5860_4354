@@ -1,0 +1,108 @@
+﻿<Window x:Class="PL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="Delivery System Manager" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        Loaded="Window_Loaded" Closing="Window_Closing"
+        Background="{DynamicResource PrimaryBackground}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{DynamicResource PanelBackground}" Padding="15" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="🕒 System Clock:" Foreground="{DynamicResource SecondaryText}" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="16"/>
+                    <TextBlock Text="{Binding CurrentTime}" Foreground="{DynamicResource PrimaryText}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="+1 Min" Click="BtnAddMinute_Click" ToolTip="Advance 1 Minute"/>
+                    <Button Content="+1 Hour" Click="BtnAddHour_Click" ToolTip="Advance 1 Hour"/>
+                    <Button Content="+1 Day" Click="BtnAddDay_Click" ToolTip="Advance 1 Day"/>
+                    <Button Content="+1 Year" Click="BtnAddYear_Click" ToolTip="Advance 1 Year"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="Dark Mode" Foreground="{DynamicResource PrimaryText}" FontSize="10" HorizontalAlignment="Center" Margin="0,0,0,2"/>
+                    <ToggleButton Style="{StaticResource ThemeToggleStyle}" Click="BtnTheme_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="30">
+            <Border Background="{DynamicResource SecondaryBackground}" CornerRadius="10" Padding="20">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" Direction="270" ShadowDepth="2" Opacity="0.2"/>
+                </Border.Effect>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="⚙ Configuration Settings" Grid.Row="0" Foreground="{DynamicResource PrimaryText}" FontSize="24" FontWeight="Light" Margin="0,0,0,20"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Max Delivery Range (km):" Foreground="{DynamicResource PrimaryText}" FontSize="16" Margin="0,10"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Configuration.MaxDeliveryRange, UpdateSourceTrigger=PropertyChanged}" 
+                                 FontSize="16" Padding="5" Margin="10,10" Background="{DynamicResource PrimaryBackground}" Foreground="{DynamicResource PrimaryText}" BorderBrush="{DynamicResource BorderBrush}"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Car Speed (km/h):" Foreground="{DynamicResource PrimaryText}" FontSize="16" Margin="0,10"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Configuration.AvgSpeedKmhForCar, UpdateSourceTrigger=PropertyChanged}" 
+                                 FontSize="16" Padding="5" Margin="10,10" Background="{DynamicResource PrimaryBackground}" Foreground="{DynamicResource PrimaryText}" BorderBrush="{DynamicResource BorderBrush}"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="Bicycle Speed (km/h):" Foreground="{DynamicResource PrimaryText}" FontSize="16" Margin="0,10"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Configuration.AvgSpeedKmhForBicycle, UpdateSourceTrigger=PropertyChanged}" 
+                                 FontSize="16" Padding="5" Margin="10,10" Background="{DynamicResource PrimaryBackground}" Foreground="{DynamicResource PrimaryText}" BorderBrush="{DynamicResource BorderBrush}"/>
+                    </Grid>
+
+                    <Button Grid.Row="2" Content="Save Configuration" Click="BtnUpdateConfig_Click" HorizontalAlignment="Right" Width="200" Height="40" Margin="0,20,0,0"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Background="{DynamicResource PanelBackground}" Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="📦 Manage Couriers" Click="BtnCouriers_Click" Height="50" FontSize="18" Margin="10" />
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Initialize DB" Click="BtnInitDB_Click" Background="#27AE60" Margin="10"/>
+                    <Button Content="Reset DB" Click="BtnResetDB_Click" Background="{DynamicResource DeleteButtonBg}" Foreground="{DynamicResource DeleteButtonFg}" Margin="10"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
