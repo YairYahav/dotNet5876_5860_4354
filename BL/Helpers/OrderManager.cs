@@ -5,12 +5,34 @@ using System;
 
 namespace Helpers;
 
+/// <summary>
+/// Manages order-related operations including creation, retrieval, updates, cancellations, and delivery assignments.
+/// Also handles order status calculations and observer notifications.
+/// </summary>
+/// <remarks>
+/// This static class provides comprehensive business logic for order management, including filtering,
+/// sorting, validation, and transformation between data and business layer objects. It also manages
+/// observer notifications for list and item updates and integrates with geocoding services for address handling.
+/// </remarks>
 internal static class OrderManager
 {
+    /// <summary>
+    /// Gets the observer manager for notifying subscribers of order list and item changes.
+    /// </summary>
     internal static ObserverManager Observers = new();
 
+    /// <summary>
+    /// Gets the Data Access Layer (DAL) factory instance for accessing data operations.
+    /// </summary>
     private static readonly IDal s_dal = Factory.Get;
 
+    /// <summary>
+    /// Retrieves a summary of all orders organized by their status and scheduling status combination.
+    /// </summary>
+    /// <param name="requesterId">The ID of the user requesting the summary (must be admin).</param>
+    /// <returns>An array where each index represents a combination of OrderStatus and ScheduleStatus, containing the count of orders in that state.</returns>
+    /// <exception cref="BO.BlUnauthorizedAccessException">Thrown if the requester is not an admin.</exception>
+    /// <remarks>The array is organized as [orderStatusIndex * scheduleStatusCount + scheduleStatusIndex].</remarks>
     internal static int[] GetOrdersSummary(int requesterId)
     {
         Tools.AuthorizeAdmin(requesterId);
@@ -46,6 +68,15 @@ internal static class OrderManager
         return summary;
     }
 
+    /// <summary>
+    /// Retrieves a filtered and sorted list of all orders.
+    /// </summary>
+    /// <param name="requesterId">The ID of the user requesting the list (must be admin).</param>
+    /// <param name="filterBy">Optional filter criteria for the orders.</param>
+    /// <param name="filterValue">The value to filter by (OrderStatus or ScheduleStatus depending on filterBy).</param>
+    /// <param name="orderBy">Optional sorting criteria for the returned list.</param>
+    /// <returns>An enumerable collection of OrderInList objects matching the criteria.</returns>
+    /// <exception cref="BO.BlUnauthorizedAccessException">Thrown if the requester is not an admin.</exception>
     internal static IEnumerable<BO.OrderInList> GetOrders(int requesterId,BO.OrderListFilterBy? filterBy = null,object? filterValue = null,BO.OrderListOrderBy? orderBy = null)
     {
         Tools.AuthorizeAdmin(requesterId);
@@ -87,6 +118,15 @@ internal static class OrderManager
         return ordered;
     }
 
+    /// <summary>
+    /// Retrieves a list of closed (completed) deliveries for a specific courier with optional filtering and sorting.
+    /// </summary>
+    /// <param name="requesterId">The ID of the user requesting the list (must be admin).</param>
+    /// <param name="courierId">The ID of the courier whose closed deliveries to retrieve.</param>
+    /// <param name="orderTypeFilter">Optional filter by order type.</param>
+    /// <param name="orderBy">Optional sorting criteria for the returned list.</param>
+    /// <returns>An enumerable collection of ClosedDeliveryInList objects for the specified courier.</returns>
+    /// <exception cref="BO.BlUnauthorizedAccessException">Thrown if the requester is not an admin.</exception>
     internal static IEnumerable<BO.ClosedDeliveryInList> GetClosedDeliveries(int requesterId,int courierId,BO.OrderType? orderTypeFilter = null,BO.ClosedOrdersListOrderBy? orderBy = null)
     {
         //להוסיף try catch
@@ -130,6 +170,16 @@ internal static class OrderManager
         
     }
 
+    /// <summary>
+    /// Retrieves a list of open orders that are within delivery range for a specific courier.
+    /// </summary>
+    /// <param name="requesterId">The ID of the user requesting the list (must be admin).</param>
+    /// <param name="courierId">The ID of the courier to find orders for.</param>
+    /// <param name="orderTypeFilter">Optional filter by order type.</param>
+    /// <param name="orderBy">Optional sorting criteria for the returned list.</param>
+    /// <returns>An enumerable collection of OpenOrderInList objects within the courier's range.</returns>
+    /// <exception cref="BO.BlUnauthorizedAccessException">Thrown if the requester is not an admin.</exception>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the courier doesn't exist.</exception>
     internal static IEnumerable<BO.OpenOrderInList> GetOpenDeliveries(int requesterId,int courierId,BO.OrderType? orderTypeFilter = null,BO.OpenDeliveryListOrderBy? orderBy = null)
     {
         Tools.AuthorizeAdmin(requesterId);
@@ -174,6 +224,14 @@ internal static class OrderManager
         return ordered;
     }
 
+    /// <summary>
+    /// Retrieves a specific order by ID with all related information.
+    /// </summary>
+    /// <param name="requesterId">The ID of the user requesting the order (must be admin).</param>
+    /// <param name="orderId">The ID of the order to retrieve.</param>
+    /// <returns>An Order object containing the order's complete information.</returns>
+    /// <exception cref="BO.BlUnauthorizedAccessException">Thrown if the requester is not an admin.</exception>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the order doesn't exist.</exception>
     internal static BO.Order GetOrder(int requesterId, int orderId)
     {
         Tools.AuthorizeAdmin(requesterId);
@@ -185,6 +243,14 @@ internal static class OrderManager
         return FromDoToBo(d);
     }
 
+    /// <summary>
+    /// Updates an existing order's information.
+    /// </summary>
+    /// <param name="requesterId">The ID of the user updating the order (must be admin).</param>
+    /// <param name="order">The Order object containing updated information.</param>
+    /// <exception cref="BO.BlUnauthorizedAccessException">Thrown if the requester is not an admin.</exception>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the order doesn't exist.</exception>
+    /// <exception cref="BO.BlInvalidOperationException">Thrown if the order cannot be updated in its current status.</exception>
     internal static void UpdateOrder(int requesterId, BO.Order order)
     {
         Tools.AuthorizeAdmin(requesterId);
@@ -229,6 +295,14 @@ internal static class OrderManager
         Observers.NotifyListUpdated();
     }
 
+    /// <summary>
+    /// Cancels an order and creates a cancellation delivery record.
+    /// </summary>
+    /// <param name="requesterId">The ID of the user canceling the order (must be admin).</param>
+    /// <param name="orderId">The ID of the order to cancel.</param>
+    /// <exception cref="BO.BlUnauthorizedAccessException">Thrown if the requester is not an admin.</exception>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the order doesn't exist.</exception>
+    /// <exception cref="BO.BlInvalidOperationException">Thrown if the order cannot be canceled in its current status.</exception>
     internal static void CancelOrder(int requesterId, int orderId)
     {
         Tools.AuthorizeAdmin(requesterId);
@@ -283,6 +357,12 @@ internal static class OrderManager
         Observers.NotifyListUpdated();
     }
 
+    /// <summary>
+    /// Attempts to delete an order (operation is not allowed).
+    /// </summary>
+    /// <param name="requesterId">The ID of the user attempting to delete (must be admin).</param>
+    /// <param name="orderId">The ID of the order to delete.</param>
+    /// <exception cref="BO.BlInvalidOperationException">Always thrown as orders cannot be deleted from the system.</exception>
     internal static void DeleteOrder(int requesterId, int orderId)
     {
         Tools.AuthorizeAdmin(requesterId);
@@ -290,6 +370,13 @@ internal static class OrderManager
         throw new BO.BlInvalidOperationException("Orders cannot be deleted from the system");
     }
 
+    /// <summary>
+    /// Creates a new order in the system with geocoding for the address.
+    /// </summary>
+    /// <param name="requesterId">The ID of the user creating the order (must be admin).</param>
+    /// <param name="order">The Order object containing the new order's information.</param>
+    /// <exception cref="BO.BlUnauthorizedAccessException">Thrown if the requester is not an admin.</exception>
+    /// <exception cref="BO.BlDataValidationException">Thrown if address geocoding fails.</exception>
     internal static void CreateOrder(int requesterId, BO.Order order)
     {
         Tools.AuthorizeAdmin(requesterId);
@@ -315,6 +402,15 @@ internal static class OrderManager
         Observers.NotifyListUpdated();
     }
 
+    /// <summary>
+    /// Marks a delivery as complete for a courier.
+    /// </summary>
+    /// <param name="requesterId">The ID of the user completing the delivery (must be the courier or admin).</param>
+    /// <param name="courierId">The ID of the courier completing the delivery.</param>
+    /// <param name="deliveryId">The ID of the delivery to complete.</param>
+    /// <exception cref="BO.BlUnauthorizedAccessException">Thrown if the requester is not the courier or an admin.</exception>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the delivery doesn't exist.</exception>
+    /// <exception cref="BO.BlInvalidOperationException">Thrown if the delivery doesn't belong to the courier or is already completed.</exception>
     internal static void CompleteOrderForCourier(int requesterId, int courierId, int deliveryId)
     {
         if (requesterId != courierId && !Tools.IsAdmin(requesterId))
@@ -347,6 +443,15 @@ internal static class OrderManager
         Observers.NotifyListUpdated();
     }
 
+    /// <summary>
+    /// Assigns an open order to a courier for delivery.
+    /// </summary>
+    /// <param name="requesterId">The ID of the user assigning the order (must be admin).</param>
+    /// <param name="courierId">The ID of the courier to assign the order to.</param>
+    /// <param name="orderId">The ID of the order to assign.</param>
+    /// <exception cref="BO.BlUnauthorizedAccessException">Thrown if the requester is not an admin.</exception>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the order or courier doesn't exist.</exception>
+    /// <exception cref="BO.BlInvalidOperationException">Thrown if the order is not in Open status.</exception>
     internal static void ChooseOrderForDelivery(int requesterId, int courierId, int orderId)
     {
         Tools.AuthorizeAdmin(requesterId);
@@ -379,6 +484,12 @@ internal static class OrderManager
     }
 
     // ==================== Helper Methods ====================
+
+    /// <summary>
+    /// Converts a Data Access Layer Order object to a Business Logic OrderInList object.
+    /// </summary>
+    /// <param name="order">The DO.Order object to convert.</param>
+    /// <returns>An OrderInList object with calculated metrics and current status.</returns>
     private static BO.OrderInList MapDoToOrderInList(DO.Order order)
     {
         var orderStatus = GetOrderStatus(order);
@@ -388,8 +499,8 @@ internal static class OrderManager
         double airDistance = Tools.AirDistance(
             order.Latitude,
             order.Longitude,
-            s_dal.Config.Latitude.GetValueOrDefault(),//לתקן להביא מAdminManager,GetConfig
-            s_dal.Config.Longitude.GetValueOrDefault());
+            AdminManager.GetConfig().Latitude.GetValueOrDefault(),
+            AdminManager.GetConfig().Longitude.GetValueOrDefault());
 
         return new BO.OrderInList
         {
@@ -400,7 +511,7 @@ internal static class OrderManager
             OrderStatus = orderStatus,
             ScheduleStatus = scheduleStatus,
             RemainingTineToCompletion = orderStatus == BO.OrderStatus.Open
-                ? (order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery - AdminManager.Now)///לתקן להביא מAdmin Manager
+                ? (order.OrderPlacementTime + AdminManager.GetConfig().MaxTimeRangeForDelivery - AdminManager.Now)
                 : TimeSpan.Zero,
             ExpectedTimeToCompletion = ExpectedDelivery != null && orderStatus == BO.OrderStatus.InProgress
                 ? ExpectedDeliveryTime(ExpectedDelivery)
@@ -409,13 +520,18 @@ internal static class OrderManager
         };
     }
 
+    /// <summary>
+    /// Converts a Data Access Layer Order object to a Business Logic OpenOrderInList object.
+    /// </summary>
+    /// <param name="order">The DO.Order object to convert.</param>
+    /// <returns>An OpenOrderInList object suitable for displaying available orders to couriers.</returns>
     private static BO.OpenOrderInList MapDoToOpenOrderInList(DO.Order order)
     {
         double airDistance = Tools.AirDistance(order.Latitude, order.Longitude,
-            s_dal.Config.Latitude.GetValueOrDefault(),
-            s_dal.Config.Longitude.GetValueOrDefault());//לתקן להביא מAdminManager
+            AdminManager.GetConfig().Latitude.GetValueOrDefault(),
+            AdminManager.GetConfig().Longitude.GetValueOrDefault());
 
-        DateTime maxDeliveryTime = order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery;
+        DateTime maxDeliveryTime = order.OrderPlacementTime + AdminManager.GetConfig().MaxTimeRangeForDelivery;
         TimeSpan remainingTime = maxDeliveryTime - AdminManager.Now;
 
         return new BO.OpenOrderInList
@@ -435,6 +551,11 @@ internal static class OrderManager
         };
     }
 
+    /// <summary>
+    /// Converts a Data Access Layer Delivery object to a Business Logic ClosedDeliveryInList object.
+    /// </summary>
+    /// <param name="delivery">The DO.Delivery object to convert.</param>
+    /// <returns>A ClosedDeliveryInList object containing completed delivery information.</returns>
     private static BO.ClosedDeliveryInList MapDoToClosedDeliveryInList(DO.Delivery delivery)
     {
         var order = s_dal.Order.Read(delivery.OrderId);
@@ -458,6 +579,11 @@ internal static class OrderManager
         };
     }
 
+    /// <summary>
+    /// Determines the current operational status of an order based on its deliveries.
+    /// </summary>
+    /// <param name="order">The order to evaluate.</param>
+    /// <returns>An OrderStatus value indicating the order's current operational status.</returns>
     internal static BO.OrderStatus GetOrderStatus(DO.Order order)
     {
         var deliveries = s_dal.Delivery.ReadAll(d => d.OrderId == order.Id);
@@ -473,13 +599,18 @@ internal static class OrderManager
         return CourierManager.GetDeliveryStatus(latestDelivery);
     }
 
+    /// <summary>
+    /// Determines the scheduling status of an order based on whether it's on-time or late.
+    /// </summary>
+    /// <param name="order">The order to evaluate.</param>
+    /// <returns>A ScheduleStatus value indicating the order's timing status.</returns>
     internal static BO.ScheduleStatus GetScheduleStatusOfOrder(DO.Order order)
     {
         var deliveries = s_dal.Delivery.ReadAll(d => d.OrderId == order.Id);
         
         if (deliveries == null || !deliveries.Any())
         {
-            DateTime maxDeliveryTime = order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery;//לעדכן מAdmin Manager.GetConfig
+            DateTime maxDeliveryTime = order.OrderPlacementTime + AdminManager.GetConfig().MaxTimeRangeForDelivery;
             return AdminManager.Now > maxDeliveryTime ? BO.ScheduleStatus.Late : BO.ScheduleStatus.OnTime;
         }
 
@@ -487,13 +618,18 @@ internal static class OrderManager
         
         if (latestDelivery == null)
         {
-            DateTime maxDeliveryTime = order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery;//
+            DateTime maxDeliveryTime = order.OrderPlacementTime + AdminManager.GetConfig().MaxTimeRangeForDelivery;
             return AdminManager.Now > maxDeliveryTime ? BO.ScheduleStatus.Late : BO.ScheduleStatus.OnTime;
         }
 
         return CourierManager.GetScheduleStatusOfDelivery(latestDelivery);
     }
 
+    /// <summary>
+    /// Converts a Data Access Layer Order object to a Business Logic Order object.
+    /// </summary>
+    /// <param name="d">The DO.Order object to convert.</param>
+    /// <returns>A BO.Order object with calculated air distance.</returns>
     private static BO.Order FromDoToBo(DO.Order d)
     {
         return new BO.Order
@@ -511,11 +647,16 @@ internal static class OrderManager
             Weight = d.Weight,
             OrderPlacementTime = d.OrderPlacementTime,
             AirDistance = Tools.AirDistance(d.Latitude, d.Longitude,
-                s_dal.Config.Latitude.GetValueOrDefault(),
-                s_dal.Config.Longitude.GetValueOrDefault())
+                AdminManager.GetConfig().Latitude.GetValueOrDefault(),
+                AdminManager.GetConfig().Longitude.GetValueOrDefault())
         };
     }
 
+    /// <summary>
+    /// Calculates the expected delivery time based on the delivery distance and courier's average speed.
+    /// </summary>
+    /// <param name="delivery">The delivery to calculate time for.</param>
+    /// <returns>A TimeSpan representing the expected duration of the delivery.</returns>
     internal static TimeSpan ExpectedDeliveryTime(DO.Delivery delivery)
     {
         double averageSpeed = CourierManager.GetAverageSpeedKmh(delivery.DeliveryType);
@@ -524,6 +665,12 @@ internal static class OrderManager
         return TimeSpan.FromHours(hours);
     }
 
+    /// <summary>
+    /// Converts a Data Access Layer Delivery object to a Business Logic OrderInProgress object.
+    /// </summary>
+    /// <param name="order">The DO.Order object for the delivery.</param>
+    /// <param name="activeDelivery">The DO.Delivery object in progress.</param>
+    /// <returns>An OrderInProgress object containing complete delivery tracking information.</returns>
     internal static BO.OrderInProgress AddOrderInProgress(DO.Order order, DO.Delivery activeDelivery)
     {
         return new BO.OrderInProgress
@@ -534,18 +681,18 @@ internal static class OrderManager
             DescriptionOfOrder = order.DescriptionOfOrder,
             AddressOfOrder = order.AddressOfOrder,
             AirDistance = Tools.AirDistance(order.Latitude, order.Longitude,
-                s_dal.Config.Latitude.GetValueOrDefault(),//תיקון לפניה באינטרנט
-                s_dal.Config.Longitude.GetValueOrDefault()),//לתקן לפניה לאינטרנט
+                AdminManager.GetConfig().Latitude.GetValueOrDefault(),
+                    AdminManager.GetConfig().Longitude.GetValueOrDefault()),
             ActualDistance = activeDelivery.ActualDistance,
             CustomerName = order.CustomerName,
             CustomerPhone = order.CustomerPhone,
             OrderPlacementTime = order.OrderPlacementTime,
             PickUpTime = activeDelivery.DeliveryStartTime,
             DeliveryTime = activeDelivery.DeliveryStartTime + ExpectedDeliveryTime(activeDelivery),
-            MaxDelivryTime = order.OrderPlacementTime + s_dal.Config.MaxTimeRangeForDelivery,
+            MaxDelivryTime = order.OrderPlacementTime + AdminManager.GetConfig().MaxTimeRangeForDelivery,
             OrderStatus = CourierManager.GetDeliveryStatus(activeDelivery),
             ScheduleStatus = CourierManager.GetScheduleStatusOfDelivery(activeDelivery),
-            TimeLeftToDelivery = (activeDelivery.DeliveryStartTime + s_dal.Config.MaxTimeRangeForDelivery) - AdminManager.Now
+            TimeLeftToDelivery = (activeDelivery.DeliveryStartTime + AdminManager.GetConfig().MaxTimeRangeForDelivery) - AdminManager.Now
         };
     }
 }

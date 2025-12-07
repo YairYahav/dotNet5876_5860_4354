@@ -5,18 +5,51 @@ using DalTest;
 using DO = DO; // It was "DO = DalFaced.DO" but it is not rellevent anymore couse of the reference
 
 namespace Helpers;
+
+/// <summary>
+/// Manages administrative functions including clock management, configuration settings,
+/// and database initialization/reset operations.
+/// </summary>
+/// <remarks>
+/// This static class provides system-wide administrative capabilities such as managing
+/// the application clock, system configuration, and database state management. It also
+/// includes event notifications for configuration and clock updates.
+/// </remarks>
 internal static class AdminManager
 {
+    /// <summary>
+    /// Gets the Data Access Layer (DAL) factory instance for accessing data operations.
+    /// </summary>
     private static readonly IDal s_dal = DalApi.Factory.Get;
 
+    /// <summary>
+    /// Event raised when configuration settings are updated.
+    /// </summary>
+    /// <remarks>Subscribers can use this event to react to configuration changes in the system.</remarks>
     public static event Action? ConfigUpdatedObservers;
-    public static event Action? ClockUpdatedObservers;
 
+    /// <summary>
+    /// Event raised when the system clock is updated.
+    /// </summary>
+    /// <remarks>Subscribers can use this event to react to clock adjustments in the system.</remarks>
+    public static event Action? ClockUpdatedObservers;
 
     #region Clock Management
 
+    /// <summary>
+    /// Gets the current system clock time.
+    /// </summary>
+    /// <value>A DateTime representing the current application time.</value>
+    /// <remarks>The clock is retrieved from the DAL configuration and represents
+    /// the system's internal time that may differ from real time for testing purposes.</remarks>
     internal static DateTime Now { get => s_dal.Config.Clock; }
 
+    /// <summary>
+    /// Updates the system clock to a new time value.
+    /// </summary>
+    /// <param name="newClock">The new DateTime value to set as the system clock.</param>
+    /// <remarks>This method updates the clock in the DAL configuration and triggers
+    /// the ClockUpdatedObservers event to notify all subscribers of the change.</remarks>
     internal static void UpdateClock(DateTime newClock)
     {
         var oldClock = s_dal.Config.Clock;
@@ -29,6 +62,12 @@ internal static class AdminManager
 
     #region Config Management
 
+    /// <summary>
+    /// Retrieves the current system configuration settings.
+    /// </summary>
+    /// <returns>A Config object containing all current system configuration parameters.</returns>
+    /// <remarks>This method reads all configuration values from the DAL and returns them
+    /// as a business logic Config object, mapping all clock, manager, courier, and delivery parameters.</remarks>
     internal static BO.Config GetConfig()
     => new BO.Config()
     {
@@ -48,6 +87,13 @@ internal static class AdminManager
         InactivityRange = s_dal.Config.InactivityRange,
     };
 
+    /// <summary>
+    /// Updates the system configuration settings with new values.
+    /// </summary>
+    /// <param name="configuration">A Config object containing the new configuration values to apply.</param>
+    /// <remarks>This method compares the new configuration with the current values and only
+    /// updates those that have changed. It triggers the ConfigUpdatedObservers event if any
+    /// changes are detected. Clock updates trigger the ClockUpdatedObservers event separately.</remarks>
     internal static void SetConfig(BO.Config configuration)
     {
         bool configChanged = false;
@@ -88,12 +134,22 @@ internal static class AdminManager
 
     #region Database Initialization/Reset
 
+    /// <summary>
+    /// Resets the database to its initial empty state and resets the system clock to the current time.
+    /// </summary>
+    /// <remarks>This operation removes all data from the system and restores default configuration values.
+    /// The system clock is set to the current real time after the reset.</remarks>
     internal static void ResetDB()
     {
         s_dal.ResetDB();
         UpdateClock(DateTime.Now);
     }
 
+    /// <summary>
+    /// Initializes the database with default test data and updates the system clock.
+    /// </summary>
+    /// <remarks>This operation populates the database with initial data through the Initialization module
+    /// and synchronizes the system clock with the configuration's clock value.</remarks>
     internal static void InitializeDB()
     {
 
