@@ -41,16 +41,25 @@ internal static class CourierManager
         if (password is null)
             throw new BO.BlDoesNotExistException("Password cannot be null or empty");
 
-
-        if (AdminManager.GetConfig().ManagerId == id && AdminManager.GetConfig().ManagerPassword == password)//צריך להוסיף בדיקת הצפנה
+        // Check if admin - support both hashed and plain passwords for backward compatibility
+        var config = AdminManager.GetConfig();
+        if (config.ManagerId == id)
         {
-            return UserRole.Admin;
+            string hashedPassword = Tools.HashPassword(password);
+            if (config.ManagerPassword == password || config.ManagerPassword == hashedPassword)
+            {
+                return UserRole.Admin;
+            }
+            throw new BO.BlDoesNotExistException("Incorrect password.");
         }
-        var courier = s_dal.Courier.Read(id);//או לשנות ולהוסיף try catch
+
+        // Check courier
+        var courier = s_dal.Courier.Read(id);
         if (courier == null)
             throw new BO.BlDoesNotExistException($"Courier with ID {id} does not exist.");
-        string hashed = HashPassword(password);
-        if (courier.Password == hashed || courier.Password == password)
+        
+        string hashedCourierPassword = HashPassword(password);
+        if (courier.Password == hashedCourierPassword || courier.Password == password)
         {
             return UserRole.Courier;
         }
@@ -461,6 +470,6 @@ internal static class CourierManager
 
 
 
-]
+
 
 

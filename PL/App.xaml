@@ -3,18 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PL"
              xmlns:converters="clr-namespace:PL.Converters"
-             StartupUri="MainWindow.xaml">
+             StartupUri="login/LoginWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/Light.xaml" />
-
                 <ResourceDictionary Source="Themes/GeneralStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <local:DeliveryTypeCollection x:Key="DeliveryTypeCollectionKey" />
 
             <converters:StatusToBooleanConverter x:Key="ConvertUpdateToTrueKey" />
+            <converters:EnumValuesConverter x:Key="EnumValuesConverter"/>
+            <converters:NullableEnumToTextConverter x:Key="NullableEnumToTextConverter"/>
+            <converters:OrderStatusCanCancelConverter x:Key="OrderStatusCanCancelConverter"/>
+            <converters:CanUpdateOrderConverter x:Key="CanUpdateOrderConverter"/>
+            <converters:OrderStatusToBoolConverter x:Key="OrderStatusToBoolConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>

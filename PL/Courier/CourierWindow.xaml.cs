@@ -61,7 +61,7 @@ namespace PL.Courier
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading courier: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error Loading Courier", MessageBoxButton.OK, MessageBoxImage.Error);
                 Close();
             }
         }
@@ -86,7 +86,7 @@ namespace PL.Courier
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Operation failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Operation Failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

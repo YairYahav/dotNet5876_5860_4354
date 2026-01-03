@@ -1,0 +1,142 @@
+﻿<Window x:Class="PL.Order.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Order"
+        xmlns:conv="clr-namespace:PL.Converters"
+        xmlns:bo="clr-namespace:BO;assembly=BL"
+        Title="ניהול הזמנה"
+        Height="720" Width="1050"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+
+    <Window.Resources>
+        <conv:EnumValuesConverter x:Key="EnumValuesConverter"/>
+        <conv:OrderStatusCanCancelConverter x:Key="OrderStatusCanCancelConverter"/>
+        <conv:CanUpdateOrderConverter x:Key="CanUpdateOrderConverter"/>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- כותרת -->
+        <TextBlock FontSize="20" FontWeight="Bold"
+                   Text="{Binding WindowTitle}"/>
+
+        <!-- פרטי הזמנה -->
+        <Border Grid.Row="2" Padding="10" BorderBrush="LightGray" BorderThickness="1" CornerRadius="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Id (קריאה בלבד) -->
+                <TextBlock Text="מספר הזמנה:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding CurrentOrder.Id}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
+
+                <!-- סוג הזמנה -->
+                <TextBlock Text="סוג הזמנה:" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="0" Grid.Column="4"
+                          ItemsSource="{Binding Source={x:Type bo:OrderType}, Converter={StaticResource EnumValuesConverter}}"
+                          SelectedItem="{Binding CurrentOrder.orderType, Mode=TwoWay}"
+                          IsEnabled="{Binding CurrentOrder.OrderStatus, Converter={StaticResource CanUpdateOrderConverter}}"/>
+
+                <!-- כתובת -->
+                <TextBlock Text="כתובת:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4"
+                         Text="{Binding CurrentOrder.AddressOfOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding CurrentOrder.OrderStatus, Converter={StaticResource CanUpdateOrderConverter}}"/>
+
+                <!-- לקוח -->
+                <TextBlock Text="שם לקוח:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="4" Grid.Column="1"
+                         Text="{Binding CurrentOrder.CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding CurrentOrder.OrderStatus, Converter={StaticResource CanUpdateOrderConverter}}"/>
+
+                <TextBlock Text="טלפון לקוח:" Grid.Row="4" Grid.Column="3" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="4" Grid.Column="4"
+                         Text="{Binding CurrentOrder.CustomerPhone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding CurrentOrder.OrderStatus, Converter={StaticResource CanUpdateOrderConverter}}"/>
+
+                <!-- פרטים נוספים -->
+                <TextBlock Text="שביר:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="6" Grid.Column="1"
+                          IsChecked="{Binding CurrentOrder.IsFrag, Mode=TwoWay}"
+                          IsEnabled="{Binding CurrentOrder.OrderStatus, Converter={StaticResource CanUpdateOrderConverter}}"/>
+
+                <TextBlock Text="נפח:" Grid.Row="6" Grid.Column="3" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="6" Grid.Column="4"
+                         Text="{Binding CurrentOrder.Volume, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding CurrentOrder.OrderStatus, Converter={StaticResource CanUpdateOrderConverter}}"/>
+
+                <TextBlock Text="משקל:" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="8" Grid.Column="1"
+                         Text="{Binding CurrentOrder.Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding CurrentOrder.OrderStatus, Converter={StaticResource CanUpdateOrderConverter}}"/>
+
+                <TextBlock Text="תיאור:" Grid.Row="8" Grid.Column="3" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="8" Grid.Column="4"
+                         Text="{Binding CurrentOrder.DescriptionOfOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding CurrentOrder.OrderStatus, Converter={StaticResource CanUpdateOrderConverter}}"/>
+            </Grid>
+        </Border>
+
+        <!-- רשימת משלוחים -->
+        <GroupBox Grid.Row="4" Header="משלוחים עבור ההזמנה (צפייה בלבד)" Margin="0,8,0,0">
+            <DataGrid ItemsSource="{Binding Deliveries}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="DeliveryId" Binding="{Binding DeliveryId}" Width="90"/>
+                    <DataGridTextColumn Header="CourierId" Binding="{Binding CourierId}" Width="90"/>
+                    <DataGridTextColumn Header="CourierName" Binding="{Binding CourierName}" Width="160"/>
+                    <DataGridTextColumn Header="DeliveryType" Binding="{Binding DeliveryType}" Width="120"/>
+                    <DataGridTextColumn Header="Start" Binding="{Binding DeliveryStartTime, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" Width="140"/>
+                    <DataGridTextColumn Header="CompletionType" Binding="{Binding TypeOfDeliveryCompletionTime}" Width="140"/>
+                    <DataGridTextColumn Header="End" Binding="{Binding DeliveryEndTime, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" Width="140"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        
+        <!-- כפתורים -->
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="ביטול הזמנה"
+                    Click="BtnCancelOrder_Click"
+                    IsEnabled="{Binding CurrentOrder.OrderStatus, Converter={StaticResource OrderStatusCanCancelConverter}}"
+                    Margin="4" Padding="10,4"/>
+
+            <Button Content="{Binding WindowTitle}"
+                    Click="BtnPrimary_Click"
+                    Margin="4" Padding="10,4"/>
+
+            <Button Content="סגור" Click="BtnClose_Click" Margin="4" Padding="10,4"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

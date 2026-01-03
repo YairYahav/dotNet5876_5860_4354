@@ -120,10 +120,10 @@ public class Order
     public DateTime RemainingTimeToDelivery { get; init; }
 
     /// <summary>
-    /// Gets the delivery information for this order in a list view context.
+    /// Gets the list of all deliveries associated with this order.
     /// </summary>
-    /// <value>A DeliveryPerOrderInList object, or null if no delivery is assigned.</value>
-    public DeliveryPerOrderInList? DeliveryPerOrderInList { get; init; }
+    /// <value>A list of DeliveryPerOrderInList objects representing all delivery attempts for this order, or null if no deliveries exist.</value>
+    public IEnumerable<DeliveryPerOrderInList>? DeliveriesForOrder { get; init; }
 
     /// <summary>
     /// Returns a string representation of the order object.

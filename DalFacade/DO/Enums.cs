@@ -28,10 +28,11 @@ public enum TypeOfDeliveryCompletionTime
 
 /// <summary>
 /// Types of delivery
-/// Car, Motorcycle, Bicycle, OnFoot
+/// Car, Motorcycle, Bicycle, OnFoot, None (for all)
 /// </summary>
 public enum DeliveryType
 {
+    //None = -1
     Car,
     Motorcycle,
     Bicycle,

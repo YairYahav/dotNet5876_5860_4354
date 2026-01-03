@@ -26,18 +26,34 @@ namespace PL.Courier
         public static readonly DependencyProperty CourierListProperty =
             DependencyProperty.Register("CourierList", typeof(IEnumerable<CourierInList>), typeof(CourierListWindow), new PropertyMetadata(null));
 
-        public DeliveryType DeliveryTypeFilter { get; set; } = DeliveryType.None;
+        public DeliveryType DeliveryTypeFilter 
+        { 
+            get { return (DeliveryType)GetValue(DeliveryTypeFilterProperty); }
+            set { SetValue(DeliveryTypeFilterProperty, value); }
+        }
 
-        public CourierInList? SelectedCourier { get; set; }
+        public static readonly DependencyProperty DeliveryTypeFilterProperty =
+            DependencyProperty.Register("DeliveryTypeFilter", typeof(DeliveryType), typeof(CourierListWindow), 
+                new PropertyMetadata(DeliveryType.None, OnFilterChanged));
+
+        private static void OnFilterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is CourierListWindow window)
+                window.RefreshList();
+        }
+
+        public CourierInList? SelectedCourier 
+        { 
+            get { return (CourierInList)GetValue(SelectedCourierProperty); }
+            set { SetValue(SelectedCourierProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectedCourierProperty =
+            DependencyProperty.Register("SelectedCourier", typeof(CourierInList), typeof(CourierListWindow), new PropertyMetadata(null));
 
         public CourierListWindow()
         {
             InitializeComponent();
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            RefreshList();
         }
 
         private void RefreshList()
@@ -56,7 +72,7 @@ namespace PL.Courier
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error Loading Couriers", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -74,7 +90,7 @@ namespace PL.Courier
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error Loading Courier List", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -84,9 +100,9 @@ namespace PL.Courier
             {
                 s_bl.Courier.RemoveObserver(CourierListObserver);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Suppress errors during closing to avoid cascading issues
             }
         }
 
@@ -129,7 +145,7 @@ namespace PL.Courier
                     catch (Exception ex)
                     {
                         // 4. Handle failure
-                        MessageBox.Show($"Deletion failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(ex.Message, "Delete Failed", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }

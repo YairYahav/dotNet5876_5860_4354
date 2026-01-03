@@ -1,0 +1,103 @@
+﻿<Window x:Class="PL.Order.OrdersManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Order"
+        xmlns:converters="clr-namespace:PL.Converters"
+        xmlns:bo="clr-namespace:BO;assembly=BL"
+        mc:Ignorable="d"
+        Title="ניהול הזמנות"
+        Height="650" Width="1050"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    
+    <Window.Resources>
+        <converters:EnumValuesConverter x:Key="EnumValuesConverter"/>
+        <converters:OrderStatusCanCancelConverter x:Key="OrderStatusCanCancelConverter"/>
+
+        <!-- אופציונלי: תצוגת "ללא סינון" כאשר הפריט הוא null -->
+        <converters:NullableEnumToTextConverter x:Key="NullableEnumToTextConverter"/>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- סינון ומיון -->
+        <Border Padding="10" BorderBrush="LightGray" BorderThickness="1" CornerRadius="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="260"/>
+                    <ColumnDefinition Width="18"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="260"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="סינון לפי סטטוס:" VerticalAlignment="Center"/>
+
+                <!-- ItemsSource הוא רשימת enum, SelectedItem הוא Nullable -->
+                <ComboBox Grid.Column="1"
+                          ItemsSource="{Binding OrderStatusValues}"
+                          SelectedItem="{Binding StatusFilter, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource NullableEnumToTextConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <TextBlock Grid.Column="3" Text="מיון לפי:" VerticalAlignment="Center"/>
+
+                <ComboBox Grid.Column="4"
+                          ItemsSource="{Binding Source={x:Type bo:OrderListOrderBy}, Converter={StaticResource EnumValuesConverter}}"
+                          SelectedItem="{Binding OrderBy, Mode=TwoWay}"/>
+            </Grid>
+        </Border>
+        <!-- רשימה -->
+        <DataGrid Grid.Row="2" Margin="0,10,0,10"
+                  ItemsSource="{Binding OrderList}"
+                  SelectedItem="{Binding SelectedOrder}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  MouseDoubleClick="OrdersGrid_MouseDoubleClick">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="מספר הזמנה" Binding="{Binding OrderId}" Width="110"/>
+                <DataGridTextColumn Header="סוג" Binding="{Binding OrderType}" Width="130"/>
+                <DataGridTextColumn Header="סטטוס" Binding="{Binding OrderStatus}" Width="150"/>
+                <DataGridTextColumn Header="סטטוס בזמנים" Binding="{Binding ScheduleStatus}" Width="150"/>
+                <DataGridTextColumn Header="מרחק אווירי" Binding="{Binding AirDistance}" Width="120"/>
+                <DataGridTextColumn Header="זמן נותר" Binding="{Binding RemainingTineToCompletion}" Width="140"/>
+                <DataGridTextColumn Header="זמן צפוי" Binding="{Binding ExpectedTimeToCompletion}" Width="140"/>
+                <DataGridTextColumn Header="מספר משלוחים" Binding="{Binding AmountOfDeliveries}" Width="120"/>
+
+                <!-- כפתור בטל -->
+                <DataGridTemplateColumn Header="פעולות" Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="בטל"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=CancelOrderCommand}"
+                                    CommandParameter="{Binding OrderId}"
+                                    IsEnabled="{Binding OrderStatus, Converter={StaticResource OrderStatusCanCancelConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- כפתורי תחתית -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="הוספת הזמנה" Click="BtnAdd_Click" Margin="4" Padding="10,4"/>
+            <Button Content="סגור" Click="BtnClose_Click" Margin="4" Padding="10,4"/>
+        </StackPanel>
+    </Grid>
+</Window>

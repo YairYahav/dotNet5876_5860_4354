@@ -1,0 +1,51 @@
+﻿<Window x:Class="PL.login.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.login"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="כניסה למערכת" FontSize="20" FontWeight="SemiBold"/>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="תעודת זהות:" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1"
+                     Text="{Binding UserIdText, UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="9"/>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="142*"/>
+                <ColumnDefinition Width="203*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="סיסמה:" VerticalAlignment="Center"/>
+            <PasswordBox Grid.Column="1"
+                         PasswordChanged="PasswordBox_PasswordChanged" Grid.ColumnSpan="2"/>
+        </Grid>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="כניסה" Width="90"  Click="Login_Click"/>
+            <Button Content="ניקוי" Width="90" Click="Clear_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

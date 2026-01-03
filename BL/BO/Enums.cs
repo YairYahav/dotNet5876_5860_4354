@@ -32,7 +32,7 @@ public enum TypeOfDeliveryCompletionTime
 
 public enum DeliveryType
 {
-    None,
+    None = -1,
     Car,
     Motorcycle,
     Bicycle,

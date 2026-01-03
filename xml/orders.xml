@@ -2,171 +2,171 @@
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Order>
     <Id>30001</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>6 Ben Gurion Blvd, Herzliya, Israel</AddressOfOrder>
-    <Latitude>32.1621</Latitude>
-    <Longitude>34.8072</Longitude>
-    <CustomerName>Shira Ron</CustomerName>
-    <CustomerPhone>0542233445</CustomerPhone>
+    <OrderType>Regular</OrderType>
+    <AddressOfOrder>12 Gaza St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.7773</Latitude>
+    <Longitude>35.2102</Longitude>
+    <CustomerName>Eli Amar</CustomerName>
+    <CustomerPhone>0501234567</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-13T23:53:18</OrderPlacementTime>
-    <Volume>65</Volume>
-    <Weight>1</Weight>
-    <DescriptionOfOrder>Office supplies</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-15T02:01:55</OrderPlacementTime>
+    <Volume>58</Volume>
+    <Weight>10</Weight>
+    <DescriptionOfOrder>Food package</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30002</Id>
-    <OrderType>Heavy</OrderType>
-    <AddressOfOrder>6 Ben Gurion Blvd, Herzliya, Israel</AddressOfOrder>
-    <Latitude>32.1621</Latitude>
-    <Longitude>34.8072</Longitude>
-    <CustomerName>Dana Levi</CustomerName>
-    <CustomerPhone>0531112233</CustomerPhone>
+    <OrderType>Regular</OrderType>
+    <AddressOfOrder>8 Pinsker St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.074</Latitude>
+    <Longitude>34.7732</Longitude>
+    <CustomerName>Gal Turner</CustomerName>
+    <CustomerPhone>0507654321</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-14T02:13:18</OrderPlacementTime>
-    <Volume>61</Volume>
-    <Weight>16</Weight>
-    <DescriptionOfOrder>Electronics</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-12T08:34:55</OrderPlacementTime>
+    <Volume>39</Volume>
+    <Weight>36</Weight>
+    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30003</Id>
-    <OrderType>Regular</OrderType>
-    <AddressOfOrder>23 Begin St, Beersheba, Israel</AddressOfOrder>
-    <Latitude>31.2522</Latitude>
-    <Longitude>34.7915</Longitude>
+    <OrderType>Express</OrderType>
+    <AddressOfOrder>120 Ibn Gabirol St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.0852</Latitude>
+    <Longitude>34.7821</Longitude>
     <CustomerName>Moshe Peretz</CustomerName>
-    <CustomerPhone>0524445566</CustomerPhone>
+    <CustomerPhone>0503216549</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-06T14:01:18</OrderPlacementTime>
-    <Volume>37</Volume>
-    <Weight>29</Weight>
-    <DescriptionOfOrder>Documents</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-18T16:38:55</OrderPlacementTime>
+    <Volume>2</Volume>
+    <Weight>8</Weight>
+    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30004</Id>
-    <OrderType>Heavy</OrderType>
+    <OrderType>Regular</OrderType>
     <AddressOfOrder>50 Allenby St, Tel Aviv, Israel</AddressOfOrder>
     <Latitude>32.0683</Latitude>
     <Longitude>34.7743</Longitude>
-    <CustomerName>Rina Azulay</CustomerName>
-    <CustomerPhone>0501234567</CustomerPhone>
+    <CustomerName>Yair Azulay</CustomerName>
+    <CustomerPhone>0501122334</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-26T04:03:18</OrderPlacementTime>
-    <Volume>63</Volume>
-    <Weight>22</Weight>
-    <DescriptionOfOrder>Office supplies</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-26T15:24:55</OrderPlacementTime>
+    <Volume>66</Volume>
+    <Weight>17</Weight>
+    <DescriptionOfOrder>Gifts</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30005</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>19 King George St, Jerusalem, Israel</AddressOfOrder>
-    <Latitude>31.7836</Latitude>
-    <Longitude>35.217</Longitude>
-    <CustomerName>Avi Cohen</CustomerName>
-    <CustomerPhone>0532223344</CustomerPhone>
+    <OrderType>Regular</OrderType>
+    <AddressOfOrder>50 Allenby St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.0683</Latitude>
+    <Longitude>34.7743</Longitude>
+    <CustomerName>Tamar Lavi</CustomerName>
+    <CustomerPhone>0523332222</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-24T02:15:18</OrderPlacementTime>
-    <Volume>93</Volume>
-    <Weight>41</Weight>
-    <DescriptionOfOrder>Medicine</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-25T21:36:55</OrderPlacementTime>
+    <Volume>79</Volume>
+    <Weight>14</Weight>
+    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30006</Id>
-    <OrderType>Express</OrderType>
-    <AddressOfOrder>28 Emek Refaim St, Jerusalem, Israel</AddressOfOrder>
-    <Latitude>31.762</Latitude>
-    <Longitude>35.2192</Longitude>
-    <CustomerName>Yair Azulay</CustomerName>
-    <CustomerPhone>0508080808</CustomerPhone>
+    <OrderType>Regular</OrderType>
+    <AddressOfOrder>25 Herzl St, Ramat Gan, Israel</AddressOfOrder>
+    <Latitude>32.082</Latitude>
+    <Longitude>34.814</Longitude>
+    <CustomerName>Eli Amar</CustomerName>
+    <CustomerPhone>0524445566</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-12-03T22:53:18</OrderPlacementTime>
-    <Volume>29</Volume>
-    <Weight>1</Weight>
-    <DescriptionOfOrder>Electronics</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-16T06:16:55</OrderPlacementTime>
+    <Volume>38</Volume>
+    <Weight>47</Weight>
+    <DescriptionOfOrder>Medicine</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30007</Id>
     <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>28 Emek Refaim St, Jerusalem, Israel</AddressOfOrder>
-    <Latitude>31.762</Latitude>
-    <Longitude>35.2192</Longitude>
-    <CustomerName>Yair Azulay</CustomerName>
-    <CustomerPhone>0529090909</CustomerPhone>
+    <AddressOfOrder>23 Begin St, Beersheba, Israel</AddressOfOrder>
+    <Latitude>31.2522</Latitude>
+    <Longitude>34.7915</Longitude>
+    <CustomerName>Shira Ron</CustomerName>
+    <CustomerPhone>0501122334</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-26T22:02:18</OrderPlacementTime>
-    <Volume>7</Volume>
-    <Weight>10</Weight>
-    <DescriptionOfOrder>Medicine</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-13T17:17:55</OrderPlacementTime>
+    <Volume>77</Volume>
+    <Weight>14</Weight>
+    <DescriptionOfOrder>Food package</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30008</Id>
-    <OrderType>Regular</OrderType>
-    <AddressOfOrder>6 Ben Gurion Blvd, Herzliya, Israel</AddressOfOrder>
-    <Latitude>32.1621</Latitude>
-    <Longitude>34.8072</Longitude>
-    <CustomerName>Neta Alon</CustomerName>
-    <CustomerPhone>0542233445</CustomerPhone>
+    <OrderType>Express</OrderType>
+    <AddressOfOrder>10 Jaffa St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.7839</Latitude>
+    <Longitude>35.216</Longitude>
+    <CustomerName>Eli Amar</CustomerName>
+    <CustomerPhone>0531112233</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-08T18:03:18</OrderPlacementTime>
-    <Volume>27</Volume>
-    <Weight>19</Weight>
-    <DescriptionOfOrder>Electronics</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-03T11:34:55</OrderPlacementTime>
+    <Volume>99</Volume>
+    <Weight>14</Weight>
+    <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30009</Id>
     <OrderType>Heavy</OrderType>
-    <AddressOfOrder>50 Allenby St, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.0683</Latitude>
-    <Longitude>34.7743</Longitude>
-    <CustomerName>Yuval Harel</CustomerName>
-    <CustomerPhone>0531112233</CustomerPhone>
+    <AddressOfOrder>18 Yehuda St, Netanya, Israel</AddressOfOrder>
+    <Latitude>32.3291</Latitude>
+    <Longitude>34.853</Longitude>
+    <CustomerName>Eli Amar</CustomerName>
+    <CustomerPhone>0501122334</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-18T00:47:18</OrderPlacementTime>
-    <Volume>8</Volume>
-    <Weight>2</Weight>
-    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-13T16:41:55</OrderPlacementTime>
+    <Volume>58</Volume>
+    <Weight>39</Weight>
+    <DescriptionOfOrder>Clothing</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30010</Id>
-    <OrderType>Fragile</OrderType>
-    <AddressOfOrder>22 Weizmann St, Herzliya, Israel</AddressOfOrder>
-    <Latitude>32.1663</Latitude>
-    <Longitude>34.8353</Longitude>
-    <CustomerName>Eli Amar</CustomerName>
-    <CustomerPhone>0509998887</CustomerPhone>
-    <IsFrag>true</IsFrag>
-    <OrderPlacementTime>2025-11-23T05:37:18</OrderPlacementTime>
-    <Volume>69</Volume>
-    <Weight>16</Weight>
+    <OrderType>Heavy</OrderType>
+    <AddressOfOrder>8 Pinsker St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.074</Latitude>
+    <Longitude>34.7732</Longitude>
+    <CustomerName>Rina Azulay</CustomerName>
+    <CustomerPhone>0523332222</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-05T05:06:55</OrderPlacementTime>
+    <Volume>46</Volume>
+    <Weight>2</Weight>
     <DescriptionOfOrder>Documents</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30011</Id>
-    <OrderType>Regular</OrderType>
-    <AddressOfOrder>18 Yehuda St, Netanya, Israel</AddressOfOrder>
-    <Latitude>32.3291</Latitude>
-    <Longitude>34.853</Longitude>
-    <CustomerName>Noa Biton</CustomerName>
-    <CustomerPhone>0527654321</CustomerPhone>
+    <OrderType>Refrigerated</OrderType>
+    <AddressOfOrder>14 Dizengoff St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.077</Latitude>
+    <Longitude>34.7742</Longitude>
+    <CustomerName>Eli Amar</CustomerName>
+    <CustomerPhone>0507654321</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-08T00:32:18</OrderPlacementTime>
-    <Volume>92</Volume>
-    <Weight>46</Weight>
+    <OrderPlacementTime>2025-12-09T08:57:55</OrderPlacementTime>
+    <Volume>83</Volume>
+    <Weight>27</Weight>
     <DescriptionOfOrder>Gifts</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30012</Id>
-    <OrderType>Heavy</OrderType>
-    <AddressOfOrder>2 HaShalom Rd, Ramat Gan, Israel</AddressOfOrder>
-    <Latitude>32.0705</Latitude>
-    <Longitude>34.8101</Longitude>
-    <CustomerName>Eden Ben David</CustomerName>
-    <CustomerPhone>0542233445</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-10T12:11:18</OrderPlacementTime>
-    <Volume>94</Volume>
-    <Weight>36</Weight>
-    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
+    <OrderType>Fragile</OrderType>
+    <AddressOfOrder>10 Jaffa St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.7839</Latitude>
+    <Longitude>35.216</Longitude>
+    <CustomerName>Shira Ron</CustomerName>
+    <CustomerPhone>0526003300</CustomerPhone>
+    <IsFrag>true</IsFrag>
+    <OrderPlacementTime>2025-12-12T10:53:55</OrderPlacementTime>
+    <Volume>42</Volume>
+    <Weight>14</Weight>
+    <DescriptionOfOrder>Documents</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30013</Id>
@@ -175,529 +175,529 @@
     <Latitude>31.7773</Latitude>
     <Longitude>35.2102</Longitude>
     <CustomerName>Rina Azulay</CustomerName>
-    <CustomerPhone>0523332222</CustomerPhone>
+    <CustomerPhone>0503216549</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-28T00:58:18</OrderPlacementTime>
-    <Volume>30</Volume>
-    <Weight>11</Weight>
-    <DescriptionOfOrder>Medicine</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-08T12:46:55</OrderPlacementTime>
+    <Volume>3</Volume>
+    <Weight>39</Weight>
+    <DescriptionOfOrder>Electronics</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30014</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>23 Begin St, Beersheba, Israel</AddressOfOrder>
-    <Latitude>31.2522</Latitude>
-    <Longitude>34.7915</Longitude>
-    <CustomerName>Omer Katz</CustomerName>
-    <CustomerPhone>0524445566</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-19T05:58:18</OrderPlacementTime>
-    <Volume>6</Volume>
-    <Weight>37</Weight>
-    <DescriptionOfOrder>Office supplies</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30015</Id>
     <OrderType>Regular</OrderType>
-    <AddressOfOrder>8 Ben Yehuda St, Jerusalem, Israel</AddressOfOrder>
-    <Latitude>31.7801</Latitude>
-    <Longitude>35.2204</Longitude>
-    <CustomerName>Neta Alon</CustomerName>
-    <CustomerPhone>0501234567</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-14T14:01:18</OrderPlacementTime>
-    <Volume>86</Volume>
-    <Weight>4</Weight>
-    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30016</Id>
-    <OrderType>Express</OrderType>
     <AddressOfOrder>120 Ibn Gabirol St, Tel Aviv, Israel</AddressOfOrder>
     <Latitude>32.0852</Latitude>
     <Longitude>34.7821</Longitude>
-    <CustomerName>Tomer Ashkenazi</CustomerName>
-    <CustomerPhone>0501234567</CustomerPhone>
+    <CustomerName>Shira Ron</CustomerName>
+    <CustomerPhone>0503216549</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-05T10:27:18</OrderPlacementTime>
-    <Volume>72</Volume>
-    <Weight>18</Weight>
-    <DescriptionOfOrder>Books</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-11T19:50:55</OrderPlacementTime>
+    <Volume>3</Volume>
+    <Weight>14</Weight>
+    <DescriptionOfOrder>Gifts</DescriptionOfOrder>
   </Order>
   <Order>
-    <Id>30017</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>14 Dizengoff St, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.077</Latitude>
-    <Longitude>34.7742</Longitude>
-    <CustomerName>Neta Alon</CustomerName>
+    <Id>30015</Id>
+    <OrderType>Heavy</OrderType>
+    <AddressOfOrder>28 Emek Refaim St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.762</Latitude>
+    <Longitude>35.2192</Longitude>
+    <CustomerName>Eden Ben David</CustomerName>
     <CustomerPhone>0532223344</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-29T21:55:18</OrderPlacementTime>
-    <Volume>77</Volume>
-    <Weight>28</Weight>
-    <DescriptionOfOrder>Documents</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-06T12:59:55</OrderPlacementTime>
+    <Volume>97</Volume>
+    <Weight>31</Weight>
+    <DescriptionOfOrder>Clothing</DescriptionOfOrder>
   </Order>
   <Order>
-    <Id>30018</Id>
-    <OrderType>Fragile</OrderType>
-    <AddressOfOrder>10 Jaffa St, Jerusalem, Israel</AddressOfOrder>
-    <Latitude>31.7839</Latitude>
-    <Longitude>35.216</Longitude>
-    <CustomerName>Gal Turner</CustomerName>
-    <CustomerPhone>0531112233</CustomerPhone>
-    <IsFrag>true</IsFrag>
-    <OrderPlacementTime>2025-11-21T22:38:18</OrderPlacementTime>
-    <Volume>82</Volume>
-    <Weight>1</Weight>
-    <DescriptionOfOrder>Documents</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30019</Id>
-    <OrderType>Express</OrderType>
-    <AddressOfOrder>18 Yehuda St, Netanya, Israel</AddressOfOrder>
-    <Latitude>32.3291</Latitude>
-    <Longitude>34.853</Longitude>
-    <CustomerName>Maya Levi</CustomerName>
-    <CustomerPhone>0524445566</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-21T06:42:18</OrderPlacementTime>
-    <Volume>3</Volume>
-    <Weight>22</Weight>
-    <DescriptionOfOrder>Documents</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30020</Id>
+    <Id>30016</Id>
     <OrderType>Refrigerated</OrderType>
     <AddressOfOrder>45 Rothschild Blvd, Tel Aviv, Israel</AddressOfOrder>
     <Latitude>32.0625</Latitude>
     <Longitude>34.772</Longitude>
-    <CustomerName>Omer Katz</CustomerName>
-    <CustomerPhone>0526003300</CustomerPhone>
+    <CustomerName>Itay Shalem</CustomerName>
+    <CustomerPhone>0532223344</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-19T10:07:18</OrderPlacementTime>
+    <OrderPlacementTime>2025-12-23T09:42:55</OrderPlacementTime>
+    <Volume>63</Volume>
+    <Weight>19</Weight>
+    <DescriptionOfOrder>Gifts</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30017</Id>
+    <OrderType>Express</OrderType>
+    <AddressOfOrder>10 Jaffa St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.7839</Latitude>
+    <Longitude>35.216</Longitude>
+    <CustomerName>Tomer Ashkenazi</CustomerName>
+    <CustomerPhone>0534455667</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-13T16:10:55</OrderPlacementTime>
+    <Volume>10</Volume>
+    <Weight>49</Weight>
+    <DescriptionOfOrder>Office supplies</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30018</Id>
+    <OrderType>Regular</OrderType>
+    <AddressOfOrder>19 King George St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.7836</Latitude>
+    <Longitude>35.217</Longitude>
+    <CustomerName>Liad Cohen</CustomerName>
+    <CustomerPhone>0547001200</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-18T19:43:55</OrderPlacementTime>
+    <Volume>23</Volume>
+    <Weight>24</Weight>
+    <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30019</Id>
+    <OrderType>Fragile</OrderType>
+    <AddressOfOrder>6 Ben Gurion Blvd, Herzliya, Israel</AddressOfOrder>
+    <Latitude>32.1621</Latitude>
+    <Longitude>34.8072</Longitude>
+    <CustomerName>Tomer Ashkenazi</CustomerName>
+    <CustomerPhone>0507654321</CustomerPhone>
+    <IsFrag>true</IsFrag>
+    <OrderPlacementTime>2025-12-10T09:40:55</OrderPlacementTime>
     <Volume>43</Volume>
-    <Weight>15</Weight>
-    <DescriptionOfOrder>Books</DescriptionOfOrder>
+    <Weight>22</Weight>
+    <DescriptionOfOrder>Clothing</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30020</Id>
+    <OrderType>Heavy</OrderType>
+    <AddressOfOrder>22 Weizmann St, Herzliya, Israel</AddressOfOrder>
+    <Latitude>32.1663</Latitude>
+    <Longitude>34.8353</Longitude>
+    <CustomerName>Tomer Ashkenazi</CustomerName>
+    <CustomerPhone>0503216549</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-18T09:22:55</OrderPlacementTime>
+    <Volume>41</Volume>
+    <Weight>8</Weight>
+    <DescriptionOfOrder>Office supplies</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30021</Id>
-    <OrderType>Heavy</OrderType>
-    <AddressOfOrder>25 Herzl St, Ramat Gan, Israel</AddressOfOrder>
-    <Latitude>32.082</Latitude>
-    <Longitude>34.814</Longitude>
-    <CustomerName>Shai Ben Haim</CustomerName>
-    <CustomerPhone>0547001200</CustomerPhone>
+    <OrderType>Express</OrderType>
+    <AddressOfOrder>27 Ahad Ha’am St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.062</Latitude>
+    <Longitude>34.7733</Longitude>
+    <CustomerName>Yair Azulay</CustomerName>
+    <CustomerPhone>0532223344</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-24T20:47:18</OrderPlacementTime>
-    <Volume>70</Volume>
-    <Weight>41</Weight>
+    <OrderPlacementTime>2025-12-26T08:21:55</OrderPlacementTime>
+    <Volume>75</Volume>
+    <Weight>49</Weight>
     <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30022</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>45 Rothschild Blvd, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.0625</Latitude>
-    <Longitude>34.772</Longitude>
-    <CustomerName>Hila Regev</CustomerName>
-    <CustomerPhone>0545556667</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-09T13:31:18</OrderPlacementTime>
-    <Volume>79</Volume>
-    <Weight>22</Weight>
-    <DescriptionOfOrder>Documents</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30023</Id>
-    <OrderType>Fragile</OrderType>
+    <OrderType>Express</OrderType>
     <AddressOfOrder>28 Emek Refaim St, Jerusalem, Israel</AddressOfOrder>
     <Latitude>31.762</Latitude>
     <Longitude>35.2192</Longitude>
     <CustomerName>Gal Turner</CustomerName>
-    <CustomerPhone>0508080808</CustomerPhone>
-    <IsFrag>true</IsFrag>
-    <OrderPlacementTime>2025-11-20T21:44:18</OrderPlacementTime>
-    <Volume>46</Volume>
-    <Weight>7</Weight>
+    <CustomerPhone>0545556667</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-04T08:26:55</OrderPlacementTime>
+    <Volume>7</Volume>
+    <Weight>38</Weight>
+    <DescriptionOfOrder>Food package</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30023</Id>
+    <OrderType>Regular</OrderType>
+    <AddressOfOrder>12 Gaza St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.7773</Latitude>
+    <Longitude>35.2102</Longitude>
+    <CustomerName>Shira Ron</CustomerName>
+    <CustomerPhone>0501234567</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-14T23:34:55</OrderPlacementTime>
+    <Volume>40</Volume>
+    <Weight>29</Weight>
     <DescriptionOfOrder>Medicine</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30024</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>22 Weizmann St, Herzliya, Israel</AddressOfOrder>
-    <Latitude>32.1663</Latitude>
-    <Longitude>34.8353</Longitude>
-    <CustomerName>Rina Azulay</CustomerName>
-    <CustomerPhone>0501234567</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-24T08:26:18</OrderPlacementTime>
-    <Volume>69</Volume>
-    <Weight>32</Weight>
-    <DescriptionOfOrder>Medicine</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30025</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>25 Herzl St, Ramat Gan, Israel</AddressOfOrder>
-    <Latitude>32.082</Latitude>
-    <Longitude>34.814</Longitude>
-    <CustomerName>Dana Levi</CustomerName>
-    <CustomerPhone>0503216549</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-15T08:30:18</OrderPlacementTime>
-    <Volume>30</Volume>
-    <Weight>16</Weight>
-    <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30026</Id>
-    <OrderType>Heavy</OrderType>
-    <AddressOfOrder>50 Allenby St, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.0683</Latitude>
-    <Longitude>34.7743</Longitude>
-    <CustomerName>Tamar Lavi</CustomerName>
-    <CustomerPhone>0545556667</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-12T19:59:18</OrderPlacementTime>
-    <Volume>33</Volume>
-    <Weight>15</Weight>
-    <DescriptionOfOrder>Gifts</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30027</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>50 Allenby St, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.0683</Latitude>
-    <Longitude>34.7743</Longitude>
-    <CustomerName>Avi Cohen</CustomerName>
-    <CustomerPhone>0508080808</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-12-02T23:34:18</OrderPlacementTime>
-    <Volume>93</Volume>
-    <Weight>30</Weight>
-    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30028</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>10 Jaffa St, Jerusalem, Israel</AddressOfOrder>
-    <Latitude>31.7839</Latitude>
-    <Longitude>35.216</Longitude>
-    <CustomerName>Tomer Ashkenazi</CustomerName>
-    <CustomerPhone>0542233445</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-05T15:34:18</OrderPlacementTime>
-    <Volume>76</Volume>
-    <Weight>22</Weight>
-    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30029</Id>
     <OrderType>Regular</OrderType>
     <AddressOfOrder>50 Allenby St, Tel Aviv, Israel</AddressOfOrder>
     <Latitude>32.0683</Latitude>
     <Longitude>34.7743</Longitude>
-    <CustomerName>Noa Biton</CustomerName>
-    <CustomerPhone>0545556667</CustomerPhone>
+    <CustomerName>Eli Amar</CustomerName>
+    <CustomerPhone>0548889990</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-28T22:42:18</OrderPlacementTime>
-    <Volume>77</Volume>
-    <Weight>39</Weight>
-    <DescriptionOfOrder>Office supplies</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-10T21:39:55</OrderPlacementTime>
+    <Volume>27</Volume>
+    <Weight>32</Weight>
+    <DescriptionOfOrder>Documents</DescriptionOfOrder>
   </Order>
   <Order>
-    <Id>30030</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>6 Ben Gurion Blvd, Herzliya, Israel</AddressOfOrder>
-    <Latitude>32.1621</Latitude>
-    <Longitude>34.8072</Longitude>
+    <Id>30025</Id>
+    <OrderType>Express</OrderType>
+    <AddressOfOrder>18 Yehuda St, Netanya, Israel</AddressOfOrder>
+    <Latitude>32.3291</Latitude>
+    <Longitude>34.853</Longitude>
     <CustomerName>Eden Ben David</CustomerName>
-    <CustomerPhone>0534455667</CustomerPhone>
+    <CustomerPhone>0531112233</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-24T16:53:18</OrderPlacementTime>
-    <Volume>65</Volume>
-    <Weight>43</Weight>
+    <OrderPlacementTime>2025-12-24T03:41:55</OrderPlacementTime>
+    <Volume>10</Volume>
+    <Weight>21</Weight>
+    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30026</Id>
+    <OrderType>Express</OrderType>
+    <AddressOfOrder>2 HaShalom Rd, Ramat Gan, Israel</AddressOfOrder>
+    <Latitude>32.0705</Latitude>
+    <Longitude>34.8101</Longitude>
+    <CustomerName>Yair Azulay</CustomerName>
+    <CustomerPhone>0542233445</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-11-29T04:54:55</OrderPlacementTime>
+    <Volume>67</Volume>
+    <Weight>7</Weight>
+    <DescriptionOfOrder>Clothing</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30027</Id>
+    <OrderType>Regular</OrderType>
+    <AddressOfOrder>50 Allenby St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.0683</Latitude>
+    <Longitude>34.7743</Longitude>
+    <CustomerName>Neta Alon</CustomerName>
+    <CustomerPhone>0527654321</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-27T08:26:55</OrderPlacementTime>
+    <Volume>43</Volume>
+    <Weight>28</Weight>
+    <DescriptionOfOrder>Food package</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30028</Id>
+    <OrderType>Regular</OrderType>
+    <AddressOfOrder>25 Herzl St, Ramat Gan, Israel</AddressOfOrder>
+    <Latitude>32.082</Latitude>
+    <Longitude>34.814</Longitude>
+    <CustomerName>Yuval Harel</CustomerName>
+    <CustomerPhone>0542233445</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-02T17:36:55</OrderPlacementTime>
+    <Volume>7</Volume>
+    <Weight>30</Weight>
     <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
   </Order>
   <Order>
+    <Id>30029</Id>
+    <OrderType>Heavy</OrderType>
+    <AddressOfOrder>90 Jabotinsky St, Bnei Brak, Israel</AddressOfOrder>
+    <Latitude>32.096</Latitude>
+    <Longitude>34.843</Longitude>
+    <CustomerName>Itay Shalem</CustomerName>
+    <CustomerPhone>0532223344</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-10T22:33:55</OrderPlacementTime>
+    <Volume>20</Volume>
+    <Weight>39</Weight>
+    <DescriptionOfOrder>Electronics</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30030</Id>
+    <OrderType>Heavy</OrderType>
+    <AddressOfOrder>120 Ibn Gabirol St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.0852</Latitude>
+    <Longitude>34.7821</Longitude>
+    <CustomerName>Gal Turner</CustomerName>
+    <CustomerPhone>0526003300</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-11-29T22:34:55</OrderPlacementTime>
+    <Volume>94</Volume>
+    <Weight>40</Weight>
+    <DescriptionOfOrder>Clothing</DescriptionOfOrder>
+  </Order>
+  <Order>
     <Id>30031</Id>
+    <OrderType>Fragile</OrderType>
+    <AddressOfOrder>27 Ahad Ha’am St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.062</Latitude>
+    <Longitude>34.7733</Longitude>
+    <CustomerName>Tamar Lavi</CustomerName>
+    <CustomerPhone>0529090909</CustomerPhone>
+    <IsFrag>true</IsFrag>
+    <OrderPlacementTime>2025-12-13T09:59:55</OrderPlacementTime>
+    <Volume>23</Volume>
+    <Weight>17</Weight>
+    <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30032</Id>
     <OrderType>Regular</OrderType>
     <AddressOfOrder>90 Jabotinsky St, Bnei Brak, Israel</AddressOfOrder>
     <Latitude>32.096</Latitude>
     <Longitude>34.843</Longitude>
-    <CustomerName>Yuval Harel</CustomerName>
-    <CustomerPhone>0534455667</CustomerPhone>
+    <CustomerName>Tamar Lavi</CustomerName>
+    <CustomerPhone>0501234567</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-23T01:50:18</OrderPlacementTime>
-    <Volume>88</Volume>
-    <Weight>37</Weight>
-    <DescriptionOfOrder>Medicine</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30032</Id>
-    <OrderType>Express</OrderType>
-    <AddressOfOrder>23 Begin St, Beersheba, Israel</AddressOfOrder>
-    <Latitude>31.2522</Latitude>
-    <Longitude>34.7915</Longitude>
-    <CustomerName>Yair Azulay</CustomerName>
-    <CustomerPhone>0508080808</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-27T09:31:18</OrderPlacementTime>
-    <Volume>59</Volume>
-    <Weight>45</Weight>
-    <DescriptionOfOrder>Office supplies</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30033</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>18 Yehuda St, Netanya, Israel</AddressOfOrder>
-    <Latitude>32.3291</Latitude>
-    <Longitude>34.853</Longitude>
-    <CustomerName>Noa Biton</CustomerName>
-    <CustomerPhone>0534455667</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-17T16:29:18</OrderPlacementTime>
-    <Volume>57</Volume>
-    <Weight>18</Weight>
-    <DescriptionOfOrder>Gifts</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30034</Id>
-    <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>45 Rothschild Blvd, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.0625</Latitude>
-    <Longitude>34.772</Longitude>
-    <CustomerName>Liad Cohen</CustomerName>
-    <CustomerPhone>0508080808</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-18T11:05:18</OrderPlacementTime>
-    <Volume>99</Volume>
-    <Weight>35</Weight>
-    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30035</Id>
-    <OrderType>Regular</OrderType>
-    <AddressOfOrder>6 Ben Gurion Blvd, Herzliya, Israel</AddressOfOrder>
-    <Latitude>32.1621</Latitude>
-    <Longitude>34.8072</Longitude>
-    <CustomerName>Avi Cohen</CustomerName>
-    <CustomerPhone>0541112223</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-17T12:54:18</OrderPlacementTime>
-    <Volume>5</Volume>
-    <Weight>15</Weight>
+    <OrderPlacementTime>2025-12-28T11:26:55</OrderPlacementTime>
+    <Volume>81</Volume>
+    <Weight>4</Weight>
     <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
   </Order>
   <Order>
-    <Id>30036</Id>
-    <OrderType>Regular</OrderType>
-    <AddressOfOrder>45 Rothschild Blvd, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.0625</Latitude>
-    <Longitude>34.772</Longitude>
-    <CustomerName>Yair Azulay</CustomerName>
+    <Id>30033</Id>
+    <OrderType>Fragile</OrderType>
+    <AddressOfOrder>90 Jabotinsky St, Bnei Brak, Israel</AddressOfOrder>
+    <Latitude>32.096</Latitude>
+    <Longitude>34.843</Longitude>
+    <CustomerName>Shai Ben Haim</CustomerName>
     <CustomerPhone>0542233445</CustomerPhone>
+    <IsFrag>true</IsFrag>
+    <OrderPlacementTime>2025-11-30T21:53:55</OrderPlacementTime>
+    <Volume>88</Volume>
+    <Weight>49</Weight>
+    <DescriptionOfOrder>Electronics</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30034</Id>
+    <OrderType>Heavy</OrderType>
+    <AddressOfOrder>90 Jabotinsky St, Bnei Brak, Israel</AddressOfOrder>
+    <Latitude>32.096</Latitude>
+    <Longitude>34.843</Longitude>
+    <CustomerName>Liad Cohen</CustomerName>
+    <CustomerPhone>0526003300</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-12T08:39:18</OrderPlacementTime>
-    <Volume>28</Volume>
-    <Weight>33</Weight>
+    <OrderPlacementTime>2025-12-24T22:35:55</OrderPlacementTime>
+    <Volume>94</Volume>
+    <Weight>20</Weight>
+    <DescriptionOfOrder>Documents</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30035</Id>
+    <OrderType>Refrigerated</OrderType>
+    <AddressOfOrder>7 HaNesi'im St, Petah Tikva, Israel</AddressOfOrder>
+    <Latitude>32.088</Latitude>
+    <Longitude>34.887</Longitude>
+    <CustomerName>Omer Katz</CustomerName>
+    <CustomerPhone>0527654321</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-13T00:03:55</OrderPlacementTime>
+    <Volume>18</Volume>
+    <Weight>46</Weight>
     <DescriptionOfOrder>Medicine</DescriptionOfOrder>
   </Order>
   <Order>
-    <Id>30037</Id>
-    <OrderType>Regular</OrderType>
-    <AddressOfOrder>10 Jaffa St, Jerusalem, Israel</AddressOfOrder>
-    <Latitude>31.7839</Latitude>
-    <Longitude>35.216</Longitude>
-    <CustomerName>Hila Regev</CustomerName>
+    <Id>30036</Id>
+    <OrderType>Heavy</OrderType>
+    <AddressOfOrder>25 Herzl St, Ramat Gan, Israel</AddressOfOrder>
+    <Latitude>32.082</Latitude>
+    <Longitude>34.814</Longitude>
+    <CustomerName>Yair Azulay</CustomerName>
     <CustomerPhone>0545556667</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-12-04T18:50:18</OrderPlacementTime>
-    <Volume>80</Volume>
-    <Weight>9</Weight>
-    <DescriptionOfOrder>Gifts</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-20T09:31:55</OrderPlacementTime>
+    <Volume>10</Volume>
+    <Weight>31</Weight>
+    <DescriptionOfOrder>Books</DescriptionOfOrder>
   </Order>
   <Order>
-    <Id>30038</Id>
+    <Id>30037</Id>
     <OrderType>Express</OrderType>
     <AddressOfOrder>45 Rothschild Blvd, Tel Aviv, Israel</AddressOfOrder>
     <Latitude>32.0625</Latitude>
     <Longitude>34.772</Longitude>
-    <CustomerName>Shai Ben Haim</CustomerName>
-    <CustomerPhone>0501122334</CustomerPhone>
+    <CustomerName>Itay Shalem</CustomerName>
+    <CustomerPhone>0531112233</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-14T11:51:18</OrderPlacementTime>
-    <Volume>77</Volume>
-    <Weight>2</Weight>
-    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-20T15:36:55</OrderPlacementTime>
+    <Volume>36</Volume>
+    <Weight>32</Weight>
+    <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30038</Id>
+    <OrderType>Regular</OrderType>
+    <AddressOfOrder>90 Jabotinsky St, Bnei Brak, Israel</AddressOfOrder>
+    <Latitude>32.096</Latitude>
+    <Longitude>34.843</Longitude>
+    <CustomerName>Yair Azulay</CustomerName>
+    <CustomerPhone>0545556667</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-04T11:14:55</OrderPlacementTime>
+    <Volume>32</Volume>
+    <Weight>45</Weight>
+    <DescriptionOfOrder>Documents</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30039</Id>
     <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>120 Ibn Gabirol St, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.0852</Latitude>
-    <Longitude>34.7821</Longitude>
-    <CustomerName>Tomer Ashkenazi</CustomerName>
-    <CustomerPhone>0541112223</CustomerPhone>
+    <AddressOfOrder>12 Gaza St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.7773</Latitude>
+    <Longitude>35.2102</Longitude>
+    <CustomerName>Shai Ben Haim</CustomerName>
+    <CustomerPhone>0508080808</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-13T23:11:18</OrderPlacementTime>
-    <Volume>87</Volume>
-    <Weight>15</Weight>
-    <DescriptionOfOrder>Books</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-03T06:14:55</OrderPlacementTime>
+    <Volume>86</Volume>
+    <Weight>4</Weight>
+    <DescriptionOfOrder>Medicine</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30040</Id>
-    <OrderType>Express</OrderType>
-    <AddressOfOrder>27 Ahad Ha’am St, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.062</Latitude>
-    <Longitude>34.7733</Longitude>
-    <CustomerName>Dana Levi</CustomerName>
-    <CustomerPhone>0547001200</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-18T04:05:18</OrderPlacementTime>
-    <Volume>24</Volume>
-    <Weight>18</Weight>
-    <DescriptionOfOrder>Documents</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30041</Id>
     <OrderType>Refrigerated</OrderType>
-    <AddressOfOrder>90 Jabotinsky St, Bnei Brak, Israel</AddressOfOrder>
-    <Latitude>32.096</Latitude>
-    <Longitude>34.843</Longitude>
-    <CustomerName>Tamar Lavi</CustomerName>
+    <AddressOfOrder>50 Allenby St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.0683</Latitude>
+    <Longitude>34.7743</Longitude>
+    <CustomerName>Gal Turner</CustomerName>
     <CustomerPhone>0541112223</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-17T11:55:18</OrderPlacementTime>
-    <Volume>62</Volume>
-    <Weight>44</Weight>
+    <OrderPlacementTime>2025-12-17T13:15:55</OrderPlacementTime>
+    <Volume>89</Volume>
+    <Weight>33</Weight>
     <DescriptionOfOrder>Gifts</DescriptionOfOrder>
   </Order>
   <Order>
-    <Id>30042</Id>
+    <Id>30041</Id>
     <OrderType>Heavy</OrderType>
-    <AddressOfOrder>23 Begin St, Beersheba, Israel</AddressOfOrder>
-    <Latitude>31.2522</Latitude>
-    <Longitude>34.7915</Longitude>
-    <CustomerName>Avi Cohen</CustomerName>
-    <CustomerPhone>0501122334</CustomerPhone>
+    <AddressOfOrder>10 Jaffa St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.7839</Latitude>
+    <Longitude>35.216</Longitude>
+    <CustomerName>Shira Ron</CustomerName>
+    <CustomerPhone>0503216549</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-12-01T16:32:18</OrderPlacementTime>
-    <Volume>8</Volume>
-    <Weight>9</Weight>
-    <DescriptionOfOrder>Office supplies</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30043</Id>
-    <OrderType>Regular</OrderType>
-    <AddressOfOrder>90 Jabotinsky St, Bnei Brak, Israel</AddressOfOrder>
-    <Latitude>32.096</Latitude>
-    <Longitude>34.843</Longitude>
-    <CustomerName>Yair Azulay</CustomerName>
-    <CustomerPhone>0527654321</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-29T23:17:18</OrderPlacementTime>
-    <Volume>17</Volume>
+    <OrderPlacementTime>2025-12-03T09:05:55</OrderPlacementTime>
+    <Volume>21</Volume>
     <Weight>38</Weight>
-    <DescriptionOfOrder>Books</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30044</Id>
-    <OrderType>Fragile</OrderType>
-    <AddressOfOrder>7 HaNesi'im St, Petah Tikva, Israel</AddressOfOrder>
-    <Latitude>32.088</Latitude>
-    <Longitude>34.887</Longitude>
-    <CustomerName>Neta Alon</CustomerName>
-    <CustomerPhone>0542233445</CustomerPhone>
-    <IsFrag>true</IsFrag>
-    <OrderPlacementTime>2025-12-01T05:11:18</OrderPlacementTime>
-    <Volume>78</Volume>
-    <Weight>48</Weight>
     <DescriptionOfOrder>Documents</DescriptionOfOrder>
   </Order>
   <Order>
-    <Id>30045</Id>
-    <OrderType>Heavy</OrderType>
+    <Id>30042</Id>
+    <OrderType>Express</OrderType>
     <AddressOfOrder>90 Jabotinsky St, Bnei Brak, Israel</AddressOfOrder>
     <Latitude>32.096</Latitude>
     <Longitude>34.843</Longitude>
-    <CustomerName>Eden Ben David</CustomerName>
-    <CustomerPhone>0523332222</CustomerPhone>
+    <CustomerName>Itay Shalem</CustomerName>
+    <CustomerPhone>0501234567</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-12T03:40:18</OrderPlacementTime>
-    <Volume>53</Volume>
-    <Weight>12</Weight>
-    <DescriptionOfOrder>Medicine</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-14T05:22:55</OrderPlacementTime>
+    <Volume>98</Volume>
+    <Weight>44</Weight>
+    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30043</Id>
+    <OrderType>Express</OrderType>
+    <AddressOfOrder>45 Rothschild Blvd, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.0625</Latitude>
+    <Longitude>34.772</Longitude>
+    <CustomerName>Tomer Ashkenazi</CustomerName>
+    <CustomerPhone>0545556667</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-19T07:25:55</OrderPlacementTime>
+    <Volume>12</Volume>
+    <Weight>43</Weight>
+    <DescriptionOfOrder>Clothing</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30044</Id>
+    <OrderType>Refrigerated</OrderType>
+    <AddressOfOrder>14 Dizengoff St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.077</Latitude>
+    <Longitude>34.7742</Longitude>
+    <CustomerName>Avi Cohen</CustomerName>
+    <CustomerPhone>0531112233</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-08T05:38:55</OrderPlacementTime>
+    <Volume>76</Volume>
+    <Weight>20</Weight>
+    <DescriptionOfOrder>Small furniture</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30045</Id>
+    <OrderType>Regular</OrderType>
+    <AddressOfOrder>8 Pinsker St, Tel Aviv, Israel</AddressOfOrder>
+    <Latitude>32.074</Latitude>
+    <Longitude>34.7732</Longitude>
+    <CustomerName>Eden Ben David</CustomerName>
+    <CustomerPhone>0532223344</CustomerPhone>
+    <IsFrag>false</IsFrag>
+    <OrderPlacementTime>2025-12-25T15:21:55</OrderPlacementTime>
+    <Volume>51</Volume>
+    <Weight>17</Weight>
+    <DescriptionOfOrder>Clothing</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30046</Id>
     <OrderType>Fragile</OrderType>
-    <AddressOfOrder>3 HaAtzmaut Blvd, Haifa, Israel</AddressOfOrder>
-    <Latitude>32.819</Latitude>
-    <Longitude>34.998</Longitude>
-    <CustomerName>Eden Ben David</CustomerName>
-    <CustomerPhone>0501122334</CustomerPhone>
+    <AddressOfOrder>2 HaShalom Rd, Ramat Gan, Israel</AddressOfOrder>
+    <Latitude>32.0705</Latitude>
+    <Longitude>34.8101</Longitude>
+    <CustomerName>Liad Cohen</CustomerName>
+    <CustomerPhone>0501234567</CustomerPhone>
     <IsFrag>true</IsFrag>
-    <OrderPlacementTime>2025-11-10T21:34:18</OrderPlacementTime>
-    <Volume>24</Volume>
-    <Weight>26</Weight>
-    <DescriptionOfOrder>Food package</DescriptionOfOrder>
+    <OrderPlacementTime>2025-12-19T21:22:55</OrderPlacementTime>
+    <Volume>65</Volume>
+    <Weight>11</Weight>
+    <DescriptionOfOrder>Documents</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30047</Id>
-    <OrderType>Regular</OrderType>
-    <AddressOfOrder>50 Allenby St, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.0683</Latitude>
-    <Longitude>34.7743</Longitude>
-    <CustomerName>Noa Biton</CustomerName>
-    <CustomerPhone>0501122334</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-14T00:33:18</OrderPlacementTime>
-    <Volume>52</Volume>
-    <Weight>11</Weight>
-    <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
+    <OrderType>Fragile</OrderType>
+    <AddressOfOrder>10 Jaffa St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.7839</Latitude>
+    <Longitude>35.216</Longitude>
+    <CustomerName>Tamar Lavi</CustomerName>
+    <CustomerPhone>0541112223</CustomerPhone>
+    <IsFrag>true</IsFrag>
+    <OrderPlacementTime>2025-12-09T23:17:55</OrderPlacementTime>
+    <Volume>51</Volume>
+    <Weight>12</Weight>
+    <DescriptionOfOrder>Office supplies</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30048</Id>
+    <OrderType>Fragile</OrderType>
+    <AddressOfOrder>12 Gaza St, Jerusalem, Israel</AddressOfOrder>
+    <Latitude>31.7773</Latitude>
+    <Longitude>35.2102</Longitude>
+    <CustomerName>Maya Levi</CustomerName>
+    <CustomerPhone>0509998887</CustomerPhone>
+    <IsFrag>true</IsFrag>
+    <OrderPlacementTime>2025-12-19T07:42:55</OrderPlacementTime>
+    <Volume>48</Volume>
+    <Weight>4</Weight>
+    <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
+  </Order>
+  <Order>
+    <Id>30049</Id>
     <OrderType>Heavy</OrderType>
     <AddressOfOrder>18 Yehuda St, Netanya, Israel</AddressOfOrder>
     <Latitude>32.3291</Latitude>
     <Longitude>34.853</Longitude>
-    <CustomerName>Dana Levi</CustomerName>
-    <CustomerPhone>0527654321</CustomerPhone>
+    <CustomerName>Liad Cohen</CustomerName>
+    <CustomerPhone>0531112233</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-12T07:58:18</OrderPlacementTime>
-    <Volume>69</Volume>
-    <Weight>35</Weight>
-    <DescriptionOfOrder>Documents</DescriptionOfOrder>
-  </Order>
-  <Order>
-    <Id>30049</Id>
-    <OrderType>Regular</OrderType>
-    <AddressOfOrder>27 Ahad Ha’am St, Tel Aviv, Israel</AddressOfOrder>
-    <Latitude>32.062</Latitude>
-    <Longitude>34.7733</Longitude>
-    <CustomerName>Omer Katz</CustomerName>
-    <CustomerPhone>0529090909</CustomerPhone>
-    <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-06T21:21:18</OrderPlacementTime>
-    <Volume>33</Volume>
-    <Weight>11</Weight>
+    <OrderPlacementTime>2025-12-18T03:50:55</OrderPlacementTime>
+    <Volume>6</Volume>
+    <Weight>32</Weight>
     <DescriptionOfOrder>Electronics</DescriptionOfOrder>
   </Order>
   <Order>
     <Id>30050</Id>
     <OrderType>Express</OrderType>
-    <AddressOfOrder>28 Emek Refaim St, Jerusalem, Israel</AddressOfOrder>
-    <Latitude>31.762</Latitude>
-    <Longitude>35.2192</Longitude>
-    <CustomerName>Neta Alon</CustomerName>
-    <CustomerPhone>0501122334</CustomerPhone>
+    <AddressOfOrder>23 Begin St, Beersheba, Israel</AddressOfOrder>
+    <Latitude>31.2522</Latitude>
+    <Longitude>34.7915</Longitude>
+    <CustomerName>Tamar Lavi</CustomerName>
+    <CustomerPhone>0507654321</CustomerPhone>
     <IsFrag>false</IsFrag>
-    <OrderPlacementTime>2025-11-26T00:24:18</OrderPlacementTime>
-    <Volume>54</Volume>
-    <Weight>28</Weight>
-    <DescriptionOfOrder>Gifts</DescriptionOfOrder>
+    <OrderPlacementTime>2025-11-30T12:29:55</OrderPlacementTime>
+    <Volume>91</Volume>
+    <Weight>10</Weight>
+    <DescriptionOfOrder>Fragile glassware</DescriptionOfOrder>
   </Order>
 </ArrayOfOrder>

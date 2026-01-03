@@ -26,8 +26,8 @@
 
             <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
                       ItemsSource="{Binding Source={StaticResource DeliveryTypeCollectionKey}}"
-                      SelectedValue="{Binding DeliveryTypeFilter, Mode=TwoWay}"
-                      SelectionChanged="ComboBox_SelectionChanged"/>
+                      SelectedValue="{Binding DeliveryTypeFilter, Mode=TwoWay}">
+            </ComboBox>
         </Grid>
 
         <ListView Grid.Row="1" Margin="10" 

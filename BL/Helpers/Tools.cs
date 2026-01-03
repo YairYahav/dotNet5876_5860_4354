@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Collections;
 using System.Reflection;
 using System.Text;
+using System.Security.Cryptography;
 
 /// <summary>
 /// Provides utility functions for authorization, distance calculations, geocoding, and object string representation.
@@ -273,4 +274,37 @@ internal static class Tools
         double distanceMeters = routes[0].GetProperty("distance").GetDouble();
         return distanceMeters / 1000.0;
     }
+
+    /// <summary>
+    /// Checks if a password meets strength requirements.
+    /// </summary>
+    /// <param name="password">The password to validate.</param>
+    /// <returns>True if the password is strong enough; otherwise, false.</returns>
+    /// <remarks>A strong password must be at least 8 characters and contain uppercase, lowercase, digit, and special characters.</remarks>
+    internal static bool IsStrongPassword(string password)
+    {
+        if (string.IsNullOrWhiteSpace(password))
+            return false;
+
+        bool hasUpper = password.Any(char.IsUpper);
+        bool hasLower = password.Any(char.IsLower);
+        bool hasDigit = password.Any(char.IsDigit);
+        bool hasSpecial = password.Any(ch => !char.IsLetterOrDigit(ch));
+
+        return password.Length >= 8 && hasUpper && hasLower && hasDigit && hasSpecial;
+    }
+
+    /// <summary>
+    /// Hashes a password using SHA256 encryption.
+    /// </summary>
+    /// <param name="password">The password to hash.</param>
+    /// <returns>A hexadecimal string representation of the hashed password.</returns>
+    internal static string HashPassword(string password)
+    {
+        using var sha = SHA256.Create();
+        byte[] bytes = Encoding.UTF8.GetBytes(password);
+        byte[] hash = sha.ComputeHash(bytes);
+        return Convert.ToHexString(hash);
+    }
+
 }

@@ -107,7 +107,14 @@ internal static class AdminManager
 
         if (s_dal.Config.ManagerPassword != configuration.ManagerPassword)
         {
-            s_dal.Config.ManagerPassword = configuration.ManagerPassword;
+            // Validate and hash new manager password if provided
+            if (!string.IsNullOrEmpty(configuration.ManagerPassword))
+            {
+                if (!Tools.IsStrongPassword(configuration.ManagerPassword))
+                    throw new BO.BlDataValidationException("Password is not strong enough. Must contain at least 8 characters with uppercase, lowercase, digit, and special character.");
+                
+                s_dal.Config.ManagerPassword = Tools.HashPassword(configuration.ManagerPassword);
+            }
             configChanged = true;
         }
 
@@ -117,6 +124,80 @@ internal static class AdminManager
             configChanged = true;
         }
 
+        if (s_dal.Config.CompanyAddress != configuration.CompanyAddress)
+        {
+            s_dal.Config.CompanyAddress = configuration.CompanyAddress;
+            if (!string.IsNullOrEmpty(configuration.CompanyAddress))
+            {
+                try
+                {
+                    var coords = Tools.GetCoordinatesForAddress(configuration.CompanyAddress);
+                    s_dal.Config.Latitude = coords.Latitude;
+                    s_dal.Config.Longitude = coords.Longitude;
+                }
+                catch (BO.BlDataValidationException ex)
+                {
+                    // Revert address change and re-throw validation exception
+                    s_dal.Config.CompanyAddress = configuration.CompanyAddress;
+                    throw new BO.BlDataValidationException($"Failed to get coordinates for address: {ex.Message}");
+                }
+            }
+            configChanged = true;
+        }
+
+        if (s_dal.Config.Latitude != configuration.Latitude)
+        {
+            s_dal.Config.Latitude = configuration.Latitude;
+            configChanged = true;
+        }
+
+        if (s_dal.Config.Longitude != configuration.Longitude)
+        {
+            s_dal.Config.Longitude = configuration.Longitude;
+            configChanged = true;
+        }
+
+        if (s_dal.Config.AvgSpeedKmhForCar != configuration.AvgSpeedKmhForCar)
+        {
+            s_dal.Config.AvgSpeedKmhForCar = configuration.AvgSpeedKmhForCar;
+            configChanged = true;
+        }
+
+        if (s_dal.Config.AvgSpeedKmhForMotorcycle != configuration.AvgSpeedKmhForMotorcycle)
+        {
+            s_dal.Config.AvgSpeedKmhForMotorcycle = configuration.AvgSpeedKmhForMotorcycle;
+            configChanged = true;
+        }
+
+        if (s_dal.Config.AvgSpeedKmhForBicycle != configuration.AvgSpeedKmhForBicycle)
+        {
+            s_dal.Config.AvgSpeedKmhForBicycle = configuration.AvgSpeedKmhForBicycle;
+            configChanged = true;
+        }
+
+        if (s_dal.Config.AvgSpeedKmhForFoot != configuration.AvgSpeedKmhForFoot)
+        {
+            s_dal.Config.AvgSpeedKmhForFoot = configuration.AvgSpeedKmhForFoot;
+            configChanged = true;
+        }
+
+        if (s_dal.Config.MaxTimeRangeForDelivery != configuration.MaxTimeRangeForDelivery)
+        {
+            s_dal.Config.MaxTimeRangeForDelivery = configuration.MaxTimeRangeForDelivery;
+            configChanged = true;
+        }
+
+        if (s_dal.Config.RiskRange != configuration.RiskRange)
+        {
+            s_dal.Config.RiskRange = configuration.RiskRange;
+            configChanged = true;
+        }
+
+        if (s_dal.Config.InactivityRange != configuration.InactivityRange)
+        {
+            s_dal.Config.InactivityRange = configuration.InactivityRange;
+            configChanged = true;
+        }
 
         if (s_dal.Config.Clock != configuration.Clock)
         {
@@ -143,6 +224,7 @@ internal static class AdminManager
     {
         s_dal.ResetDB();
         UpdateClock(DateTime.Now);
+        ConfigUpdatedObservers?.Invoke();
     }
 
     /// <summary>
@@ -156,6 +238,7 @@ internal static class AdminManager
         Initialization.Do();
 
         UpdateClock(s_dal.Config.Clock);
+        ConfigUpdatedObservers?.Invoke();
     }
 
     #endregion

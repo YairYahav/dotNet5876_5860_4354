@@ -629,9 +629,41 @@ internal static class OrderManager
     /// Converts a Data Access Layer Order object to a Business Logic Order object.
     /// </summary>
     /// <param name="d">The DO.Order object to convert.</param>
-    /// <returns>A BO.Order object with calculated air distance.</returns>
+    /// <returns>A BO.Order object with calculated metrics and delivery history.</returns>
     private static BO.Order FromDoToBo(DO.Order d)
     {
+        // Get all deliveries for this order
+        var deliveries = s_dal.Delivery.ReadAll(del => del.OrderId == d.Id);
+        
+        // Convert deliveries to DeliveryPerOrderInList objects
+        IEnumerable<BO.DeliveryPerOrderInList>? deliveryList = null;
+        if (deliveries != null && deliveries.Any())
+        {
+            deliveryList = deliveries.Select(del => MapDeliveryToPerOrderInList(del)).ToList();
+        }
+
+        // Get the latest active delivery for calculations
+        var activeDelivery = deliveries?
+            .Where(del => del.DeliveryCompletionTime == null)
+            .OrderByDescending(del => del.DeliveryStartTime)
+            .FirstOrDefault();
+
+        DateTime? expectedCompletion = null;
+        if (activeDelivery != null)
+        {
+            expectedCompletion = activeDelivery.DeliveryStartTime + ExpectedDeliveryTime(activeDelivery);
+        }
+
+        DateTime maxDeliveryTime = d.OrderPlacementTime + AdminManager.GetConfig().MaxTimeRangeForDelivery;
+        
+        TimeSpan remainingTime = TimeSpan.Zero;
+        if (activeDelivery != null && expectedCompletion.HasValue)
+        {
+            remainingTime = expectedCompletion.Value - AdminManager.Now;
+            if (remainingTime < TimeSpan.Zero)
+                remainingTime = TimeSpan.Zero;
+        }
+
         return new BO.Order
         {
             Id = d.Id,
@@ -646,9 +678,36 @@ internal static class OrderManager
             Volume = d.Volume,
             Weight = d.Weight,
             OrderPlacementTime = d.OrderPlacementTime,
+            ExpectedCompletionTime = expectedCompletion,
+            MaxDeliveryTime = maxDeliveryTime,
+            OrderStatus = GetOrderStatus(d),
+            ScheduleStatus = GetScheduleStatusOfOrder(d),
+            RemainingTimeToDelivery = AdminManager.Now.Add(remainingTime),
             AirDistance = Tools.AirDistance(d.Latitude, d.Longitude,
                 AdminManager.GetConfig().Latitude.GetValueOrDefault(),
-                AdminManager.GetConfig().Longitude.GetValueOrDefault())
+                AdminManager.GetConfig().Longitude.GetValueOrDefault()),
+            DeliveriesForOrder = deliveryList
+        };
+    }
+
+    /// <summary>
+    /// Converts a DO.Delivery to a BO.DeliveryPerOrderInList object.
+    /// </summary>
+    /// <param name="delivery">The delivery to convert.</param>
+    /// <returns>A DeliveryPerOrderInList object with courier information.</returns>
+    private static BO.DeliveryPerOrderInList MapDeliveryToPerOrderInList(DO.Delivery delivery)
+    {
+        var courier = s_dal.Courier.Read(delivery.CourierId);
+        
+        return new BO.DeliveryPerOrderInList
+        {
+            DeliveryId = delivery.Id,
+            CourierId = delivery.CourierId == 0 ? null : delivery.CourierId,
+            CourierName = courier?.FullName ?? "לא משוייך",
+            DeliveryType = (BO.DeliveryType)delivery.DeliveryType,
+            DeliveryStartTime = delivery.DeliveryStartTime,
+            TypeOfDeliveryCompletionTime = (BO.TypeOfDeliveryCompletionTime?)delivery.TypeOfDeliveryCompletionTime ?? BO.TypeOfDeliveryCompletionTime.Supplied,
+            DeliveryEndTime = delivery.DeliveryCompletionTime ?? default
         };
     }
 

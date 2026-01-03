@@ -28,7 +28,7 @@ public class DeliveryPerOrderInList
     /// Gets the name of the courier assigned to this delivery.
     /// </summary>
     /// <value>The courier's full name.</value>
-    public string CourierName { get; init; } 
+    public string? CourierName { get; init; } 
 
     /// <summary>
     /// Gets the type of delivery method used (Car, Motorcycle, Bicycle, OnFoot).
